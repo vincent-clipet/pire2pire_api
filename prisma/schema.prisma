@@ -49,7 +49,7 @@ model Formation{
   id Int @id @default(autoincrement())
   name String
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @default(now())
   user FormationUser[]
   module FormationModule[]
 }
@@ -67,7 +67,7 @@ model Module{
   id Int @id @default(autoincrement())
   name String
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @default(now())
   formation FormationModule[]
 }
 
@@ -84,7 +84,7 @@ model Lesson{
   name String
   content String @db.Text
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @default(now())
   user User @relation(fields:[author], references: [id])
   author Int
   apprenants UserLesson[]
