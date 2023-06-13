@@ -32,4 +32,16 @@ npm run start:dev
 psql -U postgres
 ```
 
+##### Create new DB
+```bash
+create db pire2pire
+```
 
+##### Create new DB, user, and access rights
+```bash
+create db pire2pire
+CREATE USER pire2pire_user;
+ALTER USER pire2pire_user with password '[new_password]';
+GRANT CONNECT ON DATABASE pire2pire TO pire2pire_user;
+GRANT ALL PRIVILEGES ON DATABASE pire2pire TO pire2pire_user;
+```
