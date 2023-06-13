@@ -37,9 +37,9 @@ model User{
   name String
   password String
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @default(now())
   role Role @relation(fields:[roleId], references: [id])
-  roleId Int
+  roleId Int @default(-1)
   formation FormationUser[]
   lessonEcrite Lesson[]
   lessonSuivit UserLesson[]
@@ -96,4 +96,5 @@ model UserLesson{
   userId Int
   lesson Lesson @relation(fields: [lessonId], references: [id])
   lessonId Int
+  is_finished Boolean @default(false)
 }

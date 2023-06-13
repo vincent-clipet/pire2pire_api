@@ -29,11 +29,10 @@ import {
 	async signupUser(
 	  @Body() userData: { name?: string; password: string },
 	): Promise<UserModel> {
-  
 	  return this.prismaService.user.create({
 		data: {
 		  name: userData?.name,
-		  password: userData.password
+		  password: userData.password,
 		},
 	  })
 	}
