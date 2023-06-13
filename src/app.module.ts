@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { UserController } from './controller/user.controller';
 import { ModuleController } from "./controller/module.controller";
 import { LessonController } from "./controller/lesson.controller";
+import { FormationController } from "./controller/formation.controller";
 
 import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
@@ -20,7 +21,8 @@ import { RemovePasswordInterceptor } from './interceptor/removepasswordintercept
     AppController,
     UserController,
     ModuleController,
-    LessonController
+    LessonController,
+    FormationController
   ],
   providers: [
     AppService,

@@ -9,7 +9,10 @@ import{
     Query
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
-import { Module as ModuleModel, Lesson as LessonModel, ModuleLesson as ModuleLessonModel } from "@prisma/client"
+import {
+    Module as ModuleModel,
+    Lesson as LessonModel,
+} from "@prisma/client"
 
 @Controller()
 export class ModuleController{
@@ -50,7 +53,7 @@ export class ModuleController{
         return module
     }
 
-    @Delete("delete/:id")
+    @Delete("module/delete/:id")
     async moduleDelete(
         @Param("id") id:string
     ): Promise<ModuleModel>{
@@ -64,12 +67,12 @@ export class ModuleController{
             })
         }
 
-        return this.prismaService.lesson.delete({
+        return this.prismaService.module.delete({
             where: {id: Number(id)}
         })
     }
 
-    @Put("update/:id")
+    @Put("module/update/:id")
     async moduleUpdate(
         @Param("id") id:string,
         @Body() moduleData: {
