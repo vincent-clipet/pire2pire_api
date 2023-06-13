@@ -19,11 +19,6 @@ npx prisma init
 nest new pire2pire_api
 ```
 
-##### Start the app on localhost. `:dev` => development mode, will restart app after each file modification
-```bash
-npm run start:dev
-```
-
 
 <hr>
 
@@ -44,14 +39,3 @@ GRANT ALL PRIVILEGES ON DATABASE pire2pire TO pire2pire_user;
 
 
 <hr>
-
-
-##### Update DB according to the Prisma schema. Will also regenerate Prisma Client
-```bash
-npx prisma migrate dev --name init
-```
-
-##### Regenerate Prisma client
-```bash
-npx prisma generate
-```
