@@ -34,5 +34,10 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# ============================================================
+
 # DB data
 .env
+
+# folder for random tests
+lab/
