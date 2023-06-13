@@ -46,7 +46,12 @@ GRANT ALL PRIVILEGES ON DATABASE pire2pire TO pire2pire_user;
 <hr>
 
 
-##### Update DB according to the Prisma schema
+##### Update DB according to the Prisma schema. Will also regenerate Prisma Client
 ```bash
 npx prisma migrate dev --name init
+```
+
+##### Regenerate Prisma client
+```bash
+npx prisma generate
 ```
