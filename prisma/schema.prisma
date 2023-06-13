@@ -69,6 +69,7 @@ model Module{
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   formation FormationModule[]
+  lesson ModuleLesson[]
 }
 
 model FormationModule{
@@ -88,6 +89,7 @@ model Lesson{
   user User @relation(fields:[author], references: [id])
   author Int
   apprenants UserLesson[]
+  modules ModuleLesson[]
 }
 
 model UserLesson{
@@ -97,4 +99,12 @@ model UserLesson{
   lesson Lesson @relation(fields: [lessonId], references: [id])
   lessonId Int
   is_finished Boolean @default(false)
+}
+
+model ModuleLesson{
+  id Int @id @default(autoincrement())
+  module Module @relation(fields: [moduleId], references: [id])
+  moduleId Int
+  lesson Lesson @relation(fields: [lessonId], references: [id])
+  lessonId Int
 }
