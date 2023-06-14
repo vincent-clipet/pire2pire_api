@@ -27,6 +27,7 @@ import { RemovePasswordInterceptor } from './interceptor/removepasswordintercept
   providers: [
     AppService,
     PrismaService,
+    UserService,
     {
       provide: APP_INTERCEPTOR,
       useClass: RemovePasswordInterceptor,

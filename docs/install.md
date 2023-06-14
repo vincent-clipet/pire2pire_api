@@ -3,6 +3,11 @@
 apt-get install postgresql
 ```
 
+##### Install NestJS
+````bash
+npm i @nestjs/cli
+```
+
 ##### Install Prisma
 ```bash
 npm install prisma --save-dev
