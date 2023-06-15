@@ -6,6 +6,7 @@ import { ModuleController } from "./controller/module.controller";
 import { LessonController } from "./controller/lesson.controller";
 import { FormationController } from "./controller/formation.controller";
 import { RoleController } from "./controller/role.controller";
+import { PermissionController } from './controller/permission.controller';
 
 import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
@@ -21,6 +22,7 @@ import { UserService } from './service/user.service';
     ModuleController,
     LessonController,
     FormationController,
+    PermissionController,
     RoleController
   ],
   providers: [
