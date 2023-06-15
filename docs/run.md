@@ -3,9 +3,14 @@
 npm run start:dev
 ```
 
-##### Update DB according to the Prisma schema. Will also regenerate Prisma Client, and seed database
+##### Update DB according to the Prisma schema. Will also regenerate Prisma Client
 ```bash
 npx prisma migrate dev --name init
+```
+
+##### Reset DB. DO NOT USE ON PRODUCTION DB
+```bash
+npx prisma migrate reset
 ```
 
 ##### Regenerate Prisma client
