@@ -6,7 +6,7 @@ route="/permission/3/delete"
 
 # RUN
 echo "> Delete permission '3'"
-curl "$app_host$route"
+curl -X DELETE "$app_host$route"
 
 echo
 exit 0
