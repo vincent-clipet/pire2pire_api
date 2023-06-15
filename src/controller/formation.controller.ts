@@ -11,10 +11,8 @@ import{
 import { PrismaService } from "src/prisma.service"
 import {
     Formation as FormationModel,
-    FormationModule,
     Module as ModuleModel
 } from "@prisma/client"
-import { MODULE_METADATA } from "@nestjs/common/constants"
 
 @Controller()
 export class FormationController{
@@ -32,7 +30,7 @@ export class FormationController{
     @Post("formation/create")
     async formationCreate(
         @Body() formationData: {
-            name: string;
+            name: string,
             module: ModuleModel[]
         }
     ): Promise<FormationModel>{
@@ -78,8 +76,8 @@ export class FormationController{
         @Param("id") id:string,
         @Body() formationData: {
             name?: string,
-            addModule: ModuleModel[],
-            delModule: ModuleModel[]
+            addModule?: ModuleModel[],
+            delModule?: ModuleModel[]
         }
     ): Promise<ModuleModel>{
         for(let i=0;i<formationData.addModule.length;i++){
@@ -104,7 +102,7 @@ export class FormationController{
             })
         }
 
-        return formationData === undefined ?
+        return formationData.name === undefined ?
         null :
         this.prismaService.module.update({
             where: {
