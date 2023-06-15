@@ -51,14 +51,6 @@ const formationData: Prisma.FormationCreateInput[] =
 async function main() {
 	console.log(`Start seeding ...`)
 
-	// create users
-	for (const seedData of userData) {
-		const element = await prisma.user.create({
-			data: seedData,
-		})
-		console.log(`Created user with id: ${element.id}`)
-	}
-	
 	// create roles
 	for (const seedData of roleData) {
 		const element = await prisma.role.create({
@@ -66,7 +58,15 @@ async function main() {
 		})
 		console.log(`Created role with id: ${element.id}`)
 	}
-	
+
+	// create users
+	for (const seedData of userData) {
+		const element = await prisma.user.create({
+			data: seedData,
+		})
+		console.log(`Created user with id: ${element.id}`)
+	}
+
 	// create permissions
 	for (const seedData of permissionData) {
 		const element = await prisma.permission.create({
