@@ -53,7 +53,7 @@ export class ModuleController{
         return module
     }
 
-    @Delete("module/delete/:id")
+    @Delete("module/:id/delete")
     async moduleDelete(
         @Param("id") id:string
     ): Promise<ModuleModel>{
@@ -72,7 +72,7 @@ export class ModuleController{
         })
     }
 
-    @Put("module/update/:id")
+    @Put("module/:id/update/")
     async moduleUpdate(
         @Param("id") id:string,
         @Body() moduleData: {

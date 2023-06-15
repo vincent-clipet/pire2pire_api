@@ -40,7 +40,7 @@ export class LessonController{
         })
     }
 
-    @Put("lesson/update/:id")
+    @Put("lesson/:id/update")
     async updateLesson(
         @Param('id') id: string,
         @Body() lessonData:{
@@ -58,7 +58,7 @@ export class LessonController{
         })
     }
 
-    @Delete("lesson/delete/:id")
+    @Delete("lesson/:id/delete")
     async deleteLesson(
         @Param("id") id: string
     ): Promise<LessonModel>{

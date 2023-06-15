@@ -40,7 +40,7 @@ export class PermissionController{
         });
     }
 
-    @Delete("permission/delete/:id")
+    @Delete("permission/:id/delete")
     async permissionDelete(
         @Param("id") id: string
     ): Promise<PermissionModel>{
@@ -59,7 +59,7 @@ export class PermissionController{
         })
     }
 
-    @Put("permission/update/:id")
+    @Put("permission/:id/update")
     async permissionUpdate(
         @Param("id") id:string,
         @Body() permissionData: {

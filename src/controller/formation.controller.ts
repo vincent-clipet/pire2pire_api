@@ -52,7 +52,7 @@ export class FormationController{
         return formation
     }
 
-    @Delete("formation/delete/:id")
+    @Delete("formation/:id/delete")
     async formationDelete(
         @Param("id") id:string
     ): Promise<FormationModel>{
@@ -71,7 +71,7 @@ export class FormationController{
         })
     }
 
-    @Put("formation/update/:id")
+    @Put("formation/:id/update")
     async formationUpdate(
         @Param("id") id:string,
         @Body() formationData: {
