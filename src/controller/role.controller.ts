@@ -35,38 +35,37 @@ export class RoleController{
             permission: PermissionModel[]
         }
     ): Promise<RoleModel>{
-        const role = this.prismaService.role.create({
-            data:{
-                name: roleData.name
-            }
-        });
+        
+        let permissionId:{id:number}[] = []
 
-        for(let i=0;i<roleData.permission.length;i++){
+        roleData.permission.forEach(item => {
+            permissionId.push({id:item.id})
+        })
+
+        /*for(let i=0;i<roleData.permission.length;i++){
+
             this.prismaService.rolePermission.create({
                 data:{
                     roleId: (await role).id,
                     permissionId: roleData.permission[i].id
                 }
             });
-        }
+        }*/
 
-        return role
+        return this.prismaService.role.create({
+            data:{
+                name: roleData.name,
+                permission: {
+                    connect: permissionId
+                }
+            }
+        });
     }
 
     @Delete("role/:id/delete")
     async roleDelete(
         @Param("id") id: string
     ): Promise<RoleModel>{
-        const relation = await this.prismaService.rolePermission.findMany({
-            where: {roleId: Number(id)}
-        });
-
-        for(let i=0; i<relation.length;i++){
-            this.prismaService.rolePermission.delete({
-                where: {id:Number(relation[i].id)}
-            });
-        }
-
         return this.prismaService.role.delete({
             where: {id:Number(id)}
         });
@@ -81,7 +80,7 @@ export class RoleController{
             delPermission?: PermissionModel[] 
         }
     ): Promise<RoleModel>{
-        for(let i=0;i<roleData.addPermission.length;i++){
+        /*for(let i=0;i<roleData.addPermission.length;i++){
             this.prismaService.rolePermission.create({
                 data:{
                     roleId: Number(id),
@@ -101,17 +100,31 @@ export class RoleController{
             this.prismaService.rolePermission.delete({
                 where: {id: relation.id}
             });
-        }
+        }*/
 
-        return roleData.name === undefined ?
-        null :
-        this.prismaService.role.update({
+        let connectPermissionId:{id:number}[] = []
+
+        roleData.addPermission.forEach(item => {
+            connectPermissionId.push({id:item.id})
+        })
+
+        let disconnectPermissionId:{id:number}[] = []
+
+        roleData.delPermission.forEach(item => {
+            disconnectPermissionId.push({id:item.id})
+        })
+
+        return this.prismaService.role.update({
             where: {
                 id: Number(id)
             },
             data: {
-                name: roleData.name
+                name: roleData.name,
+                permission: {
+                    connect: connectPermissionId,
+                    disconnect: disconnectPermissionId
+                }
             }
-        })
+        });
     }
 }

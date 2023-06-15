@@ -26,9 +26,9 @@ model Permission{
 
 model RolePermission{
   id Int @id @default(autoincrement())
-  role Role @relation(fields:[roleId], references: [id])
+  role Role @relation(fields:[roleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   roleId Int
-  permission Permission @relation(fields: [permissionId], references: [id])
+  permission Permission @relation(fields: [permissionId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   permissionId Int
 }
 
@@ -38,8 +38,8 @@ model User{
   password String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  role Role @relation(fields:[roleId], references: [id])
-  roleId Int @default(2)
+  role Role? @relation(fields:[roleId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  roleId Int? @default(2)
   formation FormationUser[]
   lessonEcrite Lesson[]
   lessonSuivit UserLesson[]
@@ -56,10 +56,10 @@ model Formation{
 
 model FormationUser{
   id Int @id @default(autoincrement())
-  user User @relation(fields:[userId], references: [id])
+  user User @relation(fields:[userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId Int
   userIsCoach Boolean @default(false)
-  formation Formation @relation(fields:[formationId], references: [id])
+  formation Formation @relation(fields:[formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   formationId Int
 }
 
@@ -74,9 +74,9 @@ model Module{
 
 model FormationModule{
   id Int @id @default(autoincrement())
-  module Module @relation(fields: [moduleId], references: [id])
+  module Module @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   moduleId Int
-  formation Formation @relation(fields: [formationId], references: [id])
+  formation Formation @relation(fields: [formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   formationId Int
 }
 
@@ -86,25 +86,25 @@ model Lesson{
   content String @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  user User @relation(fields:[author], references: [id])
-  author Int
+  user User? @relation(fields:[author], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  author Int?
   apprenants UserLesson[]
   modules ModuleLesson[]
 }
 
 model UserLesson{
   id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId Int
-  lesson Lesson @relation(fields: [lessonId], references: [id])
+  lesson Lesson @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   lessonId Int
   is_finished Boolean @default(false)
 }
 
 model ModuleLesson{
   id Int @id @default(autoincrement())
-  module Module @relation(fields: [moduleId], references: [id])
+  module Module @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   moduleId Int
-  lesson Lesson @relation(fields: [lessonId], references: [id])
+  lesson Lesson @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   lessonId Int
 }
