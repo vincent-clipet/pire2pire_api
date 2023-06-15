@@ -53,7 +53,7 @@ export class RoleController{
         return role
     }
 
-    @Delete("role/delete/:id")
+    @Delete("role/:id/delete")
     async roleDelete(
         @Param("id") id: string
     ): Promise<RoleModel>{
@@ -72,7 +72,7 @@ export class RoleController{
         });
     }
 
-    @Put("formation/update/:id")
+    @Put("role/:id/update")
     async roleUpdate(
         @Param("id") id:string,
         @Body() roleData: {
