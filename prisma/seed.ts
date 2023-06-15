@@ -4,64 +4,111 @@ const prisma = new PrismaClient()
 
 
 
-
-
 const userData: Prisma.UserCreateInput[] =
 [
-	{
-	  name: 'Alice',
-	  password: '123',
-	  // role: '1'
-	},
-	{
-	  name: 'Bob',
-	  password: '123',
-	  // role: '2'
-	}
+	{ name: 'Alice', password: '123' },
+	{ name: 'Bob', password: '456' },
+	{ name: 'Charlie', password: '789' },
 ]
 
 const roleData: Prisma.RoleCreateInput[] =
 [
-	{
-	  name: 'Admin',
-	},
-	{
-	  name: 'Apprenant',
-	}
+	{ name: 'Admin' },
+	{ name: 'Apprenant' },
+	{ name: 'Invité' },
 ]
 
+const permissionData: Prisma.PermissionCreateInput[] =
+[
+	{ name: 'superuser', description: 'Can do anything' },
+	{ name: 'lesson_create', description: 'Create a lesson' },
+	{ name: 'lesson_delete', description: 'Delete a lesson' },
+	{ name: 'lesson_update', description: 'Update a lesson' },
+]
 
+const moduleData: Prisma.ModuleCreateInput[] =
+[
+	{ name: 'M1' },
+	{ name: 'M2' },
+	{ name: 'M3' },
+]
+
+const lessonData: Prisma.LessonCreateInput[] =
+[
+	// { name: 'Intro à Python', content: 'Début du cours sur Python ...', author: 1},
+]
+
+const formationData: Prisma.FormationCreateInput[] =
+[
+	{ name: 'Ruby' },
+	{ name: 'C#' },
+	{ name: 'Python' },
+	{ name: 'Javascript (it sucks)' },
+]
 
 
 
 async function main() {
 	console.log(`Start seeding ...`)
 
-	// create roles
-	for (const r of roleData) {
-		const role = await prisma.role.create({
-		  data: r,
-		})
-		console.log(`Created role with id: ${role.id}`)
-	  }
-
 	// create users
-	for (const u of userData) {
-		const user = await prisma.user.create({
-		  data: u,
+	for (const seedData of userData) {
+		const element = await prisma.user.create({
+			data: seedData,
 		})
-		console.log(`Created user with id: ${user.id}`)
-	  }
+		console.log(`Created user with id: ${element.id}`)
+	}
+	
+	// create roles
+	for (const seedData of roleData) {
+		const element = await prisma.role.create({
+			data: seedData,
+		})
+		console.log(`Created role with id: ${element.id}`)
+	}
+	
+	// create permissions
+	for (const seedData of permissionData) {
+		const element = await prisma.permission.create({
+			data: seedData,
+		})
+		console.log(`Created permission with id: ${element.id}`)
+	}
+	
+	// create modules
+	for (const seedData of moduleData) {
+		const element = await prisma.module.create({
+			data: seedData,
+		})
+		console.log(`Created module with id: ${element.id}`)
+	}
 
+	// create lesson
+	for (const seedData of lessonData) {
+		const element = await prisma.lesson.create({
+			data: seedData,
+		})
+		console.log(`Created lesson with id: ${element.id}`)
+	}
+
+	// create formation
+	for (const seedData of formationData) {
+		const element = await prisma.formation.create({
+			data: seedData,
+		})
+		console.log(`Created formation with id: ${element.id}`)
+	}
+	
 	console.log(`Seeding finished.`)
-  }
+	
+}
 
 main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+.then(async () => {
+	await prisma.$disconnect()
+})
+.catch(async (e) => {
+	console.error(e)
+	await prisma.$disconnect()
+	process.exit(1)
+})
