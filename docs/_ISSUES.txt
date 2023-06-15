@@ -1,0 +1,11 @@
+user/:id/setrole
+	=> probably need to check (properly) that this role exists, instead of returning a foreign key violationj
+
+
+role/:id/delete
+	=> does not work
+role/:id/update
+	=> with empty [], works, but does not return anything
+	=> not tested with actual [] parameters
+
+
