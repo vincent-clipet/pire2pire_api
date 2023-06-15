@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 
 import { AppController } from './app.controller';
 import { UserController } from './controller/user.controller';
@@ -10,8 +9,6 @@ import { FormationController } from "./controller/formation.controller";
 import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
 import { UserService } from './service/user.service';
-
-import { RemovePasswordInterceptor } from './interceptor/removepasswordinterceptor.interceptor'
 
 
 
@@ -27,11 +24,7 @@ import { RemovePasswordInterceptor } from './interceptor/removepasswordintercept
   providers: [
     AppService,
     PrismaService,
-    UserService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: RemovePasswordInterceptor,
-    },
+    UserService
   ],
 })
 export class AppModule {}

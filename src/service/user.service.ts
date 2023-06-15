@@ -1,20 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UserService extends PrismaService{
   
-  getHello(): string {
-    return 'Hello World!';
+  strip_password<User>(user: User) {
+    delete user["password"]
+    return user
   }
-
-  // Exclude keys from user
-	strip_password<User>(user: User):Omit<User, "password"> {
-      console.log(user)
-      delete user["password"]
-      console.log(user)
-      return user
-    }
-    
-
+  
+  strip_passwords(users: User[]): User[] {
+    users.forEach(u => {
+      u = this.strip_password(u)
+    });
+    return users
+  }
 }
