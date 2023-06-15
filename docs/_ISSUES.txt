@@ -1,6 +1,15 @@
+Line endings of cURL scripts are broken, won't run on Windows anymore
+
+==========================================
+
 user/:id/setrole
 	=> probably need to check (properly) that this role exists, instead of returning a foreign key violationj
 
 role/:id/update
 	=> with empty [], works, but does not return anything
 	=> not tested with actual [] parameters
+
+formation/:id/delete
+	=> error 500 + stacktrace when already deleted (404 instead ?)
+formation/:id
+	=> should return its associated modules. Maybe in new route ? (formation/:id/modules)
