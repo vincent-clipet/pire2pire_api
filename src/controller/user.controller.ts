@@ -29,7 +29,7 @@ import {
 	  return this.userService.strip_passwords(allUsers)
 	}
 
-	@Put('user/:id/role/set')
+	@Put('user/:id/setrole')
 	async setUserRole(
 		@Body() userData: { roleId: number },
 		@Param('id') id: string
