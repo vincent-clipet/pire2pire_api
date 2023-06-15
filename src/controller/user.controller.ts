@@ -34,7 +34,7 @@ import {
 		@Body() userData: { roleId: number },
 		@Param('id') id: string
 	): Promise<UserModel> {
-	  return this.userService.user.update({
+	  const u = await this.userService.user.update({
 		where: {
 		  id: Number(id)
 		},
@@ -42,17 +42,19 @@ import {
 			roleId: userData.roleId
 		},
 	  })
+	  return this.userService.strip_password(u)
 	}
 
 	@Post('user/signup')
 	async signupUser(
 	  @Body() userData: { name: string; password: string },
 	): Promise<UserModel> {
-	  return this.userService.user.create({
+	  const u = await this.userService.user.create({
 		data: {
 		  name: userData.name,
 		  password: userData.password,
 		},
 	  })
+	  return this.userService.strip_password(u)
 	}
   }
