@@ -39,5 +39,8 @@ lerna-debug.log*
 # DB data
 .env
 
+# prisma migration
+prisma/migrations/
+
 # folder for random tests
 lab/

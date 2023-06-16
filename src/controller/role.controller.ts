@@ -32,7 +32,7 @@ export class RoleController{
     async roleCreate(
         @Body() roleData: {
             name: string,
-            permission: PermissionModel[]
+            permission?: PermissionModel[]
         }
     ): Promise<RoleModel>{
         
@@ -55,7 +55,7 @@ export class RoleController{
         return this.prismaService.role.create({
             data:{
                 name: roleData.name,
-                permissions: {
+                permission: {
                     connect: permissionId
                 }
             }
@@ -120,7 +120,7 @@ export class RoleController{
             },
             data: {
                 name: roleData.name,
-                permissions: {
+                permission: {
                     connect: connectPermissionId,
                     disconnect: disconnectPermissionId
                 }
