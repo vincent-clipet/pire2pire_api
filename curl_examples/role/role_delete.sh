@@ -1,11 +1,11 @@
 # CONFIG
 app_host=localhost:3000
-route="/role/3/delete"
+route="/role/4/delete"
 
 
 
 # RUN
-echo "> Delete role '3'"
+echo "> Delete role '4'"
 curl -X DELETE "$app_host$route"
 
 echo

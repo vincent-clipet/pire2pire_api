@@ -1,7 +1,6 @@
 # CONFIG
 app_host=localhost:3000
 route="/role/1"
-data="{}"
 
 
 
