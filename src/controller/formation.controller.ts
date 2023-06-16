@@ -31,12 +31,14 @@ export class FormationController{
     async formationCreate(
         @Body() formationData: {
             name: string,
-            module: ModuleModel[]
+            module: ModuleModel[],
+            coachId: string
         }
     ): Promise<FormationModel>{
         const formation = this.prismaService.formation.create({
             data:{
-                name: formationData.name
+                name: formationData.name,
+                coachId: Number(formationData.coachId)
             }
         });
 

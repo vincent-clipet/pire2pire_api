@@ -10,101 +10,103 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Role{
-  id Int @id @default(autoincrement())
-  name String
-  permission RolePermission[]
-  user User[]
+model Role {
+  id          Int              @id @default(autoincrement())
+  name        String
+  permissions RolePermission[]
+  users       User[]
 }
 
-model Permission{
-  id Int @id @default(autoincrement())
-  name String
-  description String @db.VarChar(255)
-  role RolePermission[]
-}
-
-model RolePermission{
-  id Int @id @default(autoincrement())
-  role Role @relation(fields:[roleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  roleId Int
-  permission Permission @relation(fields: [permissionId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+model RolePermission {
+  id           Int        @id @default(autoincrement())
+  role         Role       @relation(fields: [roleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  roleId       Int
+  permission   Permission @relation(fields: [permissionId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   permissionId Int
 }
 
-model User{
-  id Int @id @default(autoincrement())
-  name String
-  password String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  role Role? @relation(fields:[roleId], references: [id], onUpdate: Cascade, onDelete: SetNull)
-  roleId Int? @default(2)
-  formation FormationUser[]
-  lessonEcrite Lesson[]
-  lessonSuivit UserLesson[]
+model Permission {
+  id          Int              @id @default(autoincrement())
+  name        String
+  description String           @db.VarChar(255)
+  roles       RolePermission[]
 }
 
-model Formation{
-  id Int @id @default(autoincrement())
-  name String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  user FormationUser[]
-  module FormationModule[]
+model User {
+  id              Int             @id @default(autoincrement())
+  name            String
+  password        String
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @default(now())
+  role            Role?           @relation(fields: [roleId], references: [id])
+  roleId          Int?            @default(2)
+  formations      FormationUser[]
+  lessons         UserLesson[]
+  coached         Formation[]
+  lessonsAuthored Lesson[]
 }
 
-model FormationUser{
-  id Int @id @default(autoincrement())
-  user User @relation(fields:[userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  userId Int
-  userIsCoach Boolean @default(false)
-  formation Formation @relation(fields:[formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+model Formation {
+  id        Int               @id @default(autoincrement())
+  name      String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @default(now())
+  users     FormationUser[]
+  coach     User?             @relation(fields: [coachId], references: [id])
+  coachId   Int?
+  modules   FormationModule[]
+}
+
+model FormationUser {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId      Int
+  formation   Formation @relation(fields: [formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   formationId Int
 }
 
-model Module{
-  id Int @id @default(autoincrement())
-  name String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+model Module {
+  id        Int               @id @default(autoincrement())
+  name      String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @default(now())
   formation FormationModule[]
-  lesson ModuleLesson[]
+  lesson    ModuleLesson[]
 }
 
-model FormationModule{
-  id Int @id @default(autoincrement())
-  module Module @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  moduleId Int
-  formation Formation @relation(fields: [formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+model FormationModule {
+  id          Int       @id @default(autoincrement())
+  module      Module    @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  moduleId    Int
+  formation   Formation @relation(fields: [formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   formationId Int
 }
 
-model Lesson{
-  id Int @id @default(autoincrement())
-  name String
-  content String @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  user User? @relation(fields:[author], references: [id], onUpdate: Cascade, onDelete: SetNull)
-  author Int?
-  apprenants UserLesson[]
-  modules ModuleLesson[]
+model Lesson {
+  id        Int            @id @default(autoincrement())
+  name      String
+  content   String         @db.Text
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now())
+  author    User?          @relation(fields: [authorId], references: [id])
+  authorId  Int?
+  students  UserLesson[]
+  modules   ModuleLesson[]
 }
 
-model UserLesson{
-  id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  userId Int
-  lesson Lesson @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  lessonId Int
-  is_finished Boolean @default(false)
+model UserLesson {
+  id         Int     @id @default(autoincrement())
+  user       User    @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId     Int
+  lesson     Lesson  @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  lessonId   Int
+  isFinished Boolean @default(false)
 }
 
-model ModuleLesson{
-  id Int @id @default(autoincrement())
-  module Module @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+model ModuleLesson {
+  id       Int    @id @default(autoincrement())
+  module   Module @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   moduleId Int
-  lesson Lesson @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   lessonId Int
 }

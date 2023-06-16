@@ -35,12 +35,14 @@ const moduleData: Prisma.ModuleCreateInput[] =
 
 const lessonData: Prisma.LessonCreateInput[] =
 [
-	// { name: 'Intro à Python', content: 'Début du cours sur Python ...', author: 1},
+	{ name: 'Intro à Python', content: 'Début du cours sur Python ...' },
+	{ name: 'Python intermédiaire', content: 'Milieu du cours sur Python ...' },
+	{ name: 'Python avancé', content: 'Fin du cours sur Python ...' },
 ]
 
 const formationData: Prisma.FormationCreateInput[] =
 [
-	{ name: 'Ruby' },
+	{ name: 'Ruby', },
 	{ name: 'C#' },
 	{ name: 'Python' },
 	{ name: 'Javascript (it sucks)' },

@@ -35,7 +35,7 @@ export class LessonController{
             data:{
                 name: lessonData?.name,
                 content: lessonData.content,
-                author: lessonData.author
+                authorId: lessonData.author
             }
         })
     }
