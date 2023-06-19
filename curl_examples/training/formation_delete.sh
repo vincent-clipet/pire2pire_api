@@ -1,11 +1,11 @@
 # CONFIG
 app_host=localhost:3000
-route="/formation/3/delete"
+route="/training/3/delete"
 
 
 
 # RUN
-echo "> Delete formation '3'"
+echo "> Delete training '3'"
 curl -X DELETE "$app_host$route"
 
 echo

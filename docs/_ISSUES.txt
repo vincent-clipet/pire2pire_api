@@ -9,10 +9,10 @@ role/:id/update
 	=> with empty [], works, but does not return anything
 	=> not tested with actual [] parameters
 
-formation/:id/delete
+training/:id/delete
 	=> error 500 + stacktrace when already deleted (404 instead ?)
-formation/:id
-	=> should return its associated modules. Maybe in new route ? (formation/:id/modules)
+training/:id
+	=> should return its associated modules. Maybe in new route ? (training/:id/modules)
 
 module/:id/update
 	=> error 500

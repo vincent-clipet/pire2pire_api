@@ -1,12 +1,12 @@
 # CONFIG
 app_host=localhost:3000
-route="/formations"
+route="/trainings"
 data="{}"
 
 
 
 # RUN
-echo "> Get all formations"
+echo "> Get all trainings"
 curl "$app_host$route"
 
 echo

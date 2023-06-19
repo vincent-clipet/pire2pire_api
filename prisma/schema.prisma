@@ -40,29 +40,29 @@ model User {
   updatedAt       DateTime        @default(now())
   role            Role?           @relation(fields: [roleId], references: [id])
   roleId          Int?            @default(2)
-  formations      FormationUser[]
+  trainings       TrainingUser[]
   lessons         UserLesson[]
-  coached         Formation[]
+  coached         Training[]
   lessonsAuthored Lesson[]
 }
 
-model Formation {
+model Training {
   id        Int               @id @default(autoincrement())
   name      String
   createdAt DateTime          @default(now())
   updatedAt DateTime          @default(now())
-  users     FormationUser[]
+  users     TrainingUser[]
   coach     User?             @relation(fields: [coachId], references: [id], onDelete: SetNull)
   coachId   Int?
-  modules   FormationModule[]
+  modules   TrainingModule[]
 }
 
-model FormationUser {
+model TrainingUser {
   id          Int       @id @default(autoincrement())
   user        User      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId      Int
-  formation   Formation @relation(fields: [formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  formationId Int
+  training    Training @relation(fields: [trainingId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  trainingId Int
 }
 
 model Module {
@@ -70,16 +70,16 @@ model Module {
   name      String
   createdAt DateTime          @default(now())
   updatedAt DateTime          @default(now())
-  formation FormationModule[]
+  training  TrainingModule[]
   lesson    ModuleLesson[]
 }
 
-model FormationModule {
+model TrainingModule {
   id          Int       @id @default(autoincrement())
   module      Module    @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   moduleId    Int
-  formation   Formation @relation(fields: [formationId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  formationId Int
+  training   Training @relation(fields: [trainingId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  trainingId Int
 }
 
 model Lesson {

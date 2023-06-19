@@ -6,8 +6,6 @@ import{
     Body,
     Put,
     Delete,
-    Query,
-    UseInterceptors,
     NotFoundException
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
@@ -15,6 +13,8 @@ import {
     Formation as FormationModel,
     Module as ModuleModel
 } from "@prisma/client"
+
+
 
 @Controller()
 export class FormationController{
