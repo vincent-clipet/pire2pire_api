@@ -16,21 +16,21 @@ import {
 
 
 
-@Controller()
+@Controller("training")
 export class TrainingController{
     constructor(private readonly prismaService: PrismaService){}
-    
-    @Get("training/:id")
-    async getTrainingById(@Param("id") id:string): Promise<TrainingModel>{
-        return this.prismaService.training.findUnique({ where: { id: Number(id) } })
-    }
 
-    @Get("trainings")
+    @Get("list")
     async getAllTraining(): Promise<TrainingModel[]>{
         return this.prismaService.training.findMany({ take: 1000 })
     }
 
-    @Post("training/create")
+    @Get(":id")
+    async getTrainingById(@Param("id") id:string): Promise<TrainingModel>{
+        return this.prismaService.training.findUnique({ where: { id: Number(id) } })
+    }
+
+    @Post("create")
     async trainingCreate(
         @Body() trainingData: {
             name: string,
@@ -57,7 +57,7 @@ export class TrainingController{
         return training
     }
 
-    @Delete("training/:id/delete")
+    @Delete(":id/delete")
     async trainingDelete(
         @Param("id") id:string
     ): Promise<TrainingModel>{
@@ -69,7 +69,7 @@ export class TrainingController{
         })
     }
  
-    @Put("training/:id/update")
+    @Put(":id/update")
     async trainingUpdate(
         @Param("id") id:string,
         @Body() trainingData: {
