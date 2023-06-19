@@ -23,7 +23,7 @@ export class UserController {
 	)
 	@Get('list')
 	async getAllUsers(): Promise<UserModel[]> {
-	  const allUsers = await this.userService.user.findMany()
+	  const allUsers = await this.userService.user.findMany({ take: 1000 })
 	  return allUsers //this.userService.strip_passwords(allUsers)
 	}
 

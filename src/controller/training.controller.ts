@@ -34,8 +34,8 @@ export class TrainingController{
     async trainingCreate(
         @Body() trainingData: {
             name: string,
-            module: ModuleModel[],
-            coachId: string
+            modules: number[],
+            coachId: number
         }
     ): Promise<TrainingModel>{
         // Create training
@@ -46,11 +46,11 @@ export class TrainingController{
             }
         });
         // Create relations with modules
-        for(let i=0;i<trainingData.module.length;i++){
+        for(let i=0;i<trainingData.modules.length;i++){
             this.prismaService.trainingModule.create({
                 data:{
                     trainingId: (await training).id,
-                    moduleId: trainingData.module[i].id
+                    moduleId: trainingData.modules[i]
                 }
             });
         }
@@ -74,28 +74,28 @@ export class TrainingController{
         @Param("id") id:string,
         @Body() trainingData: {
             name?: string,
-            addModule?: number[],
-            deleteModule?: number[]
+            addModules?: number[],
+            deleteModules?: number[]
         }
-    ): Promise<ModuleModel>{
+    ): Promise<TrainingModel>{
         // Create relations with modules
-        if (trainingData.addModule) {
-            for(let i=0;i<trainingData.addModule.length;i++){
+        if (trainingData.addModules) {
+            for(let i=0;i<trainingData.addModules.length;i++){
                 await this.prismaService.trainingModule.create({
                     data: {
                         trainingId: Number(id),
-                        moduleId: trainingData.addModule[i]
+                        moduleId: trainingData.addModules[i]
                     }
                 });
             }
         }
         // Delete relations with modules
-        if (trainingData.deleteModule) {
-            for(let i=0;i<trainingData.deleteModule.length;i++){
+        if (trainingData.deleteModules) {
+            for(let i=0;i<trainingData.deleteModules.length;i++){
                 const relation = await this.prismaService.trainingModule.findFirst({
                     where: {
                         trainingId: Number(id),
-                        moduleId: trainingData.deleteModule[i]
+                        moduleId: trainingData.deleteModules[i]
                     }
                 });
                 this.prismaService.trainingModule.delete({

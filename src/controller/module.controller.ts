@@ -6,7 +6,7 @@ import{
     Body,
     Put,
     Delete,
-    Query
+    NotFoundException
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
@@ -26,7 +26,7 @@ export class ModuleController{
 	)
     @Get("list")
     async getAllModules(): Promise<ModuleModel[]>{
-        return this.prismaService.module.findMany()
+        return this.prismaService.module.findMany({ take: 1000 })
     }
 
     @Role(
@@ -45,24 +45,24 @@ export class ModuleController{
     async moduleCreate(
         @Body() moduleData: {
             name?: string;
-            lesson: LessonModel[]
+            lessons: number[]
         }
     ): Promise<ModuleModel>{
+        // Create module
         const module = this.prismaService.module.create({
             data:{
-                name: moduleData?.name,
+                name: moduleData.name,
             }
         });
-
-        for(let i=0;i<moduleData.lesson.length;i++){
+        // Create relations with lessons
+        for(let i=0;i<moduleData.lessons.length;i++){
             this.prismaService.moduleLesson.create({
                 data:{
                     moduleId: (await module).id,
-                    lessonId: moduleData.lesson[i].id
+                    lessonId: moduleData.lessons[i]
                 }
             });
         }
-
         return module
     }
 
@@ -73,18 +73,11 @@ export class ModuleController{
     async moduleDelete(
         @Param("id") id:string
     ): Promise<ModuleModel>{
-        const relation = await this.prismaService.moduleLesson.findMany({
-            where: {moduleId: Number(id)}
-        })
-        
-        for(let i=0;i<relation.length;i++){
-            this.prismaService.moduleLesson.delete({
-                where: {id: Number(relation[i].id)}
-            })
-        }
-
+        // Delete module
         return this.prismaService.module.delete({
-            where: {id: Number(id)}
+            where: {id:Number(id)}
+        }).catch(() => {
+            throw new NotFoundException()
         })
     }
 
@@ -96,39 +89,45 @@ export class ModuleController{
         @Param("id") id:string,
         @Body() moduleData: {
             name?: string,
-            addLesson: LessonModel[],
-            delLesson: LessonModel[]
+            addLessons: number[],
+            deleteLessons: number[]
         }
     ): Promise<ModuleModel>{
-        for(let i=0;i<moduleData.addLesson.length;i++){
-            this.prismaService.moduleLesson.create({
-                data:{
-                    moduleId: Number(id),
-                    lessonId: moduleData.addLesson[i].id
-                }
-            });
-        }
-
-        for(let i=0;i<moduleData.delLesson.length;i++){
-            const relation = await this.prismaService.moduleLesson.findFirst({
-                where: {
-                    lessonId: moduleData.delLesson[i].id,
-                    moduleId: Number(id)
-                }
-            })
-            this.prismaService.moduleLesson.delete({
-                where: {id: relation.id}
-            })
-        }
-        return moduleData.name === undefined ?
-        null :
-        this.prismaService.module.update({
-            where: {
-                id: Number(id)
-            },
-            data: {
-                name: moduleData.name
+        // Create relations with lessons
+        if (moduleData.addLessons) {
+            for(let i=0;i<moduleData.addLessons.length;i++){
+                this.prismaService.moduleLesson.create({
+                    data:{
+                        moduleId: Number(id),
+                        lessonId: moduleData.addLessons[i]
+                    }
+                });
             }
+        }
+        // Delete relations with lessons
+        if (moduleData.deleteLessons) {
+            for(let i=0;i<moduleData.deleteLessons.length;i++){
+                const relation = await this.prismaService.moduleLesson.findFirst({
+                    where: {
+                        lessonId: moduleData.deleteLessons[i],
+                        moduleId: Number(id)
+                    }
+                })
+                this.prismaService.moduleLesson.delete({
+                    where: {id: relation.id}
+                })
+            }
+        }
+        // Update module
+        if (moduleData.name !== undefined) {
+            this.prismaService.module.update({ 
+                where: { id: Number(id) },
+                data: { name: moduleData.name }
+            })
+        }
+        // Return module
+        return this.prismaService.module.findUnique({
+            where: { id: Number(id) }
         })
     }
 }

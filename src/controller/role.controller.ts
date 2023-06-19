@@ -43,7 +43,7 @@ export class RoleController{
     async roleCreate(
         @Body() roleData: {
             name: string,
-            permission?: PermissionModel[]
+            permissions?: number[]
         }
     ): Promise<RoleModel>{
         // Create role
@@ -53,11 +53,11 @@ export class RoleController{
             }
         });
         // Create relations with permissions
-        for(let i=0;i<roleData.permission.length;i++){
+        for(let i=0;i<roleData.permissions.length;i++){
             this.prismaService.rolePermission.create({
                 data:{
                     roleId: (await role).id,
-                    permissionId: roleData.permission[i].id
+                    permissionId: roleData.permissions[i]
                 }
             });
         }
@@ -87,28 +87,28 @@ export class RoleController{
         @Param("id") id:string,
         @Body() roleData: {
             name?: string,
-            addPermission?: number[],
-            deletePermission?: number[] 
+            addPermissions?: number[],
+            deletePermissions?: number[] 
         }
     ): Promise<RoleModel>{
         // Create relations with permissions
-        if (roleData.addPermission) {
-            for(let i=0;i<roleData.addPermission.length;i++){
+        if (roleData.addPermissions) {
+            for(let i=0;i<roleData.addPermissions.length;i++){
                 await this.prismaService.rolePermission.create({
                     data: {
                         roleId: Number(id),
-                        permissionId: roleData.addPermission[i]
+                        permissionId: roleData.addPermissions[i]
                     }
                 });
             }
         }
         // Delete relations with permissions
-        if (roleData.deletePermission) {
-            for(let i=0;i<roleData.deletePermission.length;i++){
+        if (roleData.deletePermissions) {
+            for(let i=0;i<roleData.deletePermissions.length;i++){
                 const relation = await this.prismaService.rolePermission.findFirst({
                     where: {
                         roleId: Number(id),
-                        permissionId: roleData.deletePermission[i]
+                        permissionId: roleData.deletePermissions[i]
                     }
                 });
                 this.prismaService.rolePermission.delete({
