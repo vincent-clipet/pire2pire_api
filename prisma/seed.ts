@@ -1,56 +1,47 @@
 import { PrismaClient, Prisma } from '@prisma/client'
-
+const argon2 = require("argon2");
 const prisma = new PrismaClient()
 
 
 
-const userData: Prisma.UserCreateInput[] =
-[
-	{ name: 'Alice', password: '123' },
-	{ name: 'Bob', password: '456' },
-	{ name: 'Charlie', password: '789' },
-]
-
-const roleData: Prisma.RoleCreateInput[] =
-[
-	{ name: 'Admin' },
-	{ name: 'Apprenant' },
-	{ name: 'Invité' },
-]
-
-const permissionData: Prisma.PermissionCreateInput[] =
-[
-	{ name: 'superuser', description: 'Can do anything' },
-	{ name: 'lesson_create', description: 'Create a lesson' },
-	{ name: 'lesson_delete', description: 'Delete a lesson' },
-	{ name: 'lesson_update', description: 'Update a lesson' },
-]
-
-const moduleData: Prisma.ModuleCreateInput[] =
-[
-	{ name: 'M1' },
-	{ name: 'M2' },
-	{ name: 'M3' },
-]
-
-const lessonData: Prisma.LessonCreateInput[] =
-[
-	{ name: 'Intro à Python', content: 'Début du cours sur Python ...' },
-	{ name: 'Python intermédiaire', content: 'Milieu du cours sur Python ...' },
-	{ name: 'Python avancé', content: 'Fin du cours sur Python ...' },
-]
-
-const trainingData: Prisma.TrainingCreateInput[] =
-[
-	{ name: 'Ruby', },
-	{ name: 'C#' },
-	{ name: 'Python' },
-	{ name: 'Javascript (it sucks)' },
-]
-
-
-
 async function main() {
+
+	const userData: Prisma.UserCreateInput[] = [
+		{ name: 'alice', password: await argon2.hash('alice') },
+		{ name: 'bob', password: await argon2.hash('bob') },
+		{ name: 'charlie', password: await argon2.hash('charlie') },
+	]
+	const roleData: Prisma.RoleCreateInput[] = [
+		{ name: 'Admin' },
+		{ name: 'Apprenant' },
+		{ name: 'Invité' },
+	]
+	const permissionData: Prisma.PermissionCreateInput[] = [
+		{ name: 'superuser', description: 'Can do anything' },
+		{ name: 'lesson_create', description: 'Create a lesson' },
+		{ name: 'lesson_delete', description: 'Delete a lesson' },
+		{ name: 'lesson_update', description: 'Update a lesson' },
+	]
+	const moduleData: Prisma.ModuleCreateInput[] = [
+		{ name: 'M1' },
+		{ name: 'M2' },
+		{ name: 'M3' },
+	]
+	const lessonData: Prisma.LessonCreateInput[] = [
+		{ name: 'Intro à Python', content: 'Début du cours sur Python ...' },
+		{ name: 'Python intermédiaire', content: 'Milieu du cours sur Python ...' },
+		{ name: 'Python avancé', content: 'Fin du cours sur Python ...' },
+	]
+	const trainingData: Prisma.TrainingCreateInput[] = [
+		{ name: 'Ruby', },
+		{ name: 'C#' },
+		{ name: 'Python' },
+		{ name: 'Javascript (it sucks)' },
+	]
+
+
+
+	// runn all loops
 	console.log(`Start seeding ...`)
 
 	// create roles

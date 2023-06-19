@@ -3,8 +3,6 @@ import { UserService } from "./user.service";
 import { JwtService } from "@nestjs/jwt";
 const argon2 = require("argon2");
 
-const salt = "$argon2id$v=19$m=65536,t=3,p=4$";
-
 @Injectable()
 export class AuthService {
     constructor(
@@ -15,7 +13,10 @@ export class AuthService {
     async signIn(username:string, password:string){
         const user = await this.usersService.user.findUnique({where:{name:username}});
         if(user === null) throw new UnauthorizedException();
-        if(await argon2.verify(salt+user.password,password)){
+        if(!password || password === "") throw new UnauthorizedException();
+        console.log(user.password)
+        console.log(password)
+        if(await argon2.verify(user.password, password)){
             const payload = {
                 id: user.id,
                 username: username,
