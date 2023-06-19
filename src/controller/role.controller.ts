@@ -6,7 +6,7 @@ import{
     Body,
     Put,
     Delete,
-    Query
+    NotFoundException
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
@@ -46,31 +46,22 @@ export class RoleController{
             permission?: PermissionModel[]
         }
     ): Promise<RoleModel>{
-        
-        let permissionId:{id:number}[] = []
-
-        roleData.permission.forEach(item => {
-            permissionId.push({id:item.id})
-        })
-
-        /*for(let i=0;i<roleData.permission.length;i++){
-
+        // Create role
+        const role = this.prismaService.role.create({
+            data:{
+                name: roleData.name,
+            }
+        });
+        // Create relations with permissions
+        for(let i=0;i<roleData.permission.length;i++){
             this.prismaService.rolePermission.create({
                 data:{
                     roleId: (await role).id,
                     permissionId: roleData.permission[i].id
                 }
             });
-        }*/
-
-        return this.prismaService.role.create({
-            data:{
-                name: roleData.name,
-                permissions: {
-                    connect: permissionId
-                }
-            }
-        });
+        }
+        return role
     }
 
     @Role(
@@ -80,9 +71,12 @@ export class RoleController{
     async roleDelete(
         @Param("id") id: string
     ): Promise<RoleModel>{
+        // Delete role
         return this.prismaService.role.delete({
             where: {id:Number(id)}
-        });
+        }).catch(() => {
+            throw new NotFoundException()
+        })
     }
 
     @Role(
@@ -93,55 +87,45 @@ export class RoleController{
         @Param("id") id:string,
         @Body() roleData: {
             name?: string,
-            addPermission?: PermissionModel[],
-            delPermission?: PermissionModel[] 
+            addPermission?: number[],
+            deletePermission?: number[] 
         }
     ): Promise<RoleModel>{
-        /*for(let i=0;i<roleData.addPermission.length;i++){
-            this.prismaService.rolePermission.create({
-                data:{
-                    roleId: Number(id),
-                    permissionId: roleData.addPermission[i].id
-                }
-            });
-        }
-
-        for(let i=0;i<roleData.delPermission.length;i++){
-            const relation = await this.prismaService.rolePermission.findFirst({
-                where: {
-                    roleId: Number(id),
-                    permissionId: roleData.delPermission[i].id
-                }
-            });
-
-            this.prismaService.rolePermission.delete({
-                where: {id: relation.id}
-            });
-        }*/
-
-        let connectPermissionId:{id:number}[] = []
-
-        roleData.addPermission.forEach(item => {
-            connectPermissionId.push({id:item.id})
-        })
-
-        let disconnectPermissionId:{id:number}[] = []
-
-        roleData.delPermission.forEach(item => {
-            disconnectPermissionId.push({id:item.id})
-        })
-
-        return this.prismaService.role.update({
-            where: {
-                id: Number(id)
-            },
-            data: {
-                name: roleData.name,
-                permissions: {
-                    connect: connectPermissionId,
-                    disconnect: disconnectPermissionId
-                }
+        // Create relations with permissions
+        if (roleData.addPermission) {
+            for(let i=0;i<roleData.addPermission.length;i++){
+                await this.prismaService.rolePermission.create({
+                    data: {
+                        roleId: Number(id),
+                        permissionId: roleData.addPermission[i]
+                    }
+                });
             }
-        });
+        }
+        // Delete relations with permissions
+        if (roleData.deletePermission) {
+            for(let i=0;i<roleData.deletePermission.length;i++){
+                const relation = await this.prismaService.rolePermission.findFirst({
+                    where: {
+                        roleId: Number(id),
+                        permissionId: roleData.deletePermission[i]
+                    }
+                });
+                this.prismaService.rolePermission.delete({
+                    where: {id: relation.id}
+                })
+            }
+        }
+        // Update training
+        if (roleData.name !== undefined) {
+            this.prismaService.role.update({ 
+                where: { id: Number(id) },
+                data: { name: roleData.name }
+            })
+        }
+        // Return training
+        return this.prismaService.role.findUnique({
+            where: { id: Number(id) }
+        })
     }
 }

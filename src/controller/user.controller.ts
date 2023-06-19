@@ -6,7 +6,6 @@ import {
 	Body,
 	Put,
 	Delete,
-	Query,
 } from '@nestjs/common'
 import { Public, Role } from 'src/auth/decorator'
 import { UserService } from '../service/user.service'

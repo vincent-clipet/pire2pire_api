@@ -81,7 +81,7 @@ export class TrainingController{
         // Create relations with modules
         if (trainingData.addModule) {
             for(let i=0;i<trainingData.addModule.length;i++){
-                const tmp = await this.prismaService.trainingModule.create({
+                await this.prismaService.trainingModule.create({
                     data: {
                         trainingId: Number(id),
                         moduleId: trainingData.addModule[i]
@@ -98,7 +98,9 @@ export class TrainingController{
                         moduleId: trainingData.deleteModule[i]
                     }
                 });
-                this.prismaService.trainingModule.delete({ where: {id: relation.id} })
+                this.prismaService.trainingModule.delete({
+                    where: {id: relation.id}
+                })
             }
         }
         // Update training
@@ -109,6 +111,8 @@ export class TrainingController{
             })
         }
         // Return training
-        return this.prismaService.training.findUnique({ where: { id: Number(id) } })
+        return this.prismaService.training.findUnique({
+            where: { id: Number(id) }
+        })
     }
 }
