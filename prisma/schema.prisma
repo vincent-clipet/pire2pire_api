@@ -19,9 +19,9 @@ model Role {
 
 model RolePermission {
   id           Int        @id @default(autoincrement())
-  role         Role       @relation(fields: [roleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
   roleId       Int
-  permission   Permission @relation(fields: [permissionId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
   permissionId Int
 }
 
@@ -52,7 +52,7 @@ model Formation {
   createdAt DateTime          @default(now())
   updatedAt DateTime          @default(now())
   users     FormationUser[]
-  coach     User?             @relation(fields: [coachId], references: [id])
+  coach     User?             @relation(fields: [coachId], references: [id], onDelete: SetNull)
   coachId   Int?
   modules   FormationModule[]
 }
