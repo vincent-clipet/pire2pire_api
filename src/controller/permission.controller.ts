@@ -10,22 +10,35 @@ import{
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import { Permission as PermissionModel } from "@prisma/client"
+import { Role } from "src/auth/decorator"
+import { Roles } from "src/auth/constant"
 
-@Controller()
+@Controller("permission")
 export class PermissionController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Get("permission/:id")
-    async getPermissionById(@Param("id") id:string): Promise<PermissionModel>{
-        return this.prismaService.permission.findUnique({where:{id:Number(id)}})
-    }
-
-    @Get("permissions")
+    @Role(
+		Roles.Admin,
+        Roles.Apprenant
+	)
+    @Get("list")
     async getAllRole(): Promise<PermissionModel[]>{
         return this.prismaService.permission.findMany()
     }
 
-    @Post("permission/create")
+    @Role(
+		Roles.Admin,
+        Roles.Apprenant
+	)
+    @Get(":id")
+    async getPermissionById(@Param("id") id:string): Promise<PermissionModel>{
+        return this.prismaService.permission.findUnique({where:{id:Number(id)}})
+    }
+
+    @Role(
+		Roles.Admin
+	)
+    @Post("create")
     async permissionCreate(
         @Body() permissionData: {
             name: string,
@@ -40,7 +53,10 @@ export class PermissionController{
         });
     }
 
-    @Delete("permission/:id/delete")
+    @Role(
+		Roles.Admin
+	)
+    @Delete(":id/delete")
     async permissionDelete(
         @Param("id") id: string
     ): Promise<PermissionModel>{
@@ -59,7 +75,10 @@ export class PermissionController{
         })
     }
 
-    @Put("permission/:id/update")
+    @Role(
+		Roles.Admin
+	)
+    @Put(":id/update")
     async permissionUpdate(
         @Param("id") id:string,
         @Body() permissionData: {

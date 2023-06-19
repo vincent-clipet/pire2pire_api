@@ -10,22 +10,35 @@ import{
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { Lesson as LessonModel } from '@prisma/client'
+import { Roles } from 'src/auth/constant'
+import { Role } from 'src/auth/decorator'
 
-@Controller()
+@Controller("lesson")
 export class LessonController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Get("lesson/:id")
-    async getLessonById(@Param('id') id: string): Promise<LessonModel>{
-        return this.prismaService.lesson.findUnique({where:{id:Number(id)}})
-    }
-
-    @Get("lessons")
+    @Role(
+		Roles.Admin,
+        Roles.Apprenant
+	)
+    @Get("list")
     async getAllLessons(): Promise<LessonModel[]>{
         return this.prismaService.lesson.findMany()
     }
 
-    @Post('lesson/create')
+    @Role(
+		Roles.Admin,
+        Roles.Apprenant
+	)
+    @Get(":id")
+    async getLessonById(@Param('id') id: string): Promise<LessonModel>{
+        return this.prismaService.lesson.findUnique({where:{id:Number(id)}})
+    }
+
+    @Role(
+		Roles.Admin
+	)
+    @Post('create')
     async lessonCreate(
         @Body() lessonData: {
             name?: string; content: string; author: number
@@ -40,7 +53,10 @@ export class LessonController{
         })
     }
 
-    @Put("lesson/:id/update")
+    @Role(
+		Roles.Admin
+	)
+    @Put(":id/update")
     async updateLesson(
         @Param('id') id: string,
         @Body() lessonData:{
@@ -58,7 +74,10 @@ export class LessonController{
         })
     }
 
-    @Delete("lesson/:id/delete")
+    @Role(
+		Roles.Admin
+	)
+    @Delete(":id/delete")
     async deleteLesson(
         @Param("id") id: string
     ): Promise<LessonModel>{

@@ -13,22 +13,33 @@ import {
     Role as RoleModel,
     Permission as PermissionModel
 } from "@prisma/client"
+import { Roles } from "src/auth/constant"
+import { Role } from "src/auth/decorator"
 
-@Controller()
+@Controller("role")
 export class RoleController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Get("role/:id")
-    async getRoleById(@Param("id") id:string): Promise<RoleModel>{
-        return this.prismaService.role.findUnique({where:{id:Number(id)}})
-    }
-
-    @Get("roles")
+    @Role(
+		Roles.Admin
+	)
+    @Get("list")
     async getAllRole(): Promise<RoleModel[]>{
         return this.prismaService.role.findMany()
     }
 
-    @Post("role/create")
+    @Role(
+		Roles.Admin
+	)
+    @Get(":id")
+    async getRoleById(@Param("id") id:string): Promise<RoleModel>{
+        return this.prismaService.role.findUnique({where:{id:Number(id)}})
+    }
+
+    @Role(
+		Roles.Admin
+	)
+    @Post("create")
     async roleCreate(
         @Body() roleData: {
             name: string,
@@ -62,7 +73,10 @@ export class RoleController{
         });
     }
 
-    @Delete("role/:id/delete")
+    @Role(
+		Roles.Admin
+	)
+    @Delete(":id/delete")
     async roleDelete(
         @Param("id") id: string
     ): Promise<RoleModel>{
@@ -71,7 +85,10 @@ export class RoleController{
         });
     }
 
-    @Put("role/:id/update")
+    @Role(
+		Roles.Admin
+	)
+    @Put(":id/update")
     async roleUpdate(
         @Param("id") id:string,
         @Body() roleData: {
