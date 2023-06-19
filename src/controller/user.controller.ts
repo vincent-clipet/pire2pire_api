@@ -14,8 +14,6 @@ import { User as UserModel } from '@prisma/client'
 import { Roles } from 'src/auth/constant'
 const argon2 = require("argon2")
 
-const salt = "$argon2id$v=19$m=65536,t=3,p=4$";
-
 @Controller('user')
 export class UserController {
 	constructor(private readonly userService: UserService) {}
@@ -70,7 +68,7 @@ export class UserController {
 	  const u = await this.userService.user.create({
 		data: {
 		  name: userData.name,
-		  password: hash.slice(salt.length),
+		  password: argon2.hash(hash),
 		},
 	  })
 	  return this.userService.strip_password(u)

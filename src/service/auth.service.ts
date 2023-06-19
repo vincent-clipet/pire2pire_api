@@ -10,8 +10,9 @@ export class AuthService {
         private jwtService: JwtService
     ){}
 
-    async signIn(username:string, password:string){
-        const user = await this.usersService.user.findUnique({where:{name:username}});
+    async signIn(name:string, password:string){
+        console.log("name =", name, "| password =", password)
+        const user = await this.usersService.user.findUnique({where:{name:name}});
         if(user === null) throw new UnauthorizedException();
         if(!password || password === "") throw new UnauthorizedException();
         console.log(user.password)
@@ -19,7 +20,7 @@ export class AuthService {
         if(await argon2.verify(user.password, password)){
             const payload = {
                 id: user.id,
-                username: username,
+                username: name,
                 role: user.roleId
             };
             return {
