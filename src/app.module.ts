@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { UserController } from './controller/user.controller';
 import { ModuleController } from "./controller/module.controller";
 import { LessonController } from "./controller/lesson.controller";
-import { FormationController } from "./controller/formation.controller";
+import { TrainingController } from "./controller/training.controller";
 import { RoleController } from "./controller/role.controller";
 import { PermissionController } from './controller/permission.controller';
 import { AuthController } from './controller/auth.controller';

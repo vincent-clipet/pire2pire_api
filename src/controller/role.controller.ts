@@ -66,7 +66,7 @@ export class RoleController{
         return this.prismaService.role.create({
             data:{
                 name: roleData.name,
-                permission: {
+                permissions: {
                     connect: permissionId
                 }
             }
@@ -137,7 +137,7 @@ export class RoleController{
             },
             data: {
                 name: roleData.name,
-                permission: {
+                permissions: {
                     connect: connectPermissionId,
                     disconnect: disconnectPermissionId
                 }
