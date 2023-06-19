@@ -40,7 +40,7 @@ const lessonData: Prisma.LessonCreateInput[] =
 	{ name: 'Python avancé', content: 'Fin du cours sur Python ...' },
 ]
 
-const formationData: Prisma.FormationCreateInput[] =
+const trainingData: Prisma.TrainingCreateInput[] =
 [
 	{ name: 'Ruby', },
 	{ name: 'C#' },
@@ -93,12 +93,12 @@ async function main() {
 		console.log(`Created lesson with id: ${element.id}`)
 	}
 
-	// create formation
-	for (const seedData of formationData) {
-		const element = await prisma.formation.create({
+	// create training
+	for (const seedData of trainingData) {
+		const element = await prisma.training.create({
 			data: seedData,
 		})
-		console.log(`Created formation with id: ${element.id}`)
+		console.log(`Created training with id: ${element.id}`)
 	}
 	
 	console.log(`Seeding finished.`)

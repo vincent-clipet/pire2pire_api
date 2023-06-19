@@ -10,105 +10,105 @@ import{
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
-    Formation as FormationModel,
+    Training as TrainingModel,
     Module as ModuleModel
 } from "@prisma/client"
 
 
 
 @Controller()
-export class FormationController{
+export class TrainingController{
     constructor(private readonly prismaService: PrismaService){}
     
-    @Get("formation/:id")
-    async getFormationById(@Param("id") id:string): Promise<FormationModel>{
-        return this.prismaService.formation.findUnique({ where: { id: Number(id) } })
+    @Get("training/:id")
+    async getTrainingById(@Param("id") id:string): Promise<TrainingModel>{
+        return this.prismaService.training.findUnique({ where: { id: Number(id) } })
     }
 
-    @Get("formations")
-    async getAllFormation(): Promise<FormationModel[]>{
-        return this.prismaService.formation.findMany({ take: 1000 })
+    @Get("trainings")
+    async getAllTraining(): Promise<TrainingModel[]>{
+        return this.prismaService.training.findMany({ take: 1000 })
     }
 
-    @Post("formation/create")
-    async formationCreate(
-        @Body() formationData: {
+    @Post("training/create")
+    async trainingCreate(
+        @Body() trainingData: {
             name: string,
             module: ModuleModel[],
             coachId: string
         }
-    ): Promise<FormationModel>{
-        // Create formation
-        const formation = this.prismaService.formation.create({
+    ): Promise<TrainingModel>{
+        // Create training
+        const training = this.prismaService.training.create({
             data:{
-                name: formationData.name,
-                coachId: Number(formationData.coachId)
+                name: trainingData.name,
+                coachId: Number(trainingData.coachId)
             }
         });
         // Create relations with modules
-        for(let i=0;i<formationData.module.length;i++){
-            this.prismaService.formationModule.create({
+        for(let i=0;i<trainingData.module.length;i++){
+            this.prismaService.trainingModule.create({
                 data:{
-                    formationId: (await formation).id,
-                    moduleId: formationData.module[i].id
+                    trainingId: (await training).id,
+                    moduleId: trainingData.module[i].id
                 }
             });
         }
-        return formation
+        return training
     }
 
-    @Delete("formation/:id/delete")
-    async formationDelete(
+    @Delete("training/:id/delete")
+    async trainingDelete(
         @Param("id") id:string
-    ): Promise<FormationModel>{
-        // Delete formation
-        return this.prismaService.formation.delete({
+    ): Promise<TrainingModel>{
+        // Delete training
+        return this.prismaService.training.delete({
             where: {id:Number(id)}
         }).catch(() => {
             throw new NotFoundException()
         })
     }
  
-    @Put("formation/:id/update")
-    async formationUpdate(
+    @Put("training/:id/update")
+    async trainingUpdate(
         @Param("id") id:string,
-        @Body() formationData: {
+        @Body() trainingData: {
             name?: string,
             addModule?: number[],
             deleteModule?: number[]
         }
     ): Promise<ModuleModel>{
         // Create relations with modules
-        if (formationData.addModule) {
-            for(let i=0;i<formationData.addModule.length;i++){
-                const tmp = await this.prismaService.formationModule.create({
+        if (trainingData.addModule) {
+            for(let i=0;i<trainingData.addModule.length;i++){
+                const tmp = await this.prismaService.trainingModule.create({
                     data: {
-                        formationId: Number(id),
-                        moduleId: formationData.addModule[i]
+                        trainingId: Number(id),
+                        moduleId: trainingData.addModule[i]
                     }
                 });
             }
         }
         // Delete relations with modules
-        if (formationData.deleteModule) {
-            for(let i=0;i<formationData.deleteModule.length;i++){
-                const relation = await this.prismaService.formationModule.findFirst({
+        if (trainingData.deleteModule) {
+            for(let i=0;i<trainingData.deleteModule.length;i++){
+                const relation = await this.prismaService.trainingModule.findFirst({
                     where: {
-                        formationId: Number(id),
-                        moduleId: formationData.deleteModule[i]
+                        trainingId: Number(id),
+                        moduleId: trainingData.deleteModule[i]
                     }
                 });
-                this.prismaService.formationModule.delete({ where: {id: relation.id} })
+                this.prismaService.trainingModule.delete({ where: {id: relation.id} })
             }
         }
-        // Update formation
-        if (formationData.name !== undefined) {
-            this.prismaService.formation.update({ 
+        // Update training
+        if (trainingData.name !== undefined) {
+            this.prismaService.training.update({ 
                 where: { id: Number(id) },
-                data: { name: formationData.name }
+                data: { name: trainingData.name }
             })
         }
-        // Return formation
-        return this.prismaService.formation.findUnique({ where: { id: Number(id) } })
+        // Return training
+        return this.prismaService.training.findUnique({ where: { id: Number(id) } })
     }
 }
