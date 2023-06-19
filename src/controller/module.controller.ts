@@ -13,22 +13,35 @@ import {
     Module as ModuleModel,
     Lesson as LessonModel,
 } from "@prisma/client"
+import { Role } from "src/auth/decorator"
+import { Roles } from "src/auth/constant"
 
-@Controller()
+@Controller("module")
 export class ModuleController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Get("module/:id")
-    async getModuleById(@Param("id") id: string): Promise<ModuleModel>{
-        return this.prismaService.module.findUnique({where:{id:Number(id)}})
-    }
-
-    @Get("modules")
+    @Role(
+		Roles.Admin,
+        Roles.Apprenant
+	)
+    @Get("list")
     async getAllModules(): Promise<ModuleModel[]>{
         return this.prismaService.module.findMany()
     }
 
-    @Post("module/create")
+    @Role(
+		Roles.Admin,
+        Roles.Apprenant
+	)
+    @Get(":id")
+    async getModuleById(@Param("id") id: string): Promise<ModuleModel>{
+        return this.prismaService.module.findUnique({where:{id:Number(id)}})
+    }
+
+    @Role(
+		Roles.Admin
+	)
+    @Post("create")
     async moduleCreate(
         @Body() moduleData: {
             name?: string;
@@ -53,7 +66,10 @@ export class ModuleController{
         return module
     }
 
-    @Delete("module/:id/delete")
+    @Role(
+		Roles.Admin
+	)
+    @Delete(":id/delete")
     async moduleDelete(
         @Param("id") id:string
     ): Promise<ModuleModel>{
@@ -72,7 +88,10 @@ export class ModuleController{
         })
     }
 
-    @Put("module/:id/update/")
+    @Role(
+		Roles.Admin
+	)
+    @Put(":id/update/")
     async moduleUpdate(
         @Param("id") id:string,
         @Body() moduleData: {

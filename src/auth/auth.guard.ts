@@ -5,9 +5,9 @@ import {
     UnauthorizedException
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { jwtConstants } from './constant'
+import { Roles, jwtConstants } from './constant'
 import { Request } from 'express'
-import { IS_PUBLIC_KEY } from './decorator'
+import { IS_PUBLIC_KEY, ROLES_KEY } from './decorator'
 import { Reflector } from '@nestjs/core'
 
 @Injectable()
@@ -38,7 +38,14 @@ export class AuthGuard implements CanActivate{
             throw new UnauthorizedException();
         }
 
-        return true;
+        console.log("user :", request.user)
+
+        const requiredRoles = this.reflector.getAllAndOverride<Roles[]>(ROLES_KEY, [
+            context.getHandler(),
+            context.getClass(),
+        ]);
+
+        return requiredRoles.includes(request.user.role);
     }
 
     private extractTokenFromHeader(request: Request): string | undefined {

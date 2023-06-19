@@ -12,7 +12,6 @@ import { AuthService } from 'src/service/auth.service';
 export class AuthController{
     constructor(private authService: AuthService){}
 
-
     @HttpCode(HttpStatus.OK)
     @Public()
     @Post('login')
