@@ -5,30 +5,45 @@ import{
     Post,
     Body,
     Put,
-    Delete,
-    Query
+    Delete
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
-import { Permission as PermissionModel } from "@prisma/client"
+import {
+    Permission as PermissionModel
+} from "@prisma/client"
 import { Role } from "src/auth/decorator"
-import { Roles } from "src/auth/constant"
+import { permissionRole } from "src/auth/permissionRole"
 
 @Controller("permission")
 export class PermissionController{
     constructor(private readonly prismaService: PrismaService){}
 
     @Role(
-		Roles.Admin,
-        Roles.Apprenant
+		permissionRole.getListPermission
 	)
     @Get("list")
     async getAllRole(): Promise<PermissionModel[]>{
         return this.prismaService.permission.findMany()
     }
 
+    async getAllPermissionWithRole(): Promise<object[]>{
+        return this.prismaService.permission.findMany({
+            include: {
+                roles:{
+                    include:{
+                        role: {
+                            select:{
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
     @Role(
-		Roles.Admin,
-        Roles.Apprenant
+		permissionRole.getPermission
 	)
     @Get(":id")
     async getPermissionById(@Param("id") id:string): Promise<PermissionModel>{
@@ -36,7 +51,7 @@ export class PermissionController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.createPermission
 	)
     @Post("create")
     async permissionCreate(
@@ -54,7 +69,7 @@ export class PermissionController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.deletePermission
 	)
     @Delete(":id/delete")
     async permissionDelete(
@@ -76,7 +91,7 @@ export class PermissionController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.deletePermission
 	)
     @Put(":id/update")
     async permissionUpdate(

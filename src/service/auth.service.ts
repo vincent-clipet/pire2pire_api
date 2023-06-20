@@ -11,12 +11,9 @@ export class AuthService {
     ){}
 
     async signIn(name:string, password:string){
-        console.log("name =", name, "| password =", password)
         const user = await this.usersService.user.findUnique({where:{name:name}});
         if(user === null) throw new UnauthorizedException();
         if(!password || password === "") throw new UnauthorizedException();
-        console.log(user.password)
-        console.log(password)
         if(await argon2.verify(user.password, password)){
             const payload = {
                 id: user.id,

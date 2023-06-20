@@ -13,23 +13,27 @@ import {
     Training as TrainingModel,
     Module as ModuleModel
 } from "@prisma/client"
-
+import { permissionRole } from "src/auth/permissionRole"
+import { Role } from "src/auth/decorator"
 
 
 @Controller("training")
 export class TrainingController{
     constructor(private readonly prismaService: PrismaService){}
 
+    @Role(permissionRole.getListTraining)
     @Get("list")
     async getAllTraining(): Promise<TrainingModel[]>{
         return this.prismaService.training.findMany({ take: 1000 })
     }
 
+    @Role(permissionRole.getTraining)
     @Get(":id")
     async getTrainingById(@Param("id") id:string): Promise<TrainingModel>{
         return this.prismaService.training.findUnique({ where: { id: Number(id) } })
     }
 
+    @Role(permissionRole.createTraining)
     @Post("create")
     async trainingCreate(
         @Body() trainingData: {
@@ -57,6 +61,7 @@ export class TrainingController{
         return training
     }
 
+    @Role(permissionRole.deleteTraining)
     @Delete(":id/delete")
     async trainingDelete(
         @Param("id") id:string
@@ -69,6 +74,7 @@ export class TrainingController{
         })
     }
  
+    @Role(permissionRole.updateTraining)
     @Put(":id/update")
     async trainingUpdate(
         @Param("id") id:string,

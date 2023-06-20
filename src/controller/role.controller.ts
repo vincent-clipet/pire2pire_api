@@ -13,15 +13,17 @@ import {
     Role as RoleModel,
     Permission as PermissionModel
 } from "@prisma/client"
-import { Roles } from "src/auth/constant"
+import { PermissionController } from "./permission.controller"
 import { Role } from "src/auth/decorator"
+import { permissionRole } from "src/auth/permissionRole"
+const fs = require("fs")
 
 @Controller("role")
 export class RoleController{
     constructor(private readonly prismaService: PrismaService){}
 
     @Role(
-		Roles.Admin
+		permissionRole.getListRole
 	)
     @Get("list")
     async getAllRole(): Promise<RoleModel[]>{
@@ -29,7 +31,7 @@ export class RoleController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.getRole
 	)
     @Get(":id")
     async getRoleById(@Param("id") id:string): Promise<RoleModel>{
@@ -37,7 +39,7 @@ export class RoleController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.createRole
 	)
     @Post("create")
     async roleCreate(
@@ -61,11 +63,14 @@ export class RoleController{
                 }
             });
         }
+
+        
+
         return role
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.deleteRole
 	)
     @Delete(":id/delete")
     async roleDelete(
@@ -80,7 +85,7 @@ export class RoleController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.updateRole
 	)
     @Put(":id/update")
     async roleUpdate(
@@ -111,21 +116,42 @@ export class RoleController{
                         permissionId: roleData.deletePermissions[i]
                     }
                 });
-                this.prismaService.rolePermission.delete({
+                console.log(relation)
+                await this.prismaService.rolePermission.delete({
                     where: {id: relation.id}
-                })
+                });
             }
         }
-        // Update training
+        // Update role
         if (roleData.name !== undefined) {
             this.prismaService.role.update({ 
                 where: { id: Number(id) },
                 data: { name: roleData.name }
             })
         }
-        // Return training
+
+        this.createFichierPermission();
+
+        // Return role
         return this.prismaService.role.findUnique({
             where: { id: Number(id) }
         })
     }
+
+    async createFichierPermission():Promise<string>{
+            const permissionController = new PermissionController(new PrismaService)
+            let permissions: object = {};
+            (await permissionController.getAllPermissionWithRole()).forEach(item => {
+                permissions[item["name"]] = []
+                item["roles"].forEach((role:object) => {
+                    permissions[item["name"]].push(role["roleId"]);
+                });
+            });
+            console.log(permissions);
+            fs.writeFile("src/auth/permissionRole.ts",`export const permissionRole = ${JSON.stringify(permissions)}`, (e) => {
+                if(e) throw e;
+                console.log("Fichier créé !");
+            });
+            return
+        }
 }

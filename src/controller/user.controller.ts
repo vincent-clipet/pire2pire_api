@@ -10,7 +10,7 @@ import {
 import { Public, Role } from 'src/auth/decorator'
 import { UserService } from '../service/user.service'
 import { User as UserModel } from '@prisma/client'
-import { Roles } from 'src/auth/constant'
+import { permissionRole } from "src/auth/permissionRole"
 const argon2 = require("argon2")
 
 @Controller('user')
@@ -18,8 +18,7 @@ export class UserController {
 	constructor(private readonly userService: UserService) {}
 
 	@Role(
-		Roles.Admin,
-		Roles.Apprenant
+		permissionRole.getListUser
 	)
 	@Get('list')
 	async getAllUsers(): Promise<UserModel[]> {
@@ -28,8 +27,7 @@ export class UserController {
 	}
 
 	@Role(
-		Roles.Admin,
-		Roles.Apprenant
+		permissionRole.getUser
 	)
 	@Get(':id')
 	async getUserById(@Param('id') id: string): Promise<UserModel> {
@@ -40,7 +38,7 @@ export class UserController {
 	}
 
 	@Role(
-		Roles.Admin
+		permissionRole.setRoleUser
 	)
 	@Put(':id/setrole')
 	async setUserRole(
@@ -63,18 +61,19 @@ export class UserController {
 	async signupUser(
 	  @Body() userData: { name: string, password: string },
 	): Promise<UserModel> {
+		console.log(userData)
 	  const hash = await argon2.hash(userData.password)
 	  const u = await this.userService.user.create({
 		data: {
 		  name: userData.name,
-		  password: argon2.hash(hash),
+		  password: hash,
 		},
 	  })
 	  return this.userService.strip_password(u)
 	}
 
 	@Role(
-		Roles.Admin
+		permissionRole.deleteUser
 	)
 	@Delete(':id/delete')
 	async deleteUser(

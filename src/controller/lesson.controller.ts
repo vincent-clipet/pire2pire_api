@@ -10,16 +10,15 @@ import{
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { Lesson as LessonModel } from '@prisma/client'
-import { Roles } from 'src/auth/constant'
 import { Role } from 'src/auth/decorator'
+import { permissionRole } from "src/auth/permissionRole"
 
 @Controller("lesson")
 export class LessonController{
     constructor(private readonly prismaService: PrismaService){}
 
     @Role(
-		Roles.Admin,
-        Roles.Apprenant
+		permissionRole.getListLesson
 	)
     @Get("list")
     async getAllLessons(): Promise<LessonModel[]>{
@@ -27,8 +26,7 @@ export class LessonController{
     }
 
     @Role(
-		Roles.Admin,
-        Roles.Apprenant
+		permissionRole.getLesson
 	)
     @Get(":id")
     async getLessonById(@Param('id') id: string): Promise<LessonModel>{
@@ -36,7 +34,7 @@ export class LessonController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.createLesson
 	)
     @Post('create')
     async lessonCreate(
@@ -54,7 +52,7 @@ export class LessonController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.updateLesson
 	)
     @Put(":id/update")
     async updateLesson(
@@ -75,7 +73,7 @@ export class LessonController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.deleteLesson
 	)
     @Delete(":id/delete")
     async deleteLesson(

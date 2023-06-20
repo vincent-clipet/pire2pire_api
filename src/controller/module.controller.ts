@@ -14,15 +14,14 @@ import {
     Lesson as LessonModel,
 } from "@prisma/client"
 import { Role } from "src/auth/decorator"
-import { Roles } from "src/auth/constant"
+import { permissionRole } from "src/auth/permissionRole"
 
 @Controller("module")
 export class ModuleController{
     constructor(private readonly prismaService: PrismaService){}
 
     @Role(
-		Roles.Admin,
-        Roles.Apprenant
+		permissionRole.getListModule
 	)
     @Get("list")
     async getAllModules(): Promise<ModuleModel[]>{
@@ -30,8 +29,7 @@ export class ModuleController{
     }
 
     @Role(
-		Roles.Admin,
-        Roles.Apprenant
+		permissionRole.getModule
 	)
     @Get(":id")
     async getModuleById(@Param("id") id: string): Promise<ModuleModel>{
@@ -39,7 +37,7 @@ export class ModuleController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.createModule
 	)
     @Post("create")
     async moduleCreate(
@@ -67,7 +65,7 @@ export class ModuleController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.deleteModule
 	)
     @Delete(":id/delete")
     async moduleDelete(
@@ -82,7 +80,7 @@ export class ModuleController{
     }
 
     @Role(
-		Roles.Admin
+		permissionRole.updateModule
 	)
     @Put(":id/update/")
     async moduleUpdate(
