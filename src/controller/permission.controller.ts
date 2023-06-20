@@ -5,7 +5,8 @@ import{
     Post,
     Body,
     Put,
-    Delete
+    Delete,
+    NotFoundException
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
@@ -60,6 +61,7 @@ export class PermissionController{
             description: string
         } 
     ): Promise<PermissionModel>{
+        // Create permission
         return this.prismaService.permission.create({
             data:{
                 name: permissionData.name,
@@ -75,18 +77,11 @@ export class PermissionController{
     async permissionDelete(
         @Param("id") id: string
     ): Promise<PermissionModel>{
-        const relation = await this.prismaService.rolePermission.findMany({
-            where: {permissionId: Number(id)}
-        });
-
-        for(let i=0; i<relation.length;i++){
-            this.prismaService.rolePermission.delete({
-                where: {id:Number(relation[i].id)}
-            })
-        }
-
+        // Delete permission
         return this.prismaService.permission.delete({
             where: {id: Number(id)}
+        }).catch(() => {
+            throw new NotFoundException()
         })
     }
 
@@ -101,6 +96,7 @@ export class PermissionController{
             description?:string
         }
     ): Promise<PermissionModel>{
+        // Update permission
         return this.prismaService.permission.update({
             where: {id: Number(id)},
             data: {

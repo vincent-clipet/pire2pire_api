@@ -64,8 +64,6 @@ export class RoleController{
             });
         }
 
-        
-
         return role
     }
 
@@ -116,7 +114,7 @@ export class RoleController{
                         permissionId: roleData.deletePermissions[i]
                     }
                 });
-                console.log(relation)
+
                 await this.prismaService.rolePermission.delete({
                     where: {id: relation.id}
                 });
@@ -124,7 +122,7 @@ export class RoleController{
         }
         // Update role
         if (roleData.name !== undefined) {
-            this.prismaService.role.update({ 
+            await this.prismaService.role.update({ 
                 where: { id: Number(id) },
                 data: { name: roleData.name }
             })

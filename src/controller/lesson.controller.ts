@@ -6,12 +6,15 @@ import{
     Body,
     Put,
     Delete,
-    Query
+    NotFoundException,
+    Req
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { Lesson as LessonModel } from '@prisma/client'
 import { Role } from 'src/auth/decorator'
 import { permissionRole } from "src/auth/permissionRole"
+import { Request } from 'express'
+import { JwtService } from '@nestjs/jwt'
 
 @Controller("lesson")
 export class LessonController{
@@ -51,6 +54,23 @@ export class LessonController{
         })
     }
 
+    @Role(permissionRole.lessonValidation)
+    @Post(":id/validation")
+    async lessonValidation(
+        @Req() request: Request,
+        @Param('id') id: string
+    ): Promise<void>{
+        const jwt = request.headers.authorization.replace("Bearer ","");
+        const jwtService = new JwtService()
+        const payload = jwtService.decode(jwt)
+        await this.prismaService.userLesson.create({
+            data:{
+                userId: payload["id"],
+                lessonId: Number(id)
+            }
+        })
+    }
+
     @Role(
 		permissionRole.updateLesson
 	)
@@ -69,6 +89,8 @@ export class LessonController{
             data: {
                 content: lessonData.content
             }
+        }).catch(() => {
+            throw new NotFoundException()
         })
     }
 
@@ -81,6 +103,8 @@ export class LessonController{
     ): Promise<LessonModel>{
         return this.prismaService.lesson.delete({
             where: {id: Number(id)}
+        }).catch(() => {
+            throw new NotFoundException()
         })
     }
 

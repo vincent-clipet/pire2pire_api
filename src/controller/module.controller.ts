@@ -10,8 +10,7 @@ import{
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
-    Module as ModuleModel,
-    Lesson as LessonModel,
+    Module as ModuleModel
 } from "@prisma/client"
 import { Role } from "src/auth/decorator"
 import { permissionRole } from "src/auth/permissionRole"
@@ -94,7 +93,7 @@ export class ModuleController{
         // Create relations with lessons
         if (moduleData.addLessons) {
             for(let i=0;i<moduleData.addLessons.length;i++){
-                this.prismaService.moduleLesson.create({
+                await this.prismaService.moduleLesson.create({
                     data:{
                         moduleId: Number(id),
                         lessonId: moduleData.addLessons[i]
@@ -111,14 +110,14 @@ export class ModuleController{
                         moduleId: Number(id)
                     }
                 })
-                this.prismaService.moduleLesson.delete({
+                await this.prismaService.moduleLesson.delete({
                     where: {id: relation.id}
                 })
             }
         }
         // Update module
         if (moduleData.name !== undefined) {
-            this.prismaService.module.update({ 
+            await this.prismaService.module.update({ 
                 where: { id: Number(id) },
                 data: { name: moduleData.name }
             })

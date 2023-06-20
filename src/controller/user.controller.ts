@@ -6,6 +6,7 @@ import {
 	Body,
 	Put,
 	Delete,
+	NotFoundException,
 } from '@nestjs/common'
 import { Public, Role } from 'src/auth/decorator'
 import { UserService } from '../service/user.service'
@@ -23,7 +24,7 @@ export class UserController {
 	@Get('list')
 	async getAllUsers(): Promise<UserModel[]> {
 	  const allUsers = await this.userService.user.findMany({ take: 1000 })
-	  return allUsers //this.userService.strip_passwords(allUsers)
+	  return this.userService.strip_passwords(allUsers)
 	}
 
 	@Role(
@@ -33,7 +34,7 @@ export class UserController {
 	async getUserById(@Param('id') id: string): Promise<UserModel> {
 		const u = await this.userService.user.findUnique({ 
 			where: { id: Number(id)	}
-		})
+		});
 		return this.userService.strip_password(u)
 	}
 
@@ -52,6 +53,8 @@ export class UserController {
 		data: {
 			roleId: userData.roleId
 		},
+	  }).catch(() => {
+		throw new NotFoundException()
 	  })
 	  return this.userService.strip_password(u)
 	}
@@ -81,6 +84,8 @@ export class UserController {
 	): Promise<UserModel>{
 		return this.userService.user.delete({
 			where: {id:Number(id)}
+		}).catch(() => {
+			throw new NotFoundException()
 		})
 	}
 }

@@ -6,15 +6,17 @@ import{
     Body,
     Put,
     Delete,
-    NotFoundException
+    NotFoundException,
+    Req
 } from "@nestjs/common"
+import { Request } from "express"
 import { PrismaService } from "src/prisma.service"
 import {
-    Training as TrainingModel,
-    Module as ModuleModel
+    Training as TrainingModel
 } from "@prisma/client"
 import { permissionRole } from "src/auth/permissionRole"
 import { Role } from "src/auth/decorator"
+import { JwtService } from "@nestjs/jwt"
 
 
 @Controller("training")
@@ -60,6 +62,23 @@ export class TrainingController{
         }
         return training
     }
+
+    /*@Role(permissionRole.subscribe)
+    @Post(":id/subscribe")
+    async trainingSubscribe(
+        @Req() request: Request,
+        @Param('id') id: string
+    ): Promise<void>{
+        const jwt = request.headers.authorization.replace("Bearer ","");
+        const jwtService = new JwtService()
+        const payload = jwtService.decode(jwt)
+        await this.prismaService.userLesson.create({
+            data:{
+                userId: payload["id"],
+                lessonId: Number(id)
+            }
+        })
+    }*/
 
     @Role(permissionRole.deleteTraining)
     @Delete(":id/delete")
