@@ -1,28 +1,6 @@
-Lesson is broken in schema
+- Auth doesn't work
+- Include sub-elements when returning Training / Module / Lesson / Role
 
-==========================================
-
-user/:id/setrole
-	=> probably need to check (properly) that this role exists, instead of returning a foreign key violationj
-
-role/:id/update
-	=> with empty [], works, but does not return anything
-	=> not tested with actual [] parameters
-
-training/:id/delete
-	=> error 500 + stacktrace when already deleted (404 instead ?)
-training/:id
-	=> should return its associated modules. Maybe in new route ? (training/:id/modules)
-
-module/:id/update
-	=> error 500
-		TypeError: Cannot read properties of null (reading 'id')
-    	at ModuleController.moduleUpdate (C:\Users\Apprenant\Documents\Git\pire2pire_api\src\controller\module.controller.ts:101:38)
-module/:id/delete
-	=> error 500
-		Invalid `this.prismaService.module.delete()` invocation in
-		C:\Users\Apprenant\Documents\Git\pire2pire_api\src\controller\module.controller.ts:70:48
-		An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
-
-lesson/
-	=> not tested, fix schema first
+- lessonController :
+	- create : author -> authorId ?
+	- update : name is not updatable
