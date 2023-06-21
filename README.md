@@ -21,9 +21,9 @@ Small example app to manage a training center :
 
 ## Installation
 
-```bash
-$ npm install
-```
+- Create the database in PostgreSQL
+- Copy `.env.example` as `.env` and change DB host/user/password
+- Run `npm install`
 
 ## Running the app
 
