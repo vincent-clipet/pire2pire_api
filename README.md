@@ -1,30 +1,23 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Small example app to manage a training center :
+- Members have a role (student or coach)
+- Each role has specific permissions
+- Students can register into a Training *(ex: "Python")*
+- Trainings contain Modules *(ex: "Introduction to Python")*
+- Modules contain Lessons *(ex: "Loops & flow structures")*
+- API requires an auth token, which you can get through the `/login` endpoint
+
+<br><hr>
+
+## Dependencies
+
+- [PostgreSQL](https://www.postgresql.org/download/) : Database
+- [NestJS](https://github.com/nestjs/nest) : Main framework
+- [Prisma](https://github.com/prisma/prisma) : ORM
+- [@nestjs/jwt](https://www.npmjs.com/package/@nestjs/jwt) : Authentication
+- [argon2](https://www.npmjs.com/package/argon2) : Password hashing
+- [pg](https://www.npmjs.com/package/pg) : PostgreSQL integration
 
 ## Installation
 
@@ -35,39 +28,174 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
+# development mode
 $ npm run start:dev
 
 # production mode
 $ npm run start:prod
 ```
 
-## Test
+<br><hr><br><br>
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Endpoints
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Get an authentication token
 
-## License
+<details>
+ <summary><code>POST</code> <code><b>/login</b></code> <code>(login with username & password, and get back an auth token)</code></summary>
 
-Nest is [MIT licensed](LICENSE).
+##### Parameters
+
+> | name      |  type     | data type               | description                                                           |
+> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
+> | name      |  required | string                  | username                                                              |
+> | password  |  required | string                  | password                                                              |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `application/json`                | ` `                                                                 |
+> | `TODO`        | `application/json`                | ` `                                                                 |
+
+##### Example cURL
+
+> ```bash
+>  curl -X GET -H "Content-Type: application/json" http://localhost:3000/login
+> ```
+
+</details><br>
+
+
+
+### User
+
+<details>
+ <summary><code>GET</code> <code><b>/user/{id}</b></code> <code>(get a specific User)</code></summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                           |
+> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
+> | id        |  required | int                     | User id                                                               |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `application/json`                | User                                                                |
+> | `404`         | `application/json`                | `{"code":"404","message":"Not Found"}`                              |
+
+##### Example cURL
+
+> ```bash
+>  curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer [token]" http://localhost:3000/user/1
+> ```
+
+</details>
+
+
+<details>
+ <summary><code>GET</code> <code><b>/user/list</b></code> <code>(get all Users. limit=1000)</code></summary>
+
+##### Parameters
+
+> None
+
+##### Responses
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `application/json`                | User[]                                                              |
+> | `404`         | `application/json`                | `{"code":"404","message":"Not Found"}`                              |
+
+##### Example cURL
+
+> ```bash
+>  curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer [token]" http://localhost:3000/user/list
+> ```
+
+</details>
+
+
+<details>
+ <summary><code>POST</code> <code><b>/user/signup</b></code> <code>(create/signup a new User)</code></summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                           |
+> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
+> | roleID    |  required | int                     | N/A                                                                   |
+> | name      |  required | string                  | username                                                              |
+> | password  |  required | string                  | password (will be hashed)                                             |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `application/json`                | User                                                                |
+> | `404`         | `application/json`                | `{"code":"404","message":"Not Found"}`                              |
+
+##### Example cURL
+
+> ```bash
+>  curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer [token]" -d data.json http://localhost:3000/user/signup
+> ```
+
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/user/{id}</b></code> <code>(delete a User)</code></summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                           |
+> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
+> | id        |  required | int                     | User id                                                               |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `application/json`                | User                                                                |
+> | `404`         | `application/json`                | `{"code":"404","message":"Not Found"}`                              |
+
+##### Example cURL
+
+> ```bash
+>  curl -X DELETE -H "Content-Type: application/json" -H "Authorization: Bearer [token]" http://localhost:3000/user/1/delete
+> ```
+
+</details>
+
+
+<details>
+ <summary><code>PUT</code> <code><b>/user/{id}/setrole</b></code> <code>(update a User's role)</code></summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                           |
+> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
+> | id        |  required | int                     | User id                                                               |
+> | roleID    |  required | int                     | roleId of the new role                                                |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `application/json`                | User                                                                |
+> | `404`         | `application/json`                | `{"code":"404","message":"Not Found"}`                              |
+
+##### Example cURL
+
+> ```bash
+>  curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer [token]" -d data.json http://localhost:3000/user/1/setrole
+> ```
+
+</details>
