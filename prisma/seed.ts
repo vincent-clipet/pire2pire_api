@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 async function main() {
 
-	const userData: Prisma.UserCreateInput[] = [
+	const userData: Prisma.UserUncheckedCreateInput[] = [
 		{ name: 'admin', password: await argon2.hash('admin') },
 		{ name: 'alice', password: await argon2.hash('alice') },
 		{ name: 'bob', password: await argon2.hash('bob') },
@@ -15,7 +15,7 @@ async function main() {
 		{ name: 'esteban', password: await argon2.hash('esteban') },
 		{ name: 'frederick', password: await argon2.hash('frederick') },
 	]
-	const roleData: Prisma.RoleCreateInput[] = [
+	const roleData: Prisma.RoleUncheckedCreateInput[] = [
 		{ name: 'Admin' },
 		{ name: 'Apprenant' },
 		{ name: 'Invité' },
@@ -23,7 +23,7 @@ async function main() {
 		{ name: 'test_role_2' },
 		{ name: 'test_role_3' },
 	]
-	const permissionData: Prisma.PermissionCreateInput[] = [
+	const permissionData: Prisma.PermissionUncheckedCreateInput[] = [
 		{ name: 'superuser', description: 'Can do anything' },
 		{ name: 'lesson_create', description: 'Create a lesson' },
 		{ name: 'lesson_delete', description: 'Delete a lesson' },
@@ -44,7 +44,7 @@ async function main() {
 		{ name: 'permission_delete', description: 'Delete a permission' },
 		{ name: 'permission_update', description: 'Update a permission' },
 	]
-	const moduleData: Prisma.ModuleCreateInput[] = [
+	const moduleData: Prisma.ModuleUncheckedCreateInput[] = [
 		{ name: 'Module 1' },
 		{ name: 'Module 2' },
 		{ name: 'Module 3' },
@@ -54,21 +54,21 @@ async function main() {
 		{ name: 'Module 7' },
 		{ name: 'Module 8' },
 	]
-	const lessonData: Prisma.LessonCreateInput[] = [
-		{ name: 'Intro à Python', content: 'Début du cours sur Python ...' },
-		{ name: 'Python intermédiaire', content: 'Milieu du cours sur Python ...' },
-		{ name: 'Python avancé', content: 'Fin du cours sur Python ...' },
-		{ name: 'Regex', content: 'Intro aux regex' },
-		{ name: 'Regex Partie 2', content: 'Regex avancées' },
-		{ name: 'Ruby > Javascript', content: 'Pas besoin de développer' },
+	const lessonData: Prisma.LessonUncheckedCreateInput[] = [
+		{ name: 'Intro à Python', content: 'Début du cours sur Python ...', authorId: 1 },
+		{ name: 'Python intermédiaire', content: 'Milieu du cours sur Python ...', authorId: 1 },
+		{ name: 'Python avancé', content: 'Fin du cours sur Python ...', authorId: 1 },
+		{ name: 'Regex', content: 'Intro aux regex', authorId: 2 },
+		{ name: 'Regex Partie 2', content: 'Regex avancées', authorId: 3 },
+		{ name: 'Ruby > Javascript', content: 'Pas besoin de développer', authorId: 4 },
 	]
-	const trainingData: Prisma.TrainingCreateInput[] = [
-		{ name: 'Ruby', },
-		{ name: 'C#' },
-		{ name: 'Python' },
-		{ name: 'Javascript (it sucks)' },
-		{ name: 'PHP' },
-		{ name: 'Perl' },
+	const trainingData: Prisma.TrainingUncheckedCreateInput[] = [
+		{ name: 'Ruby', coachId: 1 },
+		{ name: 'C#', coachId: 1 },
+		{ name: 'Python', coachId: 1 },
+		{ name: 'Javascript (it sucks)', coachId: 2 },
+		{ name: 'PHP', coachId: 3 },
+		{ name: 'Perl', coachId: 3 },
 	]
 
 
