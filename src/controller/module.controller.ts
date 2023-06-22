@@ -24,15 +24,43 @@ export class ModuleController{
 	)
     @Get("list")
     async getAllModules(): Promise<ModuleModel[]>{
-        return this.prismaService.module.findMany({ take: 1000 })
+        return this.prismaService.module.findMany({
+            include: {
+                lesson:{
+                    include:{
+                        lesson:{
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     @Role(
 		permissionRole.getModule
 	)
     @Get(":id")
-    async getModuleById(@Param("id") id: string): Promise<ModuleModel>{
-        return this.prismaService.module.findUnique({where:{id:Number(id)}})
+    async getModuleById(
+            @Param("id") id: string
+        ): Promise<ModuleModel>{
+        if(Number.isNaN(Number(id))) throw new NotFoundException()
+        return this.prismaService.module.findUnique({
+            where:{id:Number(id)},
+            include: {
+                lesson:{
+                    include:{
+                        lesson:{
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     @Role(
