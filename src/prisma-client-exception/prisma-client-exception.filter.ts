@@ -19,7 +19,7 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter {
         message = `The record searched for in the where conditions (${exception.meta.model_name}.${exception.meta.argument_name} = ${exception.meta.argument_value}) does not exist`;
         break;
       case "P2002":
-        message = `Unique constraint failed on the ${exception.meta.constraint}`;
+        message = `Unique constraint failed on the ${exception.meta.target}`;
         break;
       case "P2003":
         message = `Foreign key constaint failed on the field: ${exception.meta.field_name}`;
