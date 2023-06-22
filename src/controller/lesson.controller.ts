@@ -7,7 +7,9 @@ import{
     Put,
     Delete,
     NotFoundException,
-    Req
+    Req,
+    HttpException,
+    HttpStatus
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { Lesson as LessonModel } from '@prisma/client'
@@ -42,16 +44,20 @@ export class LessonController{
     @Post('create')
     async lessonCreate(
         @Body() lessonData: {
-            name?: string; content: string; author: number
+            name: string; content?: string; author: number
         }
     ): Promise<LessonModel>{
+        if(lessonData.author === undefined) throw new HttpException("author undefined", HttpStatus.BAD_REQUEST)
         return this.prismaService.lesson.create({
             data:{
-                name: lessonData?.name,
-                content: lessonData.content,
+                name: lessonData.name,
+                content: lessonData?.content,
                 authorId: lessonData.author
             }
-        })
+        }).catch(() => {
+            const errorResponse = "author does not exist"
+            throw new HttpException(errorResponse, HttpStatus.BAD_REQUEST)
+        });
     }
 
     @Role(permissionRole.lessonValidation)
