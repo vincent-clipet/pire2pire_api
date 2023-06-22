@@ -26,7 +26,15 @@ export class RoleController{
 	)
     @Get("list")
     async getAllRole(): Promise<RoleModel[]>{
-        return this.prismaService.role.findMany()
+        return this.prismaService.role.findMany({
+            include:{
+                permissions:{
+                    include:{
+                        permission: true
+                    }
+                }
+            }
+        })
     }
 
     @Role(
@@ -34,7 +42,16 @@ export class RoleController{
 	)
     @Get(":id")
     async getRoleById(@Param("id") id:string): Promise<RoleModel>{
-        return this.prismaService.role.findUnique({where:{id:Number(id)}})
+        return this.prismaService.role.findUnique({
+            where:{id:Number(id)},
+            include:{
+                permissions:{
+                    include:{
+                        permission: true
+                    }
+                }
+            }
+        })
     }
 
     @Role(
