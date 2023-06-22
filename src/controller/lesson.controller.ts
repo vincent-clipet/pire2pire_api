@@ -27,7 +27,15 @@ export class LessonController{
 	)
     @Get("list")
     async getAllLessons(): Promise<LessonModel[]>{
-        return this.prismaService.lesson.findMany()
+        return this.prismaService.lesson.findMany(
+            {include: {
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }}
+        )
     }
 
     @Role(
@@ -35,7 +43,16 @@ export class LessonController{
 	)
     @Get(":id")
     async getLessonById(@Param('id') id: string): Promise<LessonModel>{
-        return this.prismaService.lesson.findUnique({where:{id:Number(id)}})
+        return this.prismaService.lesson.findUnique({
+            where:{id:Number(id)},
+            include: {
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        })
     }
 
     @Role(
@@ -43,16 +60,19 @@ export class LessonController{
 	)
     @Post('create')
     async lessonCreate(
+        @Req() request: Request,
         @Body() lessonData: {
-            name: string; content?: string; author: number
+            name: string; content?: string
         }
     ): Promise<LessonModel>{
-        if(lessonData.author === undefined) throw new HttpException("author undefined", HttpStatus.BAD_REQUEST)
+        const jwt = request.headers.authorization.replace("Bearer ","");
+        const jwtService = new JwtService()
+        const payload = jwtService.decode(jwt)
         return this.prismaService.lesson.create({
             data:{
                 name: lessonData.name,
                 content: lessonData?.content,
-                authorId: lessonData.author
+                authorId: payload["id"]
             }
         }).catch(() => {
             const errorResponse = "author does not exist"
