@@ -84,7 +84,8 @@ export class LessonController{
     async updateLesson(
         @Param('id') id: string,
         @Body() lessonData:{
-            content: string
+            name?: string,
+            content?: string
         }
         ): Promise<LessonModel>{
         
@@ -93,6 +94,7 @@ export class LessonController{
                 id: Number(id)
             },
             data: {
+                name: lessonData.name,
                 content: lessonData.content
             }
         }).catch(() => {
