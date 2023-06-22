@@ -10,8 +10,7 @@ import{
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
-    Role as RoleModel,
-    Permission as PermissionModel
+    Role as RoleModel
 } from "@prisma/client"
 import { PermissionController } from "./permission.controller"
 import { Role } from "src/auth/decorator"
@@ -128,7 +127,7 @@ export class RoleController{
             })
         }
 
-        this.createFichierPermission();
+        await this.createFichierPermission();
 
         // Return role
         return this.prismaService.role.findUnique({
@@ -136,7 +135,7 @@ export class RoleController{
         })
     }
 
-    async createFichierPermission():Promise<string>{
+    async createFichierPermission():Promise<boolean>{
             const permissionController = new PermissionController(new PrismaService)
             let permissions: object = {};
             (await permissionController.getAllPermissionWithRole()).forEach(item => {
@@ -145,11 +144,10 @@ export class RoleController{
                     permissions[item["name"]].push(role["roleId"]);
                 });
             });
-            console.log(permissions);
+
             fs.writeFile("src/auth/permissionRole.ts",`export const permissionRole = ${JSON.stringify(permissions)}`, (e) => {
                 if(e) throw e;
-                console.log("Fichier créé !");
             });
-            return
+            return true
         }
 }

@@ -61,8 +61,8 @@ model Training {
 
 model TrainingUser {
   id          Int       @id @default(autoincrement())
-  user        User      @relation(fields: [coachId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  coachId      Int
+  user        User      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId      Int
   training    Training @relation(fields: [trainingId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   trainingId Int
 }

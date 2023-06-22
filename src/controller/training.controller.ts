@@ -26,13 +26,57 @@ export class TrainingController{
     @Role(permissionRole.getListTraining)
     @Get("list")
     async getAllTraining(): Promise<TrainingModel[]>{
-        return this.prismaService.training.findMany({ take: 1000 })
+        return this.prismaService.training.findMany({
+            include:{
+                modules:{
+                    include:{
+                        module:{
+                            select:{
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     @Role(permissionRole.getTraining)
     @Get(":id")
     async getTrainingById(@Param("id") id:string): Promise<TrainingModel>{
-        return this.prismaService.training.findUnique({ where: { id: Number(id) } })
+        return this.prismaService.training.findUnique({
+            where: { id: Number(id) },
+            include:{
+                modules:{
+                    include:{
+                        module:{
+                            select:{
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    @Role(permissionRole.getTrainingStudents)
+    @Get(":id/students")
+    async getTrainingStudent(@Param("id") id:string): Promise<TrainingModel>{
+        return this.prismaService.training.findUnique({
+            where: { id: Number(id) },
+            include:{
+                users:{
+                    include:{
+                        user: {
+                            select:{
+                                name:true
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     @Role(permissionRole.createTraining)
@@ -45,7 +89,7 @@ export class TrainingController{
         }
     ): Promise<TrainingModel>{
         // Create training
-        const training = this.prismaService.training.create({
+        const training = await this.prismaService.training.create({
             data:{
                 name: trainingData.name,
                 coachId: Number(trainingData.coachId)
@@ -53,9 +97,9 @@ export class TrainingController{
         });
         // Create relations with modules
         for(let i=0;i<trainingData.modules.length;i++){
-            this.prismaService.trainingModule.create({
+            await this.prismaService.trainingModule.create({
                 data:{
-                    trainingId: (await training).id,
+                    trainingId: training.id,
                     moduleId: trainingData.modules[i]
                 }
             });
@@ -63,7 +107,7 @@ export class TrainingController{
         return training
     }
 
-    /*@Role(permissionRole.subscribe)
+    @Role(permissionRole.subscribe)
     @Post(":id/subscribe")
     async trainingSubscribe(
         @Req() request: Request,
@@ -72,13 +116,13 @@ export class TrainingController{
         const jwt = request.headers.authorization.replace("Bearer ","");
         const jwtService = new JwtService()
         const payload = jwtService.decode(jwt)
-        await this.prismaService.userLesson.create({
+        await this.prismaService.trainingUser.create({
             data:{
                 userId: payload["id"],
-                lessonId: Number(id)
+                trainingId: Number(id)
             }
         })
-    }*/
+    }
 
     @Role(permissionRole.deleteTraining)
     @Delete(":id/delete")
