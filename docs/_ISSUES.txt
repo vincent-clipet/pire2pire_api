@@ -4,3 +4,9 @@
 - lessonController :
 	- create : author -> authorId ?
 	- update : name is not updatable
+
+- User signup : 500 if no args given. 500 if name already exists
+- User delete : doesn't work (404)
+
+
+- README : roleID => roleId
