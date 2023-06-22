@@ -13,8 +13,6 @@ datasource db {
 model Role {
   id          Int              @id @default(autoincrement())
   name        String
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @default(now()) @updatedAt()
   permissions RolePermission[]
   users       User[]
 }
@@ -38,8 +36,6 @@ model User {
   id              Int             @id @default(autoincrement())
   name            String          @unique
   password        String
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @default(now()) @updatedAt()
   role            Role?           @relation(fields: [roleId], references: [id], onUpdate: Cascade, onDelete: SetNull)
   roleId          Int?            @default(2)
   trainings       TrainingUser[]
@@ -51,8 +47,6 @@ model User {
 model Training {
   id        Int               @id @default(autoincrement())
   name      String
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @default(now()) @updatedAt()
   users     TrainingUser[]
   coach     User?             @relation(fields: [coachId], references: [id], onDelete: SetNull)
   coachId   Int?
@@ -70,8 +64,6 @@ model TrainingUser {
 model Module {
   id        Int               @id @default(autoincrement())
   name      String
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @default(now()) @updatedAt()
   training  TrainingModule[]
   lesson    ModuleLesson[]
 }
@@ -88,8 +80,6 @@ model Lesson {
   id        Int            @id @default(autoincrement())
   name      String
   content   String         @db.Text
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @default(now()) @updatedAt()
   author    User?          @relation(fields: [authorId], references: [id])
   authorId  Int?
   students  UserLesson[]
