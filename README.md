@@ -112,7 +112,6 @@ $ npm run start:prod
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
 > | `200`         | `application/json`                | User[]                                                              |
-> | `404`         | `application/json`                | `{"code":"404","message":"Not Found"}`                              |
 
 ##### Example cURL
 
@@ -138,7 +137,7 @@ $ npm run start:prod
 
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`                | User                                                                |
+> | `201`         | `application/json`                | User                                                                |
 > | `404`         | `application/json`                | `{"code":"404","message":"Not Found"}`                              |
 
 ##### Example cURL
@@ -269,7 +268,7 @@ $ npm run start:prod
 
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`                | Training                                                            |
+> | `201`         | `application/json`                | Training                                                            |
 > | `TODO`        | `application/json`                |                                                                     |
 
 ##### Example cURL
@@ -400,7 +399,7 @@ $ npm run start:prod
 
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`                | Module                                                            |
+> | `201`         | `application/json`                | Module                                                            |
 > | `TODO`        | `application/json`                |                                                                     |
 
 ##### Example cURL
@@ -531,7 +530,7 @@ $ npm run start:prod
 
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`                | Lesson                                                            |
+> | `201`         | `application/json`                | Lesson                                                            |
 > | `TODO`        | `application/json`                |                                                                     |
 
 ##### Example cURL
@@ -661,7 +660,7 @@ $ npm run start:prod
 
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`                | Role                                                            |
+> | `201`         | `application/json`                | Role                                                            |
 > | `TODO`        | `application/json`                |                                                                     |
 
 ##### Example cURL
@@ -792,7 +791,7 @@ $ npm run start:prod
 
 > | http code     | content-type                      | response                                                            |
 > |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`                | Permission                                                            |
+> | `201`         | `application/json`                | Permission                                                            |
 > | `TODO`        | `application/json`                |                                                                     |
 
 ##### Example cURL

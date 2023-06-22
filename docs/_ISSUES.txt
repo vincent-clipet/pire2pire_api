@@ -18,4 +18,9 @@
 
 
 
-- README : roleID => roleId
+=============================================
+
+
+User :
+	- get : 500 if doesn't exist
+	- create : creating an already existing user should return 400

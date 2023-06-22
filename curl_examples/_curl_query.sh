@@ -32,11 +32,13 @@ auth_header="Authorization: Bearer $token"
 if [ -z "$json_file" ]
 then
     curl \
+	-v \
 	-H "$auth_header" \
 	-X "$http_method" \
 	"$app_host$route"
 else
 	curl \
+	-v \
 	-H "$auth_header" \
 	-H "Content-Type: application/json" \
 	-X "$http_method" \
