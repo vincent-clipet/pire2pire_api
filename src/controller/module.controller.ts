@@ -74,16 +74,16 @@ export class ModuleController{
         }
     ): Promise<ModuleModel>{
         // Create module
-        const module = this.prismaService.module.create({
+        const module = await this.prismaService.module.create({
             data:{
                 name: moduleData.name,
             }
         });
         // Create relations with lessons
         for(let i=0;i<moduleData.lessons.length;i++){
-            this.prismaService.moduleLesson.create({
+            await this.prismaService.moduleLesson.create({
                 data:{
-                    moduleId: (await module).id,
+                    moduleId: module.id,
                     lessonId: moduleData.lessons[i]
                 }
             });
