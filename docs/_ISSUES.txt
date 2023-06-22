@@ -12,6 +12,10 @@
 	- can create multiple relations with the same IDs (module & lesson) without any errors
 	- deleteLessons : 500 if  not exists
 
+- Lesson create : Lesson has both "author" AND "authorId" in its fields
+	- Seeded values should probably have the author set instead of NULL
+- Training create : seeded values should probably have the coach set instead of NULL
+
 
 
 - README : roleID => roleId

@@ -130,7 +130,7 @@ $ npm run start:prod
 
 > | name      |  type     | data type               | description                                                           |
 > |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
-> | roleID    |  required | int                     | N/A                                                                   |
+> | roleId    |  required | int                     | N/A                                                                   |
 > | name      |  required | string                  | username                                                              |
 > | password  |  required | string                  | password (will be hashed)                                             |
 
@@ -183,7 +183,7 @@ $ npm run start:prod
 > | name      |  type     | data type               | description                                                           |
 > |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
 > | id        |  required | int                     | User id                                                               |
-> | roleID    |  required | int                     | roleId of the new role                                                |
+> | roleId    |  required | int                     | roleId of the new role                                                |
 
 ##### Responses
 
@@ -525,8 +525,7 @@ $ npm run start:prod
 > | name      |  type     | data type               | description                                                           |
 > |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
 > | name      |  optional | string                  | Name of the Lesson                                                    |
-> | content   |  required | int[]                   | Array of Lessons to include in this Lesson                            |
-> | authorId  |  required | int                     | User id of author                                                     |
+> | content   |  required | string                  | Content of the lesson                                                 |
 
 ##### Responses
 
@@ -706,7 +705,7 @@ $ npm run start:prod
 
 > | name               |  type     | data type               | description                                                           |
 > |--------------------|-----------|-------------------------|-----------------------------------------------------------------------|
-> | name               |  optional | string                  | Role id                                                               |
+> | name               |  optional | string                  | Name of role                                                          |
 > | addPermissions     |  optional | string                  | List of Permissions to add to this Role                               |
 > | deletePermissions  |  optional | string                  | List of Permissions to remove from this Role                          |
 
