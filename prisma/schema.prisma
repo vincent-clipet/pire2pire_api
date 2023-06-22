@@ -13,6 +13,8 @@ datasource db {
 model Role {
   id          Int              @id @default(autoincrement())
   name        String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt()
   permissions RolePermission[]
   users       User[]
 }
@@ -37,7 +39,7 @@ model User {
   name            String          @unique
   password        String
   createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt()
   role            Role?           @relation(fields: [roleId], references: [id], onUpdate: Cascade, onDelete: SetNull)
   roleId          Int?            @default(2)
   trainings       TrainingUser[]
@@ -50,7 +52,7 @@ model Training {
   id        Int               @id @default(autoincrement())
   name      String
   createdAt DateTime          @default(now())
-  updatedAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt()
   users     TrainingUser[]
   coach     User?             @relation(fields: [coachId], references: [id], onDelete: SetNull)
   coachId   Int?
@@ -69,7 +71,7 @@ model Module {
   id        Int               @id @default(autoincrement())
   name      String
   createdAt DateTime          @default(now())
-  updatedAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt()
   training  TrainingModule[]
   lesson    ModuleLesson[]
 }
@@ -78,7 +80,7 @@ model TrainingModule {
   id          Int       @id @default(autoincrement())
   module      Module    @relation(fields: [moduleId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   moduleId    Int
-  training   Training @relation(fields: [trainingId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  training   Training   @relation(fields: [trainingId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   trainingId Int
 }
 
@@ -87,7 +89,7 @@ model Lesson {
   name      String
   content   String         @db.Text
   createdAt DateTime       @default(now())
-  updatedAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt()
   author    User?          @relation(fields: [authorId], references: [id])
   authorId  Int?
   students  UserLesson[]
