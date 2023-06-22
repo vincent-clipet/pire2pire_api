@@ -62,7 +62,7 @@ export class UserController {
 	@Public()
 	@Post('signup')
 	async signupUser(
-	  @Body() userData: { name: string, password: string },
+	  @Body() userData: { name: string, password: string, roleId?: number },
 	): Promise<UserModel> {
 		console.log(userData)
 	  const hash = await argon2.hash(userData.password)
@@ -70,6 +70,7 @@ export class UserController {
 		data: {
 		  name: userData.name,
 		  password: hash,
+		  roleId: userData.roleId
 		},
 	  })
 	  return this.userService.strip_password(u)
