@@ -19,7 +19,9 @@ async function main() {
 		{ name: 'Admin' },
 		{ name: 'Apprenant' },
 		{ name: 'Invité' },
-		{ name: 'old_role_delete' },
+		{ name: 'test_role_1' },
+		{ name: 'test_role_2' },
+		{ name: 'test_role_3' },
 	]
 	const permissionData: Prisma.PermissionCreateInput[] = [
 		{ name: 'superuser', description: 'Can do anything' },
@@ -71,8 +73,10 @@ async function main() {
 
 
 
-	// runn all loops
+	// run all loops
 	console.log(`Start seeding ...`)
+
+
 
 	// create roles
 	for (const seedData of roleData) {
@@ -81,6 +85,8 @@ async function main() {
 		})
 		console.log(`Created role with id: ${element.id}`)
 	}
+
+
 
 	// create users
 	for (const seedData of userData) {
@@ -91,29 +97,7 @@ async function main() {
 	}
 	await prisma.$queryRaw`UPDATE "User" SET "roleId"=1 WHERE "id" = 1 OR "id" = 2;`
 
-	// create permissions
-	for (const seedData of permissionData) {
-		const element = await prisma.permission.create({
-			data: seedData,
-		})
-		console.log(`Created permission with id: ${element.id}`)
-	}
-	
-	// create modules
-	for (const seedData of moduleData) {
-		const element = await prisma.module.create({
-			data: seedData,
-		})
-		console.log(`Created module with id: ${element.id}`)
-	}
 
-	// create lesson
-	for (const seedData of lessonData) {
-		const element = await prisma.lesson.create({
-			data: seedData,
-		})
-		console.log(`Created lesson with id: ${element.id}`)
-	}
 
 	// create training
 	for (const seedData of trainingData) {
@@ -122,6 +106,78 @@ async function main() {
 		})
 		console.log(`Created training with id: ${element.id}`)
 	}
+
+
+
+	// create permissions
+	for (const seedData of permissionData) {
+		const element = await prisma.permission.create({
+			data: seedData,
+		})
+		console.log(`Created permission with id: ${element.id}`)
+	}
+	await prisma.rolePermission.createMany({
+		data: [
+			{ roleId: 3, permissionId: 1 },
+			{ roleId: 3, permissionId: 2 },
+			{ roleId: 3, permissionId: 3 },
+			{ roleId: 3, permissionId: 4 },
+			{ roleId: 3, permissionId: 5 },
+			{ roleId: 3, permissionId: 6 },
+			{ roleId: 4, permissionId: 4 },
+			{ roleId: 4, permissionId: 5 },
+			{ roleId: 4, permissionId: 6 },
+			{ roleId: 5, permissionId: 7 },
+			{ roleId: 5, permissionId: 8 },
+			{ roleId: 5, permissionId: 9 },
+		]
+	})
+	
+
+
+	// create modules
+	for (const seedData of moduleData) {
+		const element = await prisma.module.create({
+			data: seedData,
+		})
+		console.log(`Created module with id: ${element.id}`)
+	}
+	await prisma.trainingModule.createMany({
+		data: [
+			{ trainingId: 1, moduleId: 8 },
+			{ trainingId: 1, moduleId: 7 },
+			{ trainingId: 1, moduleId: 4 },
+			{ trainingId: 2, moduleId: 1 },
+			{ trainingId: 3, moduleId: 1 },
+			{ trainingId: 3, moduleId: 2 },
+			{ trainingId: 3, moduleId: 3 },
+		]
+	})
+
+
+
+	// create lesson
+	for (const seedData of lessonData) {
+		const element = await prisma.lesson.create({
+			data: seedData,
+		})
+		console.log(`Created lesson with id: ${element.id}`)
+	}
+	await prisma.moduleLesson.createMany({
+		data: [
+			{ moduleId: 8, lessonId: 1 },
+			{ moduleId: 8, lessonId: 2 },
+			{ moduleId: 8, lessonId: 3 },
+			{ moduleId: 1, lessonId: 1 },
+			{ moduleId: 1, lessonId: 2 },
+			{ moduleId: 2, lessonId: 4 },
+			{ moduleId: 3, lessonId: 1 },
+			{ moduleId: 3, lessonId: 2 },
+			{ moduleId: 3, lessonId: 3 },
+		]
+	})
+
+
 	
 	console.log(`Seeding finished.`)
 	
