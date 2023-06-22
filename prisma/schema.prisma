@@ -14,7 +14,7 @@ model Role {
   id          Int              @id @default(autoincrement())
   name        String
   createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt()
+  updatedAt   DateTime        @default(now()) @updatedAt()
   permissions RolePermission[]
   users       User[]
 }
@@ -39,7 +39,7 @@ model User {
   name            String          @unique
   password        String
   createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt()
+  updatedAt       DateTime        @default(now()) @updatedAt()
   role            Role?           @relation(fields: [roleId], references: [id], onUpdate: Cascade, onDelete: SetNull)
   roleId          Int?            @default(2)
   trainings       TrainingUser[]
@@ -52,7 +52,7 @@ model Training {
   id        Int               @id @default(autoincrement())
   name      String
   createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt()
+  updatedAt DateTime          @default(now()) @updatedAt()
   users     TrainingUser[]
   coach     User?             @relation(fields: [coachId], references: [id], onDelete: SetNull)
   coachId   Int?
@@ -71,7 +71,7 @@ model Module {
   id        Int               @id @default(autoincrement())
   name      String
   createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt()
+  updatedAt DateTime          @default(now()) @updatedAt()
   training  TrainingModule[]
   lesson    ModuleLesson[]
 }
@@ -89,7 +89,7 @@ model Lesson {
   name      String
   content   String         @db.Text
   createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt()
+  updatedAt DateTime       @default(now()) @updatedAt()
   author    User?          @relation(fields: [authorId], references: [id])
   authorId  Int?
   students  UserLesson[]
