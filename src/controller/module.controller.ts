@@ -24,15 +24,43 @@ export class ModuleController{
 	)
     @Get("list")
     async getAllModules(): Promise<ModuleModel[]>{
-        return this.prismaService.module.findMany({ take: 1000 })
+        return this.prismaService.module.findMany({
+            include: {
+                lesson:{
+                    include:{
+                        lesson:{
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     @Role(
 		permissionRole.getModule
 	)
     @Get(":id")
-    async getModuleById(@Param("id") id: string): Promise<ModuleModel>{
-        return this.prismaService.module.findUnique({where:{id:Number(id)}})
+    async getModuleById(
+            @Param("id") id: string
+        ): Promise<ModuleModel>{
+        if(Number.isNaN(Number(id))) throw new NotFoundException()
+        return this.prismaService.module.findUnique({
+            where:{id:Number(id)},
+            include: {
+                lesson:{
+                    include:{
+                        lesson:{
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
     @Role(
@@ -46,16 +74,16 @@ export class ModuleController{
         }
     ): Promise<ModuleModel>{
         // Create module
-        const module = this.prismaService.module.create({
+        const module = await this.prismaService.module.create({
             data:{
                 name: moduleData.name,
             }
         });
         // Create relations with lessons
         for(let i=0;i<moduleData.lessons.length;i++){
-            this.prismaService.moduleLesson.create({
+            await this.prismaService.moduleLesson.create({
                 data:{
-                    moduleId: (await module).id,
+                    moduleId: module.id,
                     lessonId: moduleData.lessons[i]
                 }
             });
