@@ -60,16 +60,19 @@ export class LessonController{
 	)
     @Post('create')
     async lessonCreate(
+        @Req() request: Request,
         @Body() lessonData: {
-            name: string; content?: string; author: number
+            name: string; content?: string
         }
     ): Promise<LessonModel>{
-        if(lessonData.author === undefined) throw new HttpException("author undefined", HttpStatus.BAD_REQUEST)
+        const jwt = request.headers.authorization.replace("Bearer ","");
+        const jwtService = new JwtService()
+        const payload = jwtService.decode(jwt)
         return this.prismaService.lesson.create({
             data:{
                 name: lessonData.name,
                 content: lessonData?.content,
-                authorId: lessonData.author
+                authorId: payload["id"]
             }
         }).catch(() => {
             const errorResponse = "author does not exist"
