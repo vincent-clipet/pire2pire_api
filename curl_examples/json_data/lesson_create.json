@@ -1,0 +1,4 @@
+{
+	"name": "Leçon cURL",
+	"content": "curl -X POST @data.json http://localhost/lesson/create"
+}

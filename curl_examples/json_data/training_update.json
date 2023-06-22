@@ -1,0 +1,5 @@
+{
+	"name": "training updated by cURL",
+	"addModules": [4,5],
+	"deleteModules": [3]
+}

@@ -1,0 +1,5 @@
+{
+	"name": "role updated by cURL",
+	"deletePermissions": [1,2],
+	"addPermissions": [8,9]
+}
