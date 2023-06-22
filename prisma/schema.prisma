@@ -100,7 +100,6 @@ model UserLesson {
   userId     Int
   lesson     Lesson  @relation(fields: [lessonId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   lessonId   Int
-  isFinished Boolean @default(false)
 }
 
 model ModuleLesson {
