@@ -27,7 +27,15 @@ export class LessonController{
 	)
     @Get("list")
     async getAllLessons(): Promise<LessonModel[]>{
-        return this.prismaService.lesson.findMany()
+        return this.prismaService.lesson.findMany(
+            {include: {
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }}
+        )
     }
 
     @Role(
@@ -35,7 +43,16 @@ export class LessonController{
 	)
     @Get(":id")
     async getLessonById(@Param('id') id: string): Promise<LessonModel>{
-        return this.prismaService.lesson.findUnique({where:{id:Number(id)}})
+        return this.prismaService.lesson.findUnique({
+            where:{id:Number(id)},
+            include: {
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        })
     }
 
     @Role(
