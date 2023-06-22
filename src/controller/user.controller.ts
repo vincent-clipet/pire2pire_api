@@ -7,6 +7,8 @@ import {
 	Put,
 	Delete,
 	NotFoundException,
+	HttpException,
+	HttpStatus,
 } from '@nestjs/common'
 import { Public, Role } from 'src/auth/decorator'
 import { UserService } from '../service/user.service'
@@ -35,7 +37,7 @@ export class UserController {
 		const u = await this.userService.user.findUnique({ 
 			where: { id: Number(id)	}
 		});
-		return this.userService.strip_password(u)
+		return u ? this.userService.strip_password(u) : undefined
 	}
 
 	@Role(
@@ -53,10 +55,8 @@ export class UserController {
 		data: {
 			roleId: userData.roleId
 		},
-	  }).catch(() => {
-		throw new NotFoundException()
 	  })
-	  return this.userService.strip_password(u)
+	  return u ? this.userService.strip_password(u) : undefined
 	}
 
 	@Public()
@@ -64,16 +64,16 @@ export class UserController {
 	async signupUser(
 	  @Body() userData: { name: string, password: string, roleId?: number },
 	): Promise<UserModel> {
-		console.log(userData)
-	  const hash = await argon2.hash(userData.password)
-	  const u = await this.userService.user.create({
-		data: {
-		  name: userData.name,
-		  password: hash,
-		  roleId: userData.roleId
-		},
-	  })
-	  return this.userService.strip_password(u)
+		if(userData.name === undefined || userData.password === undefined) throw new HttpException("name or password empty", HttpStatus.BAD_REQUEST)
+	  	const hash = await argon2.hash(userData.password)
+	  	const u = await this.userService.user.create({
+			data: {
+			  	name: userData.name,
+			  	password: hash,
+			  	roleId: userData.roleId
+			},
+	  	})
+	  	return this.userService.strip_password(u)
 	}
 
 	@Role(
@@ -85,8 +85,6 @@ export class UserController {
 	): Promise<UserModel>{
 		return this.userService.user.delete({
 			where: {id:Number(id)}
-		}).catch(() => {
-			throw new NotFoundException()
 		})
 	}
 }

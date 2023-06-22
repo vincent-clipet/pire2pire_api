@@ -101,8 +101,6 @@ export class ModuleController{
         // Delete module
         return this.prismaService.module.delete({
             where: {id:Number(id)}
-        }).catch(() => {
-            throw new NotFoundException()
         })
     }
 

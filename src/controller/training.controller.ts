@@ -6,7 +6,6 @@ import{
     Body,
     Put,
     Delete,
-    NotFoundException,
     Req
 } from "@nestjs/common"
 import { Request } from "express"
@@ -132,8 +131,6 @@ export class TrainingController{
         // Delete training
         return this.prismaService.training.delete({
             where: {id:Number(id)}
-        }).catch(() => {
-            throw new NotFoundException()
         })
     }
  

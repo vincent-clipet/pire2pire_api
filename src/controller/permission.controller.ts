@@ -5,8 +5,7 @@ import{
     Post,
     Body,
     Put,
-    Delete,
-    NotFoundException
+    Delete
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
@@ -80,8 +79,6 @@ export class PermissionController{
         // Delete permission
         return this.prismaService.permission.delete({
             where: {id: Number(id)}
-        }).catch(() => {
-            throw new NotFoundException()
         })
     }
 

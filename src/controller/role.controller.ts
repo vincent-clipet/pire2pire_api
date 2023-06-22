@@ -5,8 +5,7 @@ import{
     Post,
     Body,
     Put,
-    Delete,
-    NotFoundException
+    Delete
 } from "@nestjs/common"
 import { PrismaService } from "src/prisma.service"
 import {
@@ -93,8 +92,6 @@ export class RoleController{
         // Delete role
         return this.prismaService.role.delete({
             where: {id:Number(id)}
-        }).catch(() => {
-            throw new NotFoundException()
         })
     }
 

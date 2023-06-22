@@ -6,10 +6,7 @@ import{
     Body,
     Put,
     Delete,
-    NotFoundException,
-    Req,
-    HttpException,
-    HttpStatus
+    Req
 } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { Lesson as LessonModel } from '@prisma/client'
@@ -74,10 +71,7 @@ export class LessonController{
                 content: lessonData?.content,
                 authorId: payload["id"]
             }
-        }).catch(() => {
-            const errorResponse = "author does not exist"
-            throw new HttpException(errorResponse, HttpStatus.BAD_REQUEST)
-        });
+        })
     }
 
     @Role(permissionRole.lessonValidation)
@@ -117,8 +111,6 @@ export class LessonController{
                 name: lessonData.name,
                 content: lessonData.content
             }
-        }).catch(() => {
-            throw new NotFoundException()
         })
     }
 
@@ -131,8 +123,6 @@ export class LessonController{
     ): Promise<LessonModel>{
         return this.prismaService.lesson.delete({
             where: {id: Number(id)}
-        }).catch(() => {
-            throw new NotFoundException()
         })
     }
 
