@@ -22,3 +22,8 @@ npx prisma generate
 ```bash
 npx prisma db seed
 ```
+
+##### Regenerate documentation
+```bash
+npx @compodoc/compodoc -p tsconfig.json -s
+```

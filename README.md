@@ -35,6 +35,16 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+<br>
+
+## This repo also contains :
+- `/curl_examples` : cURL scripts to test any endpoint of the API
+- `/documentation` : auto-generated documentation
+- `/docs` :
+	- `/cdm` : Conceptual Data Model
+	- `install.md`, `postgresql.md` and `run.md` : command-line reference for installing the app, creating the PostgreSQL user account, and running the app
+	- `rbac.png` : list of permissions for each role
+
 <br><hr><br><br>
 
 
