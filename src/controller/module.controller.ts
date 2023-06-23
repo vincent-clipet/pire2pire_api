@@ -119,12 +119,20 @@ export class ModuleController{
         // Create relations with lessons
         if (moduleData.addLessons) {
             for(let i=0;i<moduleData.addLessons.length;i++){
-                await this.prismaService.moduleLesson.create({
-                    data:{
+                const relation = await this.prismaService.moduleLesson.findFirst({
+                    where: {
                         moduleId: Number(id),
                         lessonId: moduleData.addLessons[i]
                     }
-                });
+                })
+                if (relation === null || relation === undefined) {
+                    await this.prismaService.moduleLesson.create({
+                        data:{
+                            moduleId: Number(id),
+                            lessonId: moduleData.addLessons[i]
+                        }
+                    });
+                }
             }
         }
         // Delete relations with lessons
@@ -136,9 +144,11 @@ export class ModuleController{
                         moduleId: Number(id)
                     }
                 })
-                await this.prismaService.moduleLesson.delete({
-                    where: {id: relation.id}
-                })
+                if (relation) {
+                    await this.prismaService.moduleLesson.delete({
+                        where: {id: relation.id}
+                    })
+                }
             }
         }
         // Update module

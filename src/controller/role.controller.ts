@@ -110,12 +110,20 @@ export class RoleController{
         // Create relations with permissions
         if (roleData.addPermissions) {
             for(let i=0;i<roleData.addPermissions.length;i++){
-                await this.prismaService.rolePermission.create({
-                    data: {
+                const relation = await this.prismaService.rolePermission.findFirst({
+                    where: {
                         roleId: Number(id),
                         permissionId: roleData.addPermissions[i]
                     }
-                });
+                })
+                if (relation === null || relation === undefined) {
+                    await this.prismaService.rolePermission.create({
+                        data: {
+                            roleId: Number(id),
+                            permissionId: roleData.addPermissions[i]
+                        }
+                    });
+                }
             }
         }
         // Delete relations with permissions
@@ -127,10 +135,11 @@ export class RoleController{
                         permissionId: roleData.deletePermissions[i]
                     }
                 });
-
-                await this.prismaService.rolePermission.delete({
-                    where: {id: relation.id}
-                });
+                if (relation) {
+                    await this.prismaService.rolePermission.delete({
+                        where: {id: relation.id}
+                    })
+                }
             }
         }
         // Update role
