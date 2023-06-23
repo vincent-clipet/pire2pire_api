@@ -31,56 +31,1739 @@
                <div class="content getting-started">
                    <div class="content-data">
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 <h2>Description</h2>
-<p><a href="https://github.com/nestjs/nest">Nest</a> framework TypeScript starter repository.</p>
+<p>Small example app to manage a training center :</p>
+<ul>
+<li>Members have a role (student or coach)</li>
+<li>Each role has specific permissions</li>
+<li>Students can register into a Training <em>(ex: &quot;Python&quot;)</em></li>
+<li>Trainings contain Modules <em>(ex: &quot;Introduction to Python&quot;)</em></li>
+<li>Modules contain Lessons <em>(ex: &quot;Loops &amp; flow structures&quot;)</em></li>
+<li>API requires an auth token, which you can get through the <code>/login</code> endpoint</li>
+</ul>
+<p><br><hr></p>
+<h2>Dependencies</h2>
+<ul>
+<li><a href="https://www.postgresql.org/download/">PostgreSQL</a> : Database</li>
+<li><a href="https://github.com/nestjs/nest">NestJS</a> : Main framework</li>
+<li><a href="https://github.com/prisma/prisma">Prisma</a> : ORM</li>
+<li><a href="https://www.npmjs.com/package/@nestjs/jwt">@nestjs/jwt</a> : Authentication</li>
+<li><a href="https://www.npmjs.com/package/argon2">argon2</a> : Password hashing</li>
+<li><a href="https://www.npmjs.com/package/pg">pg</a> : PostgreSQL integration</li>
+</ul>
 <h2>Installation</h2>
-<div><pre class="line-numbers"><code class="language-bash">$ npm install</code></pre></div><h2>Running the app</h2>
-<div><pre class="line-numbers"><code class="language-bash"># development
-$ npm run start
-
-# watch mode
+<ul>
+<li>Create the database in PostgreSQL</li>
+<li>Copy <code>.env.example</code> as <code>.env</code> and change DB host/user/password</li>
+<li>Run <code>npm install</code></li>
+</ul>
+<h2>Running the app</h2>
+<div><pre class="line-numbers"><code class="language-bash"># development mode
 $ npm run start:dev
 
 # production mode
-$ npm run start:prod</code></pre></div><h2>Test</h2>
-<div><pre class="line-numbers"><code class="language-bash"># unit tests
-$ npm run test
+$ npm run start:prod</code></pre></div><p><br><hr><br><br></p>
+<h1>Endpoints</h1>
+<h3>Auth</h3>
+<details>
+ <summary><code>POST</code> <code><b>/login</b></code> <code>(login with username & password, and get back an auth token)</code></summary>
 
-# e2e tests
-$ npm run test:e2e
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>required</td>
+<td>string</td>
+<td>username</td>
+</tr>
+<tr>
+<td>password</td>
+<td>required</td>
+<td>string</td>
+<td>password</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td><code> </code></td>
+</tr>
+<tr>
+<td><code>TODO</code></td>
+<td><code>application/json</code></td>
+<td><code> </code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; http://localhost:3000/login</code></pre></div></blockquote>
+</details><br>
 
-# test coverage
-$ npm run test:cov</code></pre></div><h2>Support</h2>
-<p>Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you&#39;d like to join them, please <a href="https://docs.nestjs.com/support">read more here</a>.</p>
-<h2>Stay in touch</h2>
-<ul>
-<li>Author - <a href="https://kamilmysliwiec.com">Kamil Myśliwiec</a></li>
-<li>Website - <a href="https://nestjs.com/">https://nestjs.com</a></li>
-<li>Twitter - <a href="https://twitter.com/nestframework">@nestframework</a></li>
-</ul>
-<h2>License</h2>
-<p>Nest is <a href="LICENSE">MIT licensed</a>.</p>
+
+
+<h3>User</h3>
+<details>
+ <summary><code>GET</code> <code><b>/user/{id}</b></code> <code>(get a specific User)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>User id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>User</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/user/1</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>GET</code> <code><b>/user/list</b></code> <code>(get all Users. limit=1000)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<p>None</p>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>User[]</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/user/list</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>POST</code> <code><b>/user/signup</b></code> <code>(create/signup a new User)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>roleId</td>
+<td>required</td>
+<td>int</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>name</td>
+<td>required</td>
+<td>string</td>
+<td>username</td>
+</tr>
+<tr>
+<td>password</td>
+<td>required</td>
+<td>string</td>
+<td>password (will be hashed)</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>201</code></td>
+<td><code>application/json</code></td>
+<td>User</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X POST -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/user/signup</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/user/{id}</b></code> <code>(delete a User)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>User id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>User</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X DELETE -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/user/1/delete</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>PUT</code> <code><b>/user/{id}/setrole</b></code> <code>(update a User's role)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>User id</td>
+</tr>
+<tr>
+<td>roleId</td>
+<td>required</td>
+<td>int</td>
+<td>roleId of the new role</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>User</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X PUT -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/user/1/setrole</code></pre></div></blockquote>
+</details>
+
+
+<br>
+
+
+<h3>Training</h3>
+<details>
+ <summary><code>GET</code> <code><b>/training/{id}</b></code> <code>(get a specific Training)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Training id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Training</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/training/1</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>GET</code> <code><b>/training/list</b></code> <code>(get all Trainings. limit=1000)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<p>None</p>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Training[]</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/training/list</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>POST</code> <code><b>/training/create</b></code> <code>(create a new Training)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>required</td>
+<td>string</td>
+<td>Name of the Training</td>
+</tr>
+<tr>
+<td>modules</td>
+<td>required</td>
+<td>int[]</td>
+<td>Array of Module ids to include in this Training</td>
+</tr>
+<tr>
+<td>coachId</td>
+<td>required</td>
+<td>int</td>
+<td>User ID of the coach assigned to this module</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>201</code></td>
+<td><code>application/json</code></td>
+<td>Training</td>
+</tr>
+<tr>
+<td><code>TODO</code></td>
+<td><code>application/json</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X POST -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/training/create</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/training/{id}</b></code> <code>(delete a Training)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Training id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Training</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X DELETE -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/training/1/delete</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>PUT</code> <code><b>/training/{id}/update</b></code> <code>(update a Training. Can add or delete associated Modules)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>optional</td>
+<td>string</td>
+<td>Training id</td>
+</tr>
+<tr>
+<td>addModules</td>
+<td>optional</td>
+<td>int[]</td>
+<td>list of Modules to add to this Training</td>
+</tr>
+<tr>
+<td>deleteModules</td>
+<td>optional</td>
+<td>int[]</td>
+<td>list of Modules to delete from this Training</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Training</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X PUT -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/training/1/update</code></pre></div></blockquote>
+</details>
+
+
+<br>
+
+
+<h3>Module</h3>
+<details>
+ <summary><code>GET</code> <code><b>/module/{id}</b></code> <code>(get a specific Module)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Module id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Module</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/module/1</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>GET</code> <code><b>/module/list</b></code> <code>(get all Modules. limit=1000)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<p>None</p>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Module[]</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/module/list</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>POST</code> <code><b>/module/create</b></code> <code>(create a new Module)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>required</td>
+<td>string</td>
+<td>Name of the Module</td>
+</tr>
+<tr>
+<td>lessons</td>
+<td>optional</td>
+<td>int[]</td>
+<td>Array of Lessons to include in this Module</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>201</code></td>
+<td><code>application/json</code></td>
+<td>Module</td>
+</tr>
+<tr>
+<td><code>TODO</code></td>
+<td><code>application/json</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X POST -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/module/create</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/module/{id}</b></code> <code>(delete a Module)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Module id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Module</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X DELETE -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/module/1/delete</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>PUT</code> <code><b>/module/{id}/update</b></code> <code>(update a Module. Can add or delete associated Lessons)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>optional</td>
+<td>string</td>
+<td>Module id</td>
+</tr>
+<tr>
+<td>addLessons</td>
+<td>optional</td>
+<td>int[]</td>
+<td>list of Lessons to add to this Module</td>
+</tr>
+<tr>
+<td>deleteLessons</td>
+<td>optional</td>
+<td>int[]</td>
+<td>list of Lessons to delete from this Module</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Module</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X PUT -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/module/1/update</code></pre></div></blockquote>
+</details>
+
+
+<br>
+
+
+<h3>Lesson</h3>
+<details>
+ <summary><code>GET</code> <code><b>/lesson/{id}</b></code> <code>(get a specific Lesson)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Lesson id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Lesson</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/lesson/1</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>GET</code> <code><b>/lesson/list</b></code> <code>(get all Lessons. limit=1000)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<p>None</p>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Lesson[]</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/lesson/list</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>POST</code> <code><b>/lesson/create</b></code> <code>(create a new Lesson)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>optional</td>
+<td>string</td>
+<td>Name of the Lesson</td>
+</tr>
+<tr>
+<td>content</td>
+<td>required</td>
+<td>string</td>
+<td>Content of the lesson</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>201</code></td>
+<td><code>application/json</code></td>
+<td>Lesson</td>
+</tr>
+<tr>
+<td><code>TODO</code></td>
+<td><code>application/json</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X POST -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/lesson/create</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/lesson/{id}</b></code> <code>(delete a Lesson)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Lesson id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Lesson</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X DELETE -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/lesson/1/delete</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>PUT</code> <code><b>/lesson/{id}/update</b></code> <code>(update a Lesson)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>optional</td>
+<td>string</td>
+<td>Lesson id</td>
+</tr>
+<tr>
+<td>content</td>
+<td>optional</td>
+<td>string</td>
+<td>Lesson text content</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Lesson</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X PUT -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/lesson/1/update</code></pre></div></blockquote>
+</details>
+
+
+<br>
+
+
+<h3>Role</h3>
+<details>
+ <summary><code>GET</code> <code><b>/role/{id}</b></code> <code>(get a specific Role)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Role id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Role</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/role/1</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>GET</code> <code><b>/role/list</b></code> <code>(get all Roles. limit=1000)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<p>None</p>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Role[]</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/role/list</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>POST</code> <code><b>/role/create</b></code> <code>(create a new Role)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>optional</td>
+<td>string</td>
+<td>Name of the Role</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>required</td>
+<td>int[]</td>
+<td>Array of Roles to include in this Role</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>201</code></td>
+<td><code>application/json</code></td>
+<td>Role</td>
+</tr>
+<tr>
+<td><code>TODO</code></td>
+<td><code>application/json</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X POST -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/role/create</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/role/{id}</b></code> <code>(delete a Role)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Role id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Role</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X DELETE -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/role/1/delete</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>PUT</code> <code><b>/role/{id}/update</b></code> <code>(update a Role. Can add or delete associated Permissions)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>optional</td>
+<td>string</td>
+<td>Name of role</td>
+</tr>
+<tr>
+<td>addPermissions</td>
+<td>optional</td>
+<td>string</td>
+<td>List of Permissions to add to this Role</td>
+</tr>
+<tr>
+<td>deletePermissions</td>
+<td>optional</td>
+<td>string</td>
+<td>List of Permissions to remove from this Role</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Role</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X PUT -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/role/1/update</code></pre></div></blockquote>
+</details>
+
+
+<br>
+
+
+<h3>Permission</h3>
+<details>
+ <summary><code>GET</code> <code><b>/permission/{id}</b></code> <code>(get a specific Permission)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Permission id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Permission</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/permission/1</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>GET</code> <code><b>/permission/list</b></code> <code>(get all Permissions. limit=1000)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<p>None</p>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Permission[]</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X GET -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/permission/list</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>POST</code> <code><b>/permission/create</b></code> <code>(create a new Permission)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>required</td>
+<td>string</td>
+<td>Name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>required</td>
+<td>string</td>
+<td>Description</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>201</code></td>
+<td><code>application/json</code></td>
+<td>Permission</td>
+</tr>
+<tr>
+<td><code>TODO</code></td>
+<td><code>application/json</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X POST -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/permission/create</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>DELETE</code> <code><b>/permission/{id}</b></code> <code>(delete a Permission)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>required</td>
+<td>int</td>
+<td>Permission id</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Permission</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X DELETE -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; http://localhost:3000/permission/1/delete</code></pre></div></blockquote>
+</details>
+
+
+<details>
+ <summary><code>PUT</code> <code><b>/permission/{id}/update</b></code> <code>(update a Permission)</code></summary>
+
+<h5>Parameters</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th>data type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>optional</td>
+<td>string</td>
+<td>Permission name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>optional</td>
+<td>string</td>
+<td>Permission description</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Responses</h5>
+<blockquote>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>http code</th>
+<th>content-type</th>
+<th>response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200</code></td>
+<td><code>application/json</code></td>
+<td>Permission</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>application/json</code></td>
+<td><code>{&quot;code&quot;:&quot;404&quot;,&quot;message&quot;:&quot;Not Found&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<h5>Example cURL</h5>
+<blockquote>
+<div><pre class="line-numbers"><code class="language-bash"> curl -X PUT -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer [token]&quot; -d data.json http://localhost:3000/permission/1/update</code></pre></div></blockquote>
+</details>
+
+
+
+<h1></h1>
 
 
 

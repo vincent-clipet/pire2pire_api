@@ -28,19 +28,16 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content controller">
                    <div class="content-data">
 
 
 
 
 
-
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >AppService</li>
+  <li class="breadcrumb-item">Controllers</li>
+  <li class="breadcrumb-item" >AuthController</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -64,8 +61,10 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app.service.ts</code>
+            <code>src/controller/auth.controller.ts</code>
         </p>
+
+
 
 
 
@@ -85,7 +84,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getHello" >getHello</a>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                <a href="#signIn" >signIn</a>
                             </li>
                         </ul>
                     </td>
@@ -99,7 +101,6 @@
     </table>
 </section>
 
-
             <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -109,24 +110,35 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getHello"></a>
+                    <a name="signIn"></a>
                     <span class="name">
-                        <span ><b>getHello</b></span>
-                        <a href="#getHello"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier"></span>
+                        <span class="modifier"></span>
+                        <span class="modifier"></span>
+                        <span ><b>signIn</b></span>
+                        <a href="#signIn"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getHello()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>signIn(signInData: Record<string | any>)</code>
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HttpCode(HttpStatus.OK)<br />@Public()<br />@Post(&#x27;login&#x27;)<br /></code>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="5"
-                            class="link-to-prism">src/app.service.ts:5</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">src/controller/auth.controller.ts:18</a></div>
                 </td>
             </tr>
 
@@ -135,31 +147,78 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>signInData</td>
+                                    <td>
+                                            <code>Record&lt;string | any&gt;</code>
+                                    </td>
 
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
-</section>
-
-    </div>
+</section>    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+    Body,
+    Controller,
+    Post,
+    HttpCode,
+    HttpStatus,
+} from &#x27;@nestjs/common&#x27;;
+import { Public } from &#x27;src/auth/decorator&#x27;;
+import { AuthService } from &#x27;src/service/auth.service&#x27;;
 
-@Injectable()
-export class AppService {
-  getHello(): string {
-    return &#x27;Check the &lt;a href&#x3D;&quot;http://localhost:8080&quot;&gt;API documentation&lt;/a&gt; for a list of available endpoints&#x27;;
-  }
-}
-</code></pre>
+@Controller()
+export class AuthController{
+    constructor(private authService: AuthService){}
+
+    @HttpCode(HttpStatus.OK)
+    @Public()
+    @Post(&#x27;login&#x27;)
+    signIn(
+        @Body() signInData: Record&lt;string, any&gt;
+    ) {
+        return this.authService.signIn(signInData.name, signInData.password);
+    }
+
+}</code></pre>
     </div>
-
 </div>
+
+
+
 
 
 
@@ -198,8 +257,8 @@ export class AppService {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthController.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

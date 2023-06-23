@@ -64,6 +64,12 @@
             <code>src/controller/permission.controller.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Prefix</h3>
+            </p>
+            <p class="comment">
+                <code>permission</code>
+            </p>
 
 
 
@@ -84,26 +90,35 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllPermissionWithRole" >getAllPermissionWithRole</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getAllRole" >getAllRole</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getPermissionById" >getPermissionById</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#permissionCreate" >permissionCreate</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#permissionDelete" >permissionDelete</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#permissionUpdate" >permissionUpdate</a>
@@ -129,8 +144,48 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getAllPermissionWithRole"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>getAllPermissionWithRole</b></span>
+                        <a href="#getAllPermissionWithRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllPermissionWithRole()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/controller/permission.controller.ts:29</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;object[]&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getAllRole"></a>
                     <span class="name">
+                        <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getAllRole</b></span>
@@ -149,14 +204,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;permissions&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getListPermission)<br />@Get(&#x27;list&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/controller/permission.controller.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/controller/permission.controller.ts:25</a></div>
                 </td>
             </tr>
 
@@ -179,6 +234,7 @@
                     <a name="getPermissionById"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getPermissionById</b></span>
                         <a href="#getPermissionById"><span class="icon ion-ios-link"></span></a>
@@ -196,14 +252,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;permission/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getPermission)<br />@Get(&#x27;:id&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/controller/permission.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/controller/permission.controller.ts:49</a></div>
                 </td>
             </tr>
 
@@ -258,6 +314,7 @@
                     <a name="permissionCreate"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>permissionCreate</b></span>
                         <a href="#permissionCreate"><span class="icon ion-ios-link"></span></a>
@@ -275,14 +332,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;permission/create&#x27;)<br /></code>
+                    <code>@Role(permissionRole.createPermission)<br />@Post(&#x27;create&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/controller/permission.controller.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">src/controller/permission.controller.ts:57</a></div>
                 </td>
             </tr>
 
@@ -337,6 +394,7 @@
                     <a name="permissionDelete"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>permissionDelete</b></span>
                         <a href="#permissionDelete"><span class="icon ion-ios-link"></span></a>
@@ -354,14 +412,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;permission/delete/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.deletePermission)<br />@Delete(&#x27;:id/delete&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/controller/permission.controller.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/controller/permission.controller.ts:76</a></div>
                 </td>
             </tr>
 
@@ -416,6 +474,7 @@
                     <a name="permissionUpdate"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>permissionUpdate</b></span>
                         <a href="#permissionUpdate"><span class="icon ion-ios-link"></span></a>
@@ -433,14 +492,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Put(&#x27;permission/update/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.deletePermission)<br />@Put(&#x27;:id/update&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">src/controller/permission.controller.ts:63</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/controller/permission.controller.ts:89</a></div>
                 </td>
             </tr>
 
@@ -511,33 +570,62 @@
     Post,
     Body,
     Put,
-    Delete,
-    Query
+    Delete
 } from &quot;@nestjs/common&quot;
 import { PrismaService } from &quot;src/prisma.service&quot;
-import { Permission as PermissionModel } from &quot;@prisma/client&quot;
+import {
+    Permission as PermissionModel
+} from &quot;@prisma/client&quot;
+import { Role } from &quot;src/auth/decorator&quot;
+import { permissionRole } from &quot;src/auth/permissionRole&quot;
 
-@Controller()
+@Controller(&quot;permission&quot;)
 export class PermissionController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Get(&quot;permission/:id&quot;)
-    async getPermissionById(@Param(&quot;id&quot;) id:string): Promise&lt;PermissionModel&gt;{
-        return this.prismaService.permission.findUnique({where:{id:Number(id)}})
-    }
-
-    @Get(&quot;permissions&quot;)
+    @Role(
+		permissionRole.getListPermission
+	)
+    @Get(&quot;list&quot;)
     async getAllRole(): Promise&lt;PermissionModel[]&gt;{
         return this.prismaService.permission.findMany()
     }
 
-    @Post(&quot;permission/create&quot;)
+    async getAllPermissionWithRole(): Promise&lt;object[]&gt;{
+        return this.prismaService.permission.findMany({
+            include: {
+                roles:{
+                    include:{
+                        role: {
+                            select:{
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    @Role(
+		permissionRole.getPermission
+	)
+    @Get(&quot;:id&quot;)
+    async getPermissionById(@Param(&quot;id&quot;) id:string): Promise&lt;PermissionModel&gt;{
+        return this.prismaService.permission.findUnique({where:{id:Number(id)}})
+    }
+
+    @Role(
+		permissionRole.createPermission
+	)
+    @Post(&quot;create&quot;)
     async permissionCreate(
         @Body() permissionData: {
             name: string,
             description: string
         } 
     ): Promise&lt;PermissionModel&gt;{
+        // Create permission
         return this.prismaService.permission.create({
             data:{
                 name: permissionData.name,
@@ -546,26 +634,23 @@ export class PermissionController{
         });
     }
 
-    @Delete(&quot;permission/delete/:id&quot;)
+    @Role(
+		permissionRole.deletePermission
+	)
+    @Delete(&quot;:id/delete&quot;)
     async permissionDelete(
         @Param(&quot;id&quot;) id: string
     ): Promise&lt;PermissionModel&gt;{
-        const relation &#x3D; await this.prismaService.rolePermission.findMany({
-            where: {permissionId: Number(id)}
-        });
-
-        for(let i&#x3D;0; i&lt;relation.length;i++){
-            this.prismaService.rolePermission.delete({
-                where: {id:Number(relation[i].id)}
-            })
-        }
-
+        // Delete permission
         return this.prismaService.permission.delete({
             where: {id: Number(id)}
         })
     }
 
-    @Put(&quot;permission/update/:id&quot;)
+    @Role(
+		permissionRole.deletePermission
+	)
+    @Put(&quot;:id/update&quot;)
     async permissionUpdate(
         @Param(&quot;id&quot;) id:string,
         @Body() permissionData: {
@@ -573,6 +658,7 @@ export class PermissionController{
             description?:string
         }
     ): Promise&lt;PermissionModel&gt;{
+        // Update permission
         return this.prismaService.permission.update({
             where: {id: Number(id)},
             data: {

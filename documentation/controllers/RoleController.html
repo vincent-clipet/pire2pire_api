@@ -64,6 +64,12 @@
             <code>src/controller/role.controller.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Prefix</h3>
+            </p>
+            <p class="comment">
+                <code>role</code>
+            </p>
 
 
 
@@ -84,26 +90,35 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#createFichierPermission" >createFichierPermission</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getAllRole" >getAllRole</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getRoleById" >getRoleById</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#roleCreate" >roleCreate</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#roleDelete" >roleDelete</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#roleUpdate" >roleUpdate</a>
@@ -129,8 +144,48 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="createFichierPermission"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>createFichierPermission</b></span>
+                        <a href="#createFichierPermission"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createFichierPermission()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="161"
+                            class="link-to-prism">src/controller/role.controller.ts:161</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getAllRole"></a>
                     <span class="name">
+                        <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getAllRole</b></span>
@@ -149,7 +204,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;roles&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getListRole)<br />@Get(&#x27;list&#x27;)<br /></code>
                 </td>
             </tr>
 
@@ -165,7 +220,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;RoleModel[]&gt;</code>
+                        <b>Returns : </b>        <code><a href="../miscellaneous/variables.html#Role" target="_self" >Promise&lt;RoleModel[]&gt;</a></code>
 
                     </div>
                 </td>
@@ -178,6 +233,7 @@
                 <td class="col-md-4">
                     <a name="getRoleById"></a>
                     <span class="name">
+                        <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getRoleById</b></span>
@@ -196,14 +252,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;role/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getRole)<br />@Get(&#x27;:id&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/controller/role.controller.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/controller/role.controller.ts:43</a></div>
                 </td>
             </tr>
 
@@ -241,7 +297,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;RoleModel&gt;</code>
+                        <b>Returns : </b>        <code><a href="../miscellaneous/variables.html#Role" target="_self" >Promise&lt;RoleModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -257,6 +313,7 @@
                 <td class="col-md-4">
                     <a name="roleCreate"></a>
                     <span class="name">
+                        <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>roleCreate</b></span>
@@ -275,14 +332,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;role/create&#x27;)<br /></code>
+                    <code>@Role(permissionRole.createRole)<br />@Post(&#x27;create&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/controller/role.controller.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/controller/role.controller.ts:60</a></div>
                 </td>
             </tr>
 
@@ -320,7 +377,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;RoleModel&gt;</code>
+                        <b>Returns : </b>        <code><a href="../miscellaneous/variables.html#Role" target="_self" >Promise&lt;RoleModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -336,6 +393,7 @@
                 <td class="col-md-4">
                     <a name="roleDelete"></a>
                     <span class="name">
+                        <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>roleDelete</b></span>
@@ -354,14 +412,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;role/delete/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.deleteRole)<br />@Delete(&#x27;:id/delete&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">src/controller/role.controller.ts:57</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/controller/role.controller.ts:89</a></div>
                 </td>
             </tr>
 
@@ -399,7 +457,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;RoleModel&gt;</code>
+                        <b>Returns : </b>        <code><a href="../miscellaneous/variables.html#Role" target="_self" >Promise&lt;RoleModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -415,6 +473,7 @@
                 <td class="col-md-4">
                     <a name="roleUpdate"></a>
                     <span class="name">
+                        <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>roleUpdate</b></span>
@@ -433,14 +492,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Put(&#x27;formation/update/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.updateRole)<br />@Put(&#x27;:id/update&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="76"
-                            class="link-to-prism">src/controller/role.controller.ts:76</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="102"
+                            class="link-to-prism">src/controller/role.controller.ts:102</a></div>
                 </td>
             </tr>
 
@@ -490,7 +549,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;RoleModel&gt;</code>
+                        <b>Returns : </b>        <code><a href="../miscellaneous/variables.html#Role" target="_self" >Promise&lt;RoleModel&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -511,47 +570,76 @@
     Post,
     Body,
     Put,
-    Delete,
-    Query
+    Delete
 } from &quot;@nestjs/common&quot;
 import { PrismaService } from &quot;src/prisma.service&quot;
 import {
-    Role as RoleModel,
-    Permission as PermissionModel
+    Role as RoleModel
 } from &quot;@prisma/client&quot;
+import { PermissionController } from &quot;./permission.controller&quot;
+import { Role } from &quot;src/auth/decorator&quot;
+import { permissionRole } from &quot;src/auth/permissionRole&quot;
+const fs &#x3D; require(&quot;fs&quot;)
 
-@Controller()
+@Controller(&quot;role&quot;)
 export class RoleController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Get(&quot;role/:id&quot;)
-    async getRoleById(@Param(&quot;id&quot;) id:string): Promise&lt;RoleModel&gt;{
-        return this.prismaService.role.findUnique({where:{id:Number(id)}})
-    }
-
-    @Get(&quot;roles&quot;)
+    @Role(
+		permissionRole.getListRole
+	)
+    @Get(&quot;list&quot;)
     async getAllRole(): Promise&lt;RoleModel[]&gt;{
-        return this.prismaService.role.findMany()
+        return this.prismaService.role.findMany({
+            include:{
+                permissions:{
+                    include:{
+                        permission: true
+                    }
+                }
+            }
+        })
     }
 
-    @Post(&quot;role/create&quot;)
+    @Role(
+		permissionRole.getRole
+	)
+    @Get(&quot;:id&quot;)
+    async getRoleById(@Param(&quot;id&quot;) id:string): Promise&lt;RoleModel&gt;{
+        return this.prismaService.role.findUnique({
+            where:{id:Number(id)},
+            include:{
+                permissions:{
+                    include:{
+                        permission: true
+                    }
+                }
+            }
+        })
+    }
+
+    @Role(
+		permissionRole.createRole
+	)
+    @Post(&quot;create&quot;)
     async roleCreate(
         @Body() roleData: {
             name: string,
-            permission: PermissionModel[]
+            permissions?: number[]
         }
     ): Promise&lt;RoleModel&gt;{
+        // Create role
         const role &#x3D; this.prismaService.role.create({
             data:{
-                name: roleData.name
+                name: roleData.name,
             }
         });
-
-        for(let i&#x3D;0;i&lt;roleData.permission.length;i++){
+        // Create relations with permissions
+        for(let i&#x3D;0;i&lt;roleData.permissions.length;i++){
             this.prismaService.rolePermission.create({
                 data:{
                     roleId: (await role).id,
-                    permissionId: roleData.permission[i].id
+                    permissionId: roleData.permissions[i]
                 }
             });
         }
@@ -559,67 +647,97 @@ export class RoleController{
         return role
     }
 
-    @Delete(&quot;role/delete/:id&quot;)
+    @Role(
+		permissionRole.deleteRole
+	)
+    @Delete(&quot;:id/delete&quot;)
     async roleDelete(
         @Param(&quot;id&quot;) id: string
     ): Promise&lt;RoleModel&gt;{
-        const relation &#x3D; await this.prismaService.rolePermission.findMany({
-            where: {roleId: Number(id)}
-        });
-
-        for(let i&#x3D;0; i&lt;relation.length;i++){
-            this.prismaService.rolePermission.delete({
-                where: {id:Number(relation[i].id)}
-            });
-        }
-
+        // Delete role
         return this.prismaService.role.delete({
             where: {id:Number(id)}
-        });
+        })
     }
 
-    @Put(&quot;formation/update/:id&quot;)
+    @Role(
+		permissionRole.updateRole
+	)
+    @Put(&quot;:id/update&quot;)
     async roleUpdate(
         @Param(&quot;id&quot;) id:string,
         @Body() roleData: {
             name?: string,
-            addPermission?: PermissionModel[],
-            delPermission?: PermissionModel[] 
+            addPermissions?: number[],
+            deletePermissions?: number[] 
         }
     ): Promise&lt;RoleModel&gt;{
-        for(let i&#x3D;0;i&lt;roleData.addPermission.length;i++){
-            this.prismaService.rolePermission.create({
-                data:{
-                    roleId: Number(id),
-                    permissionId: roleData.addPermission[i].id
+        // Create relations with permissions
+        if (roleData.addPermissions) {
+            for(let i&#x3D;0;i&lt;roleData.addPermissions.length;i++){
+                const relation &#x3D; await this.prismaService.rolePermission.findFirst({
+                    where: {
+                        roleId: Number(id),
+                        permissionId: roleData.addPermissions[i]
+                    }
+                })
+                if (relation &#x3D;&#x3D;&#x3D; null || relation &#x3D;&#x3D;&#x3D; undefined) {
+                    await this.prismaService.rolePermission.create({
+                        data: {
+                            roleId: Number(id),
+                            permissionId: roleData.addPermissions[i]
+                        }
+                    });
                 }
-            });
-        }
-
-        for(let i&#x3D;0;i&lt;roleData.delPermission.length;i++){
-            const relation &#x3D; await this.prismaService.rolePermission.findFirst({
-                where: {
-                    roleId: Number(id),
-                    permissionId: roleData.delPermission[i].id
-                }
-            });
-
-            this.prismaService.rolePermission.delete({
-                where: {id: relation.id}
-            });
-        }
-
-        return roleData.name &#x3D;&#x3D;&#x3D; undefined ?
-        null :
-        this.prismaService.role.update({
-            where: {
-                id: Number(id)
-            },
-            data: {
-                name: roleData.name
             }
+        }
+        // Delete relations with permissions
+        if (roleData.deletePermissions) {
+            for(let i&#x3D;0;i&lt;roleData.deletePermissions.length;i++){
+                const relation &#x3D; await this.prismaService.rolePermission.findFirst({
+                    where: {
+                        roleId: Number(id),
+                        permissionId: roleData.deletePermissions[i]
+                    }
+                });
+                if (relation) {
+                    await this.prismaService.rolePermission.delete({
+                        where: {id: relation.id}
+                    })
+                }
+            }
+        }
+        // Update role
+        if (roleData.name !&#x3D;&#x3D; undefined) {
+            await this.prismaService.role.update({ 
+                where: { id: Number(id) },
+                data: { name: roleData.name }
+            })
+        }
+
+        await this.createFichierPermission();
+
+        // Return role
+        return this.prismaService.role.findUnique({
+            where: { id: Number(id) }
         })
     }
+
+    async createFichierPermission():Promise&lt;boolean&gt;{
+            const permissionController &#x3D; new PermissionController(new PrismaService)
+            let permissions: object &#x3D; {};
+            (await permissionController.getAllPermissionWithRole()).forEach(item &#x3D;&gt; {
+                permissions[item[&quot;name&quot;]] &#x3D; []
+                item[&quot;roles&quot;].forEach((role:object) &#x3D;&gt; {
+                    permissions[item[&quot;name&quot;]].push(role[&quot;roleId&quot;]);
+                });
+            });
+
+            fs.writeFile(&quot;src/auth/permissionRole.ts&quot;,&#x60;export const permissionRole &#x3D; ${JSON.stringify(permissions)}&#x60;, (e) &#x3D;&gt; {
+                if(e) throw e;
+            });
+            return true
+        }
 }</code></pre>
     </div>
 </div>

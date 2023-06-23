@@ -37,7 +37,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Controllers</li>
-  <li class="breadcrumb-item" >LessonController</li>
+  <li class="breadcrumb-item" >TrainingController</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,14 +61,14 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/controller/lesson.controller.ts</code>
+            <code>src/controller/training.controller.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Prefix</h3>
             </p>
             <p class="comment">
-                <code>lesson</code>
+                <code>training</code>
             </p>
 
 
@@ -93,37 +93,43 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#deleteLesson" >deleteLesson</a>
+                                <a href="#getAllTraining" >getAllTraining</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#getAllLessons" >getAllLessons</a>
+                                <a href="#getTrainingById" >getTrainingById</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#getLessonById" >getLessonById</a>
+                                <a href="#getTrainingStudent" >getTrainingStudent</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#lessonCreate" >lessonCreate</a>
+                                <a href="#trainingCreate" >trainingCreate</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#lessonValidation" >lessonValidation</a>
+                                <a href="#trainingDelete" >trainingDelete</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
-                                <a href="#updateLesson" >updateLesson</a>
+                                <a href="#trainingSubscribe" >trainingSubscribe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Async</span>
+                                <a href="#trainingUpdate" >trainingUpdate</a>
                             </li>
                         </ul>
                     </td>
@@ -146,20 +152,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deleteLesson"></a>
+                    <a name="getAllTraining"></a>
                     <span class="name">
                         <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
-                        <span ><b>deleteLesson</b></span>
-                        <a href="#deleteLesson"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getAllTraining</b></span>
+                        <a href="#getAllTraining"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>deleteLesson(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>getAllTraining()</code>
                 </td>
             </tr>
 
@@ -167,14 +173,62 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Role(permissionRole.deleteLesson)<br />@Delete(&#x27;:id/delete&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getListTraining)<br />@Get(&#x27;list&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="121"
-                            class="link-to-prism">src/controller/lesson.controller.ts:121</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/controller/training.controller.ts:27</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;TrainingModel[]&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTrainingById"></a>
+                    <span class="name">
+                        <span class="modifier"></span>
+                        <span class="modifier"></span>
+                        <span class="modifier">Async</span>
+                        <span ><b>getTrainingById</b></span>
+                        <a href="#getTrainingById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTrainingById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Role(permissionRole.getTraining)<br />@Get(&#x27;:id&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/controller/training.controller.ts:45</a></div>
                 </td>
             </tr>
 
@@ -212,7 +266,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;LessonModel&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;TrainingModel&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -226,20 +280,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getAllLessons"></a>
+                    <a name="getTrainingStudent"></a>
                     <span class="name">
                         <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
-                        <span ><b>getAllLessons</b></span>
-                        <a href="#getAllLessons"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getTrainingStudent</b></span>
+                        <a href="#getTrainingStudent"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getAllLessons()</code>
+                    <code>getTrainingStudent(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -247,62 +301,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Role(permissionRole.getListLesson)<br />@Get(&#x27;list&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getTrainingStudents)<br />@Get(&#x27;:id/students&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/controller/lesson.controller.ts:26</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;LessonModel[]&gt;</code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getLessonById"></a>
-                    <span class="name">
-                        <span class="modifier"></span>
-                        <span class="modifier"></span>
-                        <span class="modifier">Async</span>
-                        <span ><b>getLessonById</b></span>
-                        <a href="#getLessonById"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getLessonById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Role(permissionRole.getLesson)<br />@Get(&#x27;:id&#x27;)<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">src/controller/lesson.controller.ts:42</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/controller/training.controller.ts:64</a></div>
                 </td>
             </tr>
 
@@ -340,7 +346,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;LessonModel&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;TrainingModel&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -354,20 +360,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="lessonCreate"></a>
+                    <a name="trainingCreate"></a>
                     <span class="name">
                         <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
-                        <span ><b>lessonCreate</b></span>
-                        <a href="#lessonCreate"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>trainingCreate</b></span>
+                        <a href="#trainingCreate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>lessonCreate(request: Request, lessonData: literal type)</code>
+                    <code>trainingCreate(trainingData: literal type)</code>
                 </td>
             </tr>
 
@@ -375,14 +381,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Role(permissionRole.createLesson)<br />@Post(&#x27;create&#x27;)<br /></code>
+                    <code>@Role(permissionRole.createTraining)<br />@Post(&#x27;create&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="59"
-                            class="link-to-prism">src/controller/lesson.controller.ts:59</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/controller/training.controller.ts:83</a></div>
                 </td>
             </tr>
 
@@ -403,19 +409,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>request</td>
-                                    <td>
-                                            <code>Request</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>lessonData</td>
+                                    <td>trainingData</td>
                                     <td>
                                             <code>literal type</code>
                                     </td>
@@ -432,7 +426,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;LessonModel&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;TrainingModel&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -446,20 +440,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="lessonValidation"></a>
+                    <a name="trainingDelete"></a>
                     <span class="name">
                         <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
-                        <span ><b>lessonValidation</b></span>
-                        <a href="#lessonValidation"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>trainingDelete</b></span>
+                        <a href="#trainingDelete"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>lessonValidation(request: Request, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>trainingDelete(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -467,14 +461,94 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Role(permissionRole.lessonValidation)<br />@Post(&#x27;:id/validation&#x27;)<br /></code>
+                    <code>@Role(permissionRole.deleteTraining)<br />@Delete(&#x27;:id/delete&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="79"
-                            class="link-to-prism">src/controller/lesson.controller.ts:79</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="128"
+                            class="link-to-prism">src/controller/training.controller.ts:128</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;TrainingModel&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trainingSubscribe"></a>
+                    <span class="name">
+                        <span class="modifier"></span>
+                        <span class="modifier"></span>
+                        <span class="modifier">Async</span>
+                        <span ><b>trainingSubscribe</b></span>
+                        <a href="#trainingSubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>trainingSubscribe(request: Request, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Role(permissionRole.subscribe)<br />@Post(&#x27;:id/subscribe&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/controller/training.controller.ts:111</a></div>
                 </td>
             </tr>
 
@@ -538,20 +612,20 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateLesson"></a>
+                    <a name="trainingUpdate"></a>
                     <span class="name">
                         <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
-                        <span ><b>updateLesson</b></span>
-                        <a href="#updateLesson"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>trainingUpdate</b></span>
+                        <a href="#trainingUpdate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateLesson(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, lessonData: literal type)</code>
+                    <code>trainingUpdate(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, trainingData: literal type)</code>
                 </td>
             </tr>
 
@@ -559,14 +633,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Role(permissionRole.updateLesson)<br />@Put(&#x27;:id/update&#x27;)<br /></code>
+                    <code>@Role(permissionRole.updateTraining)<br />@Put(&#x27;:id/update&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="98"
-                            class="link-to-prism">src/controller/lesson.controller.ts:98</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="139"
+                            class="link-to-prism">src/controller/training.controller.ts:139</a></div>
                 </td>
             </tr>
 
@@ -599,7 +673,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>lessonData</td>
+                                    <td>trainingData</td>
                                     <td>
                                             <code>literal type</code>
                                     </td>
@@ -616,7 +690,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;LessonModel&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;TrainingModel&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -639,125 +713,190 @@
     Put,
     Delete,
     Req
-} from &#x27;@nestjs/common&#x27;
-import { PrismaService } from &#x27;src/prisma.service&#x27;
-import { Lesson as LessonModel } from &#x27;@prisma/client&#x27;
-import { Role } from &#x27;src/auth/decorator&#x27;
+} from &quot;@nestjs/common&quot;
+import { Request } from &quot;express&quot;
+import { PrismaService } from &quot;src/prisma.service&quot;
+import {
+    Training as TrainingModel
+} from &quot;@prisma/client&quot;
 import { permissionRole } from &quot;src/auth/permissionRole&quot;
-import { Request } from &#x27;express&#x27;
-import { JwtService } from &#x27;@nestjs/jwt&#x27;
+import { Role } from &quot;src/auth/decorator&quot;
+import { JwtService } from &quot;@nestjs/jwt&quot;
 
-@Controller(&quot;lesson&quot;)
-export class LessonController{
+
+@Controller(&quot;training&quot;)
+export class TrainingController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Role(
-		permissionRole.getListLesson
-	)
+    @Role(permissionRole.getListTraining)
     @Get(&quot;list&quot;)
-    async getAllLessons(): Promise&lt;LessonModel[]&gt;{
-        return this.prismaService.lesson.findMany(
-            {include: {
-                author: {
-                    select: {
-                        name: true
+    async getAllTraining(): Promise&lt;TrainingModel[]&gt;{
+        return this.prismaService.training.findMany({
+            include:{
+                modules:{
+                    include:{
+                        module:{
+                            select:{
+                                name: true
+                            }
+                        }
                     }
                 }
-            }}
-        )
+            }
+        })
     }
 
-    @Role(
-		permissionRole.getLesson
-	)
+    @Role(permissionRole.getTraining)
     @Get(&quot;:id&quot;)
-    async getLessonById(@Param(&#x27;id&#x27;) id: string): Promise&lt;LessonModel&gt;{
-        return this.prismaService.lesson.findUnique({
-            where:{id:Number(id)},
-            include: {
-                author: {
-                    select: {
-                        name: true
+    async getTrainingById(@Param(&quot;id&quot;) id:string): Promise&lt;TrainingModel&gt;{
+        return this.prismaService.training.findUnique({
+            where: { id: Number(id) },
+            include:{
+                modules:{
+                    include:{
+                        module:{
+                            select:{
+                                name: true
+                            }
+                        }
                     }
                 }
             }
         })
     }
 
-    @Role(
-		permissionRole.createLesson
-	)
-    @Post(&#x27;create&#x27;)
-    async lessonCreate(
-        @Req() request: Request,
-        @Body() lessonData: {
-            name: string; content?: string
-        }
-    ): Promise&lt;LessonModel&gt;{
-        const jwt &#x3D; request.headers.authorization.replace(&quot;Bearer &quot;,&quot;&quot;);
-        const jwtService &#x3D; new JwtService()
-        const payload &#x3D; jwtService.decode(jwt)
-        return this.prismaService.lesson.create({
-            data:{
-                name: lessonData.name,
-                content: lessonData?.content,
-                authorId: payload[&quot;id&quot;]
+    @Role(permissionRole.getTrainingStudents)
+    @Get(&quot;:id/students&quot;)
+    async getTrainingStudent(@Param(&quot;id&quot;) id:string): Promise&lt;TrainingModel&gt;{
+        return this.prismaService.training.findUnique({
+            where: { id: Number(id) },
+            include:{
+                users:{
+                    include:{
+                        user: {
+                            select:{
+                                name:true
+                            }
+                        }
+                    }
+                }
             }
         })
     }
 
-    @Role(permissionRole.lessonValidation)
-    @Post(&quot;:id/validation&quot;)
-    async lessonValidation(
+    @Role(permissionRole.createTraining)
+    @Post(&quot;create&quot;)
+    async trainingCreate(
+        @Body() trainingData: {
+            name: string,
+            modules: number[],
+            coachId: number
+        }
+    ): Promise&lt;TrainingModel&gt;{
+        // Create training
+        const training &#x3D; await this.prismaService.training.create({
+            data:{
+                name: trainingData.name,
+                coachId: Number(trainingData.coachId)
+            }
+        });
+        // Create relations with modules
+        for(let i&#x3D;0;i&lt;trainingData.modules.length;i++){
+            await this.prismaService.trainingModule.create({
+                data:{
+                    trainingId: training.id,
+                    moduleId: trainingData.modules[i]
+                }
+            });
+        }
+        return training
+    }
+
+    @Role(permissionRole.subscribe)
+    @Post(&quot;:id/subscribe&quot;)
+    async trainingSubscribe(
         @Req() request: Request,
         @Param(&#x27;id&#x27;) id: string
     ): Promise&lt;void&gt;{
         const jwt &#x3D; request.headers.authorization.replace(&quot;Bearer &quot;,&quot;&quot;);
         const jwtService &#x3D; new JwtService()
         const payload &#x3D; jwtService.decode(jwt)
-        await this.prismaService.userLesson.create({
+        await this.prismaService.trainingUser.create({
             data:{
                 userId: payload[&quot;id&quot;],
-                lessonId: Number(id)
+                trainingId: Number(id)
             }
         })
     }
 
-    @Role(
-		permissionRole.updateLesson
-	)
-    @Put(&quot;:id/update&quot;)
-    async updateLesson(
-        @Param(&#x27;id&#x27;) id: string,
-        @Body() lessonData:{
-            name?: string,
-            content?: string
-        }
-        ): Promise&lt;LessonModel&gt;{
-        
-        return this.prismaService.lesson.update({
-            where: {
-                id: Number(id)
-            },
-            data: {
-                name: lessonData.name,
-                content: lessonData.content
-            }
-        })
-    }
-
-    @Role(
-		permissionRole.deleteLesson
-	)
+    @Role(permissionRole.deleteTraining)
     @Delete(&quot;:id/delete&quot;)
-    async deleteLesson(
-        @Param(&quot;id&quot;) id: string
-    ): Promise&lt;LessonModel&gt;{
-        return this.prismaService.lesson.delete({
-            where: {id: Number(id)}
+    async trainingDelete(
+        @Param(&quot;id&quot;) id:string
+    ): Promise&lt;TrainingModel&gt;{
+        // Delete training
+        return this.prismaService.training.delete({
+            where: {id:Number(id)}
         })
     }
-
+ 
+    @Role(permissionRole.updateTraining)
+    @Put(&quot;:id/update&quot;)
+    async trainingUpdate(
+        @Param(&quot;id&quot;) id:string,
+        @Body() trainingData: {
+            name?: string,
+            addModules?: number[],
+            deleteModules?: number[]
+        }
+    ): Promise&lt;TrainingModel&gt;{
+        // Create relations with modules
+        if (trainingData.addModules) {
+            for(let i&#x3D;0;i&lt;trainingData.addModules.length;i++){
+                const relation &#x3D; await this.prismaService.trainingModule.findFirst({
+                    where: {
+                        trainingId: Number(id),
+                        moduleId: trainingData.addModules[i]
+                    }
+                })
+                if (relation &#x3D;&#x3D;&#x3D; null || relation &#x3D;&#x3D;&#x3D; undefined) {
+                    await this.prismaService.trainingModule.create({
+                        data: {
+                            trainingId: Number(id),
+                            moduleId: trainingData.addModules[i]
+                        }
+                    });
+                }
+            }
+        }
+        // Delete relations with modules
+        if (trainingData.deleteModules) {
+            for(let i&#x3D;0;i&lt;trainingData.deleteModules.length;i++){
+                const relation &#x3D; await this.prismaService.trainingModule.findFirst({
+                    where: {
+                        trainingId: Number(id),
+                        moduleId: trainingData.deleteModules[i]
+                    }
+                });
+                if (relation) {
+                    await this.prismaService.trainingModule.delete({
+                        where: {id: relation.id}
+                    })
+                }
+            }
+        }
+        // Update training
+        if (trainingData.name !&#x3D;&#x3D; undefined) {
+            this.prismaService.training.update({ 
+                where: { id: Number(id) },
+                data: { name: trainingData.name }
+            })
+        }
+        // Return training
+        return this.prismaService.training.findUnique({
+            where: { id: Number(id) }
+        })
+    }
 }</code></pre>
     </div>
 </div>
@@ -803,7 +942,7 @@ export class LessonController{
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'LessonController.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'TrainingController.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

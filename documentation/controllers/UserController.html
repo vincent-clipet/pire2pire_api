@@ -64,6 +64,12 @@
             <code>src/controller/user.controller.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Prefix</h3>
+            </p>
+            <p class="comment">
+                <code>user</code>
+            </p>
 
 
 
@@ -85,20 +91,30 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteUser" >deleteUser</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getAllUsers" >getAllUsers</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getUserById" >getUserById</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#setUserRole" >setUserRole</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#signupUser" >signupUser</a>
@@ -124,8 +140,89 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="deleteUser"></a>
+                    <span class="name">
+                        <span class="modifier"></span>
+                        <span class="modifier"></span>
+                        <span class="modifier">Async</span>
+                        <span ><b>deleteUser</b></span>
+                        <a href="#deleteUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteUser(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Role(permissionRole.deleteUser)<br />@Delete(&#x27;:id/delete&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/controller/user.controller.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;UserModel&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getAllUsers"></a>
                     <span class="name">
+                        <span class="modifier"></span>
                         <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getAllUsers</b></span>
@@ -144,7 +241,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;users&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getListUser)<br />@Get(&#x27;list&#x27;)<br /></code>
                 </td>
             </tr>
 
@@ -174,6 +271,7 @@
                     <a name="getUserById"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getUserById</b></span>
                         <a href="#getUserById"><span class="icon ion-ios-link"></span></a>
@@ -191,14 +289,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;user/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getUser)<br />@Get(&#x27;:id&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/controller/user.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/controller/user.controller.ts:36</a></div>
                 </td>
             </tr>
 
@@ -253,6 +351,7 @@
                     <a name="setUserRole"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>setUserRole</b></span>
                         <a href="#setUserRole"><span class="icon ion-ios-link"></span></a>
@@ -270,14 +369,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Put(&#x27;user/:id/role/set&#x27;)<br /></code>
+                    <code>@Role(permissionRole.setRoleUser)<br />@Put(&#x27;:id/setrole&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/controller/user.controller.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/controller/user.controller.ts:47</a></div>
                 </td>
             </tr>
 
@@ -344,6 +443,7 @@
                     <a name="signupUser"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>signupUser</b></span>
                         <a href="#signupUser"><span class="icon ion-ios-link"></span></a>
@@ -361,14 +461,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;user/signup&#x27;)<br /></code>
+                    <code>@Public()<br />@Post(&#x27;signup&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/controller/user.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/controller/user.controller.ts:64</a></div>
                 </td>
             </tr>
 
@@ -428,35 +528,49 @@
 	Body,
 	Put,
 	Delete,
-	Query,
-  } from &#x27;@nestjs/common&#x27;
-  import { UserService } from &#x27;../service/user.service&#x27;
-  import { User as UserModel } from &#x27;@prisma/client&#x27;
-  
-  @Controller()
-  export class UserController {
-	constructor(private readonly userService: UserService) { }
-  
-	@Get(&#x27;user/:id&#x27;)
-	async getUserById(@Param(&#x27;id&#x27;) id: string): Promise&lt;UserModel&gt; {
-		const u &#x3D; await this.userService.user.findUnique({ 
-			where: { id: Number(id)	}
-		})
-		return this.userService.strip_password(u)
-	}
-  
-	@Get(&#x27;users&#x27;)
+	NotFoundException,
+	HttpException,
+	HttpStatus,
+} from &#x27;@nestjs/common&#x27;
+import { Public, Role } from &#x27;src/auth/decorator&#x27;
+import { UserService } from &#x27;../service/user.service&#x27;
+import { User as UserModel } from &#x27;@prisma/client&#x27;
+import { permissionRole } from &quot;src/auth/permissionRole&quot;
+const argon2 &#x3D; require(&quot;argon2&quot;)
+
+@Controller(&#x27;user&#x27;)
+export class UserController {
+	constructor(private readonly userService: UserService) {}
+
+	@Role(
+		permissionRole.getListUser
+	)
+	@Get(&#x27;list&#x27;)
 	async getAllUsers(): Promise&lt;UserModel[]&gt; {
-	  const allUsers &#x3D; await this.userService.user.findMany()
+	  const allUsers &#x3D; await this.userService.user.findMany({ take: 1000 })
 	  return this.userService.strip_passwords(allUsers)
 	}
 
-	@Put(&#x27;user/:id/role/set&#x27;)
+	@Role(
+		permissionRole.getUser
+	)
+	@Get(&#x27;:id&#x27;)
+	async getUserById(@Param(&#x27;id&#x27;) id: string): Promise&lt;UserModel&gt; {
+		const u &#x3D; await this.userService.user.findUnique({ 
+			where: { id: Number(id)	}
+		});
+		return u ? this.userService.strip_password(u) : undefined
+	}
+
+	@Role(
+		permissionRole.setRoleUser
+	)
+	@Put(&#x27;:id/setrole&#x27;)
 	async setUserRole(
 		@Body() userData: { roleId: number },
 		@Param(&#x27;id&#x27;) id: string
 	): Promise&lt;UserModel&gt; {
-	  return this.userService.user.update({
+	  const u &#x3D; await this.userService.user.update({
 		where: {
 		  id: Number(id)
 		},
@@ -464,20 +578,38 @@
 			roleId: userData.roleId
 		},
 	  })
+	  return u ? this.userService.strip_password(u) : undefined
 	}
 
-	@Post(&#x27;user/signup&#x27;)
+	@Public()
+	@Post(&#x27;signup&#x27;)
 	async signupUser(
-	  @Body() userData: { name: string; password: string },
+	  @Body() userData: { name: string, password: string, roleId?: number },
 	): Promise&lt;UserModel&gt; {
-	  return this.userService.user.create({
-		data: {
-		  name: userData.name,
-		  password: userData.password,
-		},
-	  })
+		if(userData.name &#x3D;&#x3D;&#x3D; undefined || userData.password &#x3D;&#x3D;&#x3D; undefined) throw new HttpException(&quot;name or password empty&quot;, HttpStatus.BAD_REQUEST)
+	  	const hash &#x3D; await argon2.hash(userData.password)
+	  	const u &#x3D; await this.userService.user.create({
+			data: {
+			  	name: userData.name,
+			  	password: hash,
+			  	roleId: userData.roleId
+			},
+	  	})
+	  	return this.userService.strip_password(u)
 	}
-  }</code></pre>
+
+	@Role(
+		permissionRole.deleteUser
+	)
+	@Delete(&#x27;:id/delete&#x27;)
+	async deleteUser(
+		@Param(&quot;id&quot;) id: string
+	): Promise&lt;UserModel&gt;{
+		return this.userService.user.delete({
+			where: {id:Number(id)}
+		})
+	}
+}</code></pre>
     </div>
 </div>
 

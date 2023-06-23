@@ -64,6 +64,12 @@
             <code>src/controller/module.controller.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Prefix</h3>
+            </p>
+            <p class="comment">
+                <code>module</code>
+            </p>
 
 
 
@@ -85,25 +91,30 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getAllModules" >getAllModules</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#getModuleById" >getModuleById</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#moduleCreate" >moduleCreate</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#moduleDelete" >moduleDelete</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#moduleUpdate" >moduleUpdate</a>
@@ -132,6 +143,7 @@
                     <a name="getAllModules"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getAllModules</b></span>
                         <a href="#getAllModules"><span class="icon ion-ios-link"></span></a>
@@ -149,14 +161,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;modules&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getListModule)<br />@Get(&#x27;list&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/controller/module.controller.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/controller/module.controller.ts:26</a></div>
                 </td>
             </tr>
 
@@ -179,6 +191,7 @@
                     <a name="getModuleById"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>getModuleById</b></span>
                         <a href="#getModuleById"><span class="icon ion-ios-link"></span></a>
@@ -196,14 +209,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;module/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.getModule)<br />@Get(&#x27;:id&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/controller/module.controller.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/controller/module.controller.ts:46</a></div>
                 </td>
             </tr>
 
@@ -258,6 +271,7 @@
                     <a name="moduleCreate"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>moduleCreate</b></span>
                         <a href="#moduleCreate"><span class="icon ion-ios-link"></span></a>
@@ -275,14 +289,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;module/create&#x27;)<br /></code>
+                    <code>@Role(permissionRole.createModule)<br />@Post(&#x27;create&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/controller/module.controller.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">src/controller/module.controller.ts:70</a></div>
                 </td>
             </tr>
 
@@ -337,6 +351,7 @@
                     <a name="moduleDelete"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>moduleDelete</b></span>
                         <a href="#moduleDelete"><span class="icon ion-ios-link"></span></a>
@@ -354,14 +369,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;module/delete/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.deleteModule)<br />@Delete(&#x27;:id/delete&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">src/controller/module.controller.ts:57</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/controller/module.controller.ts:98</a></div>
                 </td>
             </tr>
 
@@ -416,6 +431,7 @@
                     <a name="moduleUpdate"></a>
                     <span class="name">
                         <span class="modifier"></span>
+                        <span class="modifier"></span>
                         <span class="modifier">Async</span>
                         <span ><b>moduleUpdate</b></span>
                         <a href="#moduleUpdate"><span class="icon ion-ios-link"></span></a>
@@ -433,14 +449,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Put(&#x27;module/update/:id&#x27;)<br /></code>
+                    <code>@Role(permissionRole.updateModule)<br />@Put(&#x27;:id/update/&#x27;)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="76"
-                            class="link-to-prism">src/controller/module.controller.ts:76</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/controller/module.controller.ts:111</a></div>
                 </td>
             </tr>
 
@@ -512,110 +528,161 @@
     Body,
     Put,
     Delete,
-    Query
+    NotFoundException
 } from &quot;@nestjs/common&quot;
 import { PrismaService } from &quot;src/prisma.service&quot;
 import {
-    Module as ModuleModel,
-    Lesson as LessonModel,
+    Module as ModuleModel
 } from &quot;@prisma/client&quot;
+import { Role } from &quot;src/auth/decorator&quot;
+import { permissionRole } from &quot;src/auth/permissionRole&quot;
 
-@Controller()
+@Controller(&quot;module&quot;)
 export class ModuleController{
     constructor(private readonly prismaService: PrismaService){}
 
-    @Get(&quot;module/:id&quot;)
-    async getModuleById(@Param(&quot;id&quot;) id: string): Promise&lt;ModuleModel&gt;{
-        return this.prismaService.module.findUnique({where:{id:Number(id)}})
-    }
-
-    @Get(&quot;modules&quot;)
+    @Role(
+		permissionRole.getListModule
+	)
+    @Get(&quot;list&quot;)
     async getAllModules(): Promise&lt;ModuleModel[]&gt;{
-        return this.prismaService.module.findMany()
+        return this.prismaService.module.findMany({
+            include: {
+                lesson:{
+                    include:{
+                        lesson:{
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
     }
 
-    @Post(&quot;module/create&quot;)
+    @Role(
+		permissionRole.getModule
+	)
+    @Get(&quot;:id&quot;)
+    async getModuleById(
+            @Param(&quot;id&quot;) id: string
+        ): Promise&lt;ModuleModel&gt;{
+        if(Number.isNaN(Number(id))) throw new NotFoundException()
+        return this.prismaService.module.findUnique({
+            where:{id:Number(id)},
+            include: {
+                lesson:{
+                    include:{
+                        lesson:{
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    @Role(
+		permissionRole.createModule
+	)
+    @Post(&quot;create&quot;)
     async moduleCreate(
         @Body() moduleData: {
             name?: string;
-            lesson: LessonModel[]
+            lessons: number[]
         }
     ): Promise&lt;ModuleModel&gt;{
-        const module &#x3D; this.prismaService.module.create({
+        // Create module
+        const module &#x3D; await this.prismaService.module.create({
             data:{
-                name: moduleData?.name,
+                name: moduleData.name,
             }
         });
-
-        for(let i&#x3D;0;i&lt;moduleData.lesson.length;i++){
-            this.prismaService.moduleLesson.create({
+        // Create relations with lessons
+        for(let i&#x3D;0;i&lt;moduleData.lessons.length;i++){
+            await this.prismaService.moduleLesson.create({
                 data:{
-                    moduleId: (await module).id,
-                    lessonId: moduleData.lesson[i].id
+                    moduleId: module.id,
+                    lessonId: moduleData.lessons[i]
                 }
             });
         }
-
         return module
     }
 
-    @Delete(&quot;module/delete/:id&quot;)
+    @Role(
+		permissionRole.deleteModule
+	)
+    @Delete(&quot;:id/delete&quot;)
     async moduleDelete(
         @Param(&quot;id&quot;) id:string
     ): Promise&lt;ModuleModel&gt;{
-        const relation &#x3D; await this.prismaService.moduleLesson.findMany({
-            where: {moduleId: Number(id)}
-        })
-        
-        for(let i&#x3D;0;i&lt;relation.length;i++){
-            this.prismaService.moduleLesson.delete({
-                where: {id: Number(relation[i].id)}
-            })
-        }
-
+        // Delete module
         return this.prismaService.module.delete({
-            where: {id: Number(id)}
+            where: {id:Number(id)}
         })
     }
 
-    @Put(&quot;module/update/:id&quot;)
+    @Role(
+		permissionRole.updateModule
+	)
+    @Put(&quot;:id/update/&quot;)
     async moduleUpdate(
         @Param(&quot;id&quot;) id:string,
         @Body() moduleData: {
             name?: string,
-            addLesson: LessonModel[],
-            delLesson: LessonModel[]
+            addLessons: number[],
+            deleteLessons: number[]
         }
     ): Promise&lt;ModuleModel&gt;{
-        for(let i&#x3D;0;i&lt;moduleData.addLesson.length;i++){
-            this.prismaService.moduleLesson.create({
-                data:{
-                    moduleId: Number(id),
-                    lessonId: moduleData.addLesson[i].id
+        // Create relations with lessons
+        if (moduleData.addLessons) {
+            for(let i&#x3D;0;i&lt;moduleData.addLessons.length;i++){
+                const relation &#x3D; await this.prismaService.moduleLesson.findFirst({
+                    where: {
+                        moduleId: Number(id),
+                        lessonId: moduleData.addLessons[i]
+                    }
+                })
+                if (relation &#x3D;&#x3D;&#x3D; null || relation &#x3D;&#x3D;&#x3D; undefined) {
+                    await this.prismaService.moduleLesson.create({
+                        data:{
+                            moduleId: Number(id),
+                            lessonId: moduleData.addLessons[i]
+                        }
+                    });
                 }
-            });
-        }
-
-        for(let i&#x3D;0;i&lt;moduleData.delLesson.length;i++){
-            const relation &#x3D; await this.prismaService.moduleLesson.findFirst({
-                where: {
-                    lessonId: moduleData.delLesson[i].id,
-                    moduleId: Number(id)
-                }
-            })
-            this.prismaService.moduleLesson.delete({
-                where: {id: relation.id}
-            })
-        }
-        return moduleData.name &#x3D;&#x3D;&#x3D; undefined ?
-        null :
-        this.prismaService.module.update({
-            where: {
-                id: Number(id)
-            },
-            data: {
-                name: moduleData.name
             }
+        }
+        // Delete relations with lessons
+        if (moduleData.deleteLessons) {
+            for(let i&#x3D;0;i&lt;moduleData.deleteLessons.length;i++){
+                const relation &#x3D; await this.prismaService.moduleLesson.findFirst({
+                    where: {
+                        lessonId: moduleData.deleteLessons[i],
+                        moduleId: Number(id)
+                    }
+                })
+                if (relation) {
+                    await this.prismaService.moduleLesson.delete({
+                        where: {id: relation.id}
+                    })
+                }
+            }
+        }
+        // Update module
+        if (moduleData.name !&#x3D;&#x3D; undefined) {
+            await this.prismaService.module.update({ 
+                where: { id: Number(id) },
+                data: { name: moduleData.name }
+            })
+        }
+        // Return module
+        return this.prismaService.module.findUnique({
+            where: { id: Number(id) }
         })
     }
 }</code></pre>
