@@ -41,6 +41,26 @@ export class UserController {
 	}
 
 	@Role(
+		permissionRole.getUser
+	)
+	@Get(":id/trainings")
+	async getUserTrainings(@Param("id") id: string): Promise<UserModel> {
+		const u = await this.userService.user.findUnique({
+			where: {
+				id: Number(id)
+			},
+			include:{
+				trainings:{
+					include:{
+						training: true
+					}
+				}
+			}
+		});
+		return this.userService.strip_password(u)
+	}
+
+	@Role(
 		permissionRole.setRoleUser
 	)
 	@Put(':id/setrole')
