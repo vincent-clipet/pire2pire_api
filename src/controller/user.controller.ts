@@ -43,7 +43,7 @@ export class UserController {
 	@Role(
 		permissionRole.getUser
 	)
-	@Get(":id/trainings")
+	@Get(":id/allDetails")
 	async getUserTrainings(@Param("id") id: string): Promise<UserModel> {
 		const u = await this.userService.user.findUnique({
 			where: {
@@ -54,7 +54,8 @@ export class UserController {
 					include:{
 						training: true
 					}
-				}
+				},
+				lessonsAuthored:true
 			}
 		});
 		return this.userService.strip_password(u)
