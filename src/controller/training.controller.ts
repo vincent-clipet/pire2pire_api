@@ -35,6 +35,11 @@ export class TrainingController{
                             }
                         }
                     }
+                },
+                coach:{
+                    select:{
+                        name:true
+                    }
                 }
             }
         })
@@ -46,11 +51,25 @@ export class TrainingController{
         return this.prismaService.training.findUnique({
             where: { id: Number(id) },
             include:{
+                coach:{
+                    select:{
+                        name: true
+                    }
+                },
                 modules:{
                     include:{
                         module:{
                             select:{
                                 name: true
+                            }
+                        }
+                    }
+                },
+                users:{
+                    include:{
+                        user: {
+                            select:{
+                                name:true
                             }
                         }
                     }
