@@ -7,71 +7,48 @@ const prisma = new PrismaClient()
 async function main() {
 
 	const userData: Prisma.UserUncheckedCreateInput[] = [
-		{ name: 'admin', password: await argon2.hash('admin') },
-		{ name: 'alice', password: await argon2.hash('alice') },
-		{ name: 'bob', password: await argon2.hash('bob') },
-		{ name: 'charlie', password: await argon2.hash('charlie') },
-		{ name: 'dylan', password: await argon2.hash('dylan') },
-		{ name: 'esteban', password: await argon2.hash('esteban') },
-		{ name: 'frederick', password: await argon2.hash('frederick') },
+		{ name: 'admin', password: await argon2.hash('admin') }
 	]
 	const roleData: Prisma.RoleUncheckedCreateInput[] = [
 		{ name: 'Admin' },
-		{ name: 'Apprenant' },
-		{ name: 'Invité' },
-		{ name: 'test_role_1' },
-		{ name: 'test_role_2' },
-		{ name: 'test_role_3' },
+		{ name: 'Coach' },
+		{ name: 'Apprenant' }
 	]
 	const permissionData: Prisma.PermissionUncheckedCreateInput[] = [
-		{ name: 'superuser', description: 'Can do anything' },
-		{ name: 'lesson_create', description: 'Create a lesson' },
-		{ name: 'lesson_delete', description: 'Delete a lesson' },
-		{ name: 'lesson_update', description: 'Update a lesson' },
-		{ name: 'module_create', description: 'Create a module' },
-		{ name: 'module_delete', description: 'Delete a module' },
-		{ name: 'module_update', description: 'Update a module' },
-		{ name: 'training_create', description: 'Create a training' },
-		{ name: 'training_delete', description: 'Delete a training' },
-		{ name: 'training_update', description: 'Update a training' },
-		{ name: 'user_create', description: 'Create a user' },
-		{ name: 'user_delete', description: 'Delete a user' },
-		{ name: 'user_update', description: 'Update a user' },
-		{ name: 'role_create', description: 'Create a role' },
-		{ name: 'role_delete', description: 'Delete a role' },
-		{ name: 'role_update', description: 'Update a role' },
-		{ name: 'permission_create', description: 'Create a permission' },
-		{ name: 'permission_delete', description: 'Delete a permission' },
-		{ name: 'permission_update', description: 'Update a permission' },
+		{ name: 'getListPermission', description: 'Récupérer la liste des permissions' },
+		{ name: 'getPermission', description: "Récupère une permission spécifique en fonction de l'id fournis" },
+		{ name: 'createPermission', description: 'Crée une nouvelle permission' },
+		{ name: 'deletePermission', description: "Supprime la permission correspondant à l'id fournis" },
+		{ name: 'updatePermission', description: "Met à jour une permission existante en fonction de l'id fournis" },
+		{ name: 'getListRole', description: 'Récupère la liste des roles' },
+		{ name: 'getRole', description: "Récupère un role spécifique en fonction de l'id fournis" },
+		{ name: 'createRole', description: 'Créé un role' },
+		{ name: 'deleteRole', description: "Supprime un role en fonction de l'id fournis" },
+		{ name: 'updateRole', description: "Modifie un role en fonction de l'id fournis" },
+		{ name: 'getListUser', description: "Récupère la liste des utilisateurs. Si la demande vient d'un apprenant, il ne verra que ceux qui sont lié à son groupe" },
+		{ name: 'getUser', description: "Récupère un utilisateur spécifique en fonction de l'id fournit. Si la demande vient d'un apprenant, il verra l'utilisateur uniquement s'il est lié à son groupe" },
+		{ name: "setRoleUser", description: "Modifie le role d'un utilisateur en fonction de l'id fournit" },
+		{ name: 'deleteUser', description: "Supprime un utilisateur spécifique en fonction de l'id fournit" },
+		{ name: 'getListLesson', description: 'Récupère la liste des leçons' },
+		{ name: 'getLesson', description: "Récupère une leçon spécifique en fonction de l'id fournit" },
+		{ name: 'createLesson', description: 'Crée une leçon' },
+		{ name: 'updateLesson', description: "modifie une leçon spécifique en fonction de l'id fournit" },
+		{ name: 'deleteLesson', description: "Supprime une leçon spécifique en fonction de l'id fournit" },
+		{ name: 'getListModule', description: 'Récupère la liste des modules' },
+		{ name: "getModule", description: "Récupère une module spécifique en fonction de l'id fournit" },
+		{ name: "createModule", description: "crée un nouveau module" },
+		{ name: "deleteModule",description: "supprime un module spécifique en fonction de l'id fournit" },
+		{ name: "updateModule", description: "modifie un module spécifique en fonction de l'id fournit" },
+		{ name: "getListTraining", description: "Récupère la liste des formations" },
+		{ name: "getTraining", description: "Récupère une formation spécifique en fonction de l'id fournit" },
+		{ name: "createTraining", description: "Crée une nouvelle formation" },
+		{ name: "deleteTraining", description: "Supprimer une formation spécifique en fonction de l'id fournit" },
+		{ name: "updateTraining", description: "Modifie une formation spécifique en fonction de l'id fournit" },
+		{ name: "subscribe", description: "Un utilisateur s'inscrit à une formation" },
+		{ name: "lessonValidation", description: "Un apprenant valide la fin d'une leçon" },
+		{ name: "getTrainingStudents", description: "Retourne la liste des apprenants lié à la formation spécifiée" },
+		{ name: "renewToken", description: "Permet de renvoyer un nouveau token" }
 	]
-	const moduleData: Prisma.ModuleUncheckedCreateInput[] = [
-		{ name: 'Module 1' },
-		{ name: 'Module 2' },
-		{ name: 'Module 3' },
-		{ name: 'Module 4' },
-		{ name: 'Module 5' },
-		{ name: 'Module 6' },
-		{ name: 'Module 7' },
-		{ name: 'Module 8' },
-	]
-	const lessonData: Prisma.LessonUncheckedCreateInput[] = [
-		{ name: 'Intro à Python', content: 'Début du cours sur Python ...', authorId: 1 },
-		{ name: 'Python intermédiaire', content: 'Milieu du cours sur Python ...', authorId: 1 },
-		{ name: 'Python avancé', content: 'Fin du cours sur Python ...', authorId: 1 },
-		{ name: 'Regex', content: 'Intro aux regex', authorId: 2 },
-		{ name: 'Regex Partie 2', content: 'Regex avancées', authorId: 3 },
-		{ name: 'Ruby > Javascript', content: 'Pas besoin de développer', authorId: 4 },
-	]
-	const trainingData: Prisma.TrainingUncheckedCreateInput[] = [
-		{ name: 'Ruby', coachId: 1 },
-		{ name: 'C#', coachId: 1 },
-		{ name: 'Python', coachId: 1 },
-		{ name: 'Javascript (it sucks)', coachId: 2 },
-		{ name: 'PHP', coachId: 3 },
-		{ name: 'Perl', coachId: 3 },
-	]
-
-
 
 	// run all loops
 	console.log(`Start seeding ...`)
@@ -95,17 +72,8 @@ async function main() {
 		})
 		console.log(`Created user with id: ${element.id}`)
 	}
-	await prisma.$queryRaw`UPDATE "User" SET "roleId"=1 WHERE "id" = 1 OR "id" = 2;`
+	await prisma.$queryRaw`UPDATE "User" SET "roleId"=1 WHERE "id" = 1;`
 
-
-
-	// create training
-	for (const seedData of trainingData) {
-		const element = await prisma.training.create({
-			data: seedData,
-		})
-		console.log(`Created training with id: ${element.id}`)
-	}
 
 
 
@@ -118,67 +86,81 @@ async function main() {
 	}
 	await prisma.rolePermission.createMany({
 		data: [
-			{ roleId: 3, permissionId: 1 },
-			{ roleId: 3, permissionId: 2 },
-			{ roleId: 3, permissionId: 3 },
-			{ roleId: 3, permissionId: 4 },
-			{ roleId: 3, permissionId: 5 },
-			{ roleId: 3, permissionId: 6 },
-			{ roleId: 4, permissionId: 4 },
-			{ roleId: 4, permissionId: 5 },
-			{ roleId: 4, permissionId: 6 },
-			{ roleId: 5, permissionId: 7 },
-			{ roleId: 5, permissionId: 8 },
-			{ roleId: 5, permissionId: 9 },
+			{ roleId: 1, permissionId: 1 },
+			{ roleId: 1, permissionId: 2 },
+			{ roleId: 1, permissionId: 3 },
+			{ roleId: 1, permissionId: 4 },
+			{ roleId: 1, permissionId: 5 },
+			{ roleId: 1, permissionId: 6 },
+			{ roleId: 1, permissionId: 7 },
+			{ roleId: 1, permissionId: 8 },
+			{ roleId: 1, permissionId: 9 },
+			{ roleId: 1, permissionId: 10 },
+			{ roleId: 1, permissionId: 11 },
+			{ roleId: 1, permissionId: 12 },
+			{ roleId: 1, permissionId: 13 },
+			{ roleId: 1, permissionId: 14 },
+			{ roleId: 1, permissionId: 15 },
+			{ roleId: 1, permissionId: 16 },
+			{ roleId: 1, permissionId: 17 },
+			{ roleId: 1, permissionId: 18 },
+			{ roleId: 1, permissionId: 19 },
+			{ roleId: 1, permissionId: 20 },
+			{ roleId: 1, permissionId: 21 },
+			{ roleId: 1, permissionId: 22 },
+			{ roleId: 1, permissionId: 23 },
+			{ roleId: 1, permissionId: 24 },
+			{ roleId: 1, permissionId: 25 },
+			{ roleId: 1, permissionId: 26 },
+			{ roleId: 1, permissionId: 27 },
+			{ roleId: 1, permissionId: 28 },
+			{ roleId: 1, permissionId: 29 },
+			{ roleId: 1, permissionId: 30 },
+			{ roleId: 1, permissionId: 31 },
+			{ roleId: 1, permissionId: 32 },
+			{ roleId: 1, permissionId: 33 },
+			{ roleId: 2, permissionId: 1 },
+			{ roleId: 2, permissionId: 2 },
+			{ roleId: 2, permissionId: 6 },
+			{ roleId: 2, permissionId: 7 },
+			{ roleId: 2, permissionId: 11 },
+			{ roleId: 2, permissionId: 12 },
+			{ roleId: 2, permissionId: 13 },
+			{ roleId: 2, permissionId: 14 },
+			{ roleId: 2, permissionId: 15 },
+			{ roleId: 2, permissionId: 16 },
+			{ roleId: 2, permissionId: 17 },
+			{ roleId: 2, permissionId: 18 },
+			{ roleId: 2, permissionId: 19 },
+			{ roleId: 2, permissionId: 20 },
+			{ roleId: 2, permissionId: 21 },
+			{ roleId: 2, permissionId: 22 },
+			{ roleId: 2, permissionId: 23 },
+			{ roleId: 2, permissionId: 24 },
+			{ roleId: 2, permissionId: 25 },
+			{ roleId: 2, permissionId: 26 },
+			{ roleId: 2, permissionId: 27 },
+			{ roleId: 2, permissionId: 28 },
+			{ roleId: 2, permissionId: 29 },
+			{ roleId: 2, permissionId: 30 },
+			{ roleId: 2, permissionId: 31 },
+			{ roleId: 2, permissionId: 32 },
+			{ roleId: 2, permissionId: 33 },
+			{ roleId: 3, permissionId: 11 },
+			{ roleId: 3, permissionId: 12 },
+			{ roleId: 3, permissionId: 15 },
+			{ roleId: 3, permissionId: 16 },
+			{ roleId: 3, permissionId: 20 },
+			{ roleId: 3, permissionId: 21 },
+			{ roleId: 3, permissionId: 25 },
+			{ roleId: 3, permissionId: 26 },
+			{ roleId: 3, permissionId: 30 },
+			{ roleId: 3, permissionId: 31 },
+			{ roleId: 3, permissionId: 32 },
+			{ roleId: 3, permissionId: 33 }
 		]
 	})
-	
 
-
-	// create modules
-	for (const seedData of moduleData) {
-		const element = await prisma.module.create({
-			data: seedData,
-		})
-		console.log(`Created module with id: ${element.id}`)
-	}
-	await prisma.trainingModule.createMany({
-		data: [
-			{ trainingId: 1, moduleId: 8 },
-			{ trainingId: 1, moduleId: 7 },
-			{ trainingId: 1, moduleId: 4 },
-			{ trainingId: 2, moduleId: 1 },
-			{ trainingId: 3, moduleId: 1 },
-			{ trainingId: 3, moduleId: 2 },
-			{ trainingId: 3, moduleId: 3 },
-		]
-	})
-
-
-
-	// create lesson
-	for (const seedData of lessonData) {
-		const element = await prisma.lesson.create({
-			data: seedData,
-		})
-		console.log(`Created lesson with id: ${element.id}`)
-	}
-	await prisma.moduleLesson.createMany({
-		data: [
-			{ moduleId: 8, lessonId: 1 },
-			{ moduleId: 8, lessonId: 2 },
-			{ moduleId: 8, lessonId: 3 },
-			{ moduleId: 1, lessonId: 1 },
-			{ moduleId: 1, lessonId: 2 },
-			{ moduleId: 2, lessonId: 4 },
-			{ moduleId: 3, lessonId: 1 },
-			{ moduleId: 3, lessonId: 2 },
-			{ moduleId: 3, lessonId: 3 },
-		]
-	})
-
-
-	
 	console.log(`Seeding finished.`)
 	
 }
